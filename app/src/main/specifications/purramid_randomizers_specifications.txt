@@ -1,0 +1,1036 @@
+// the_purramid_0_1\app\src\main\specifications
+// RandomizersHostActivity.kt
+Randomizers is a collection of four different randomization tools: Spin, Slots, Dice, and Coin Flip. Spin and Slots display a random selection from a defined list of items. Dice displays random results of selected polyhedral dice. Coin Flip displays heads or tails results from selected coins.
+
+
+ --- RUNTIME EVENTS ---
+(1) On first app-intent launch, the randomizer opens in a windowed state.
+(2) The most recent randomizer user preferences are saved. Save the following:
+	(2.1) Randomizer mode
+        (2.1.1) If Spin mode, also save:
+            (2.1.1.1) Selected list
+            (2.1.1.2) Spin toggle on/off state
+            (2.1.1.3) Announce toggle on/off state
+            (2.1.1.4) Celebrate toggle on/off state
+            (2.1.1.5) Sequence toggle on/off state
+        (2.1.2) If Slots mode, also save:
+            (2.1.2.1) Selected lists
+            (2.1.2.2) Spin toggle on/off state
+            (2.1.2.3) Number of columns (3 or 5)
+            (2.1.2.4) Announce toggle on/off state            
+        (2.1.3) If Dice mode, also save:
+            (2.1.3.1) Quantities for each die type
+            (2.1.3.2) Color for each die type
+            (2.1.3.3) Modifier toggle on/off state
+                (2.1.3.3.1) If toggle state on, save the modifier values for each die type
+            (2.1.3.4) Use pips toggle on/off state
+            (2.1.3.5) Percentile toggle on/off state
+            (2.1.3.6) Roll animation toggle on/off state
+            (2.1.3.7) Critical success toggle on/off state
+            (2.1.3.8) Graph distribution toggle on/off state
+                (2.1.3.8.1) If toggle state on, save:
+                    (2.1.3.8.1.1) Distribution type (normal or uniform)
+                    (2.1.3.8.1.2) Graph type (histogram, line graph, or Q-Q scatter)
+        (2.1.4) If Coin Flip mode, also save:
+            (2.1.4.1) Quantities for each coin type
+            (2.1.4.2) Color for each coin type
+            (2.1.4.3) Flip animation toggle on/off state
+            (2.1.4.4) Free form toggle on/off state
+            (2.1.4.5) Announce toggle on/off state
+            (2.1.4.6) Probability toggle on/off state
+                (2.1.4.6.1) If toggle state on, save which type of probability (two column, 3x3, 6x6, or 10x10)
+            (2.1.4.7) Graph distribution toggle on/off state
+                (2.1.4.7.1) If toggle state on, save:
+                    (2.1.4.7.1.1) Distribution type (normal or uniform)
+                    (2.1.4.7.1.2) Graph type (histogram, line graph, or Q-Q scatter)          
+	(2.2) All lists
+		(2.2.1) Lists are saved regardless of randomizer mode. It is possible for a user to create a new list in Spin mode and then change to Dice.
+        (2.2.2) List deletion is at the discretion of the user.
+	(2.3) Randomizer position on the screen
+(3) On future app-intent launches, the mask loads saved user preferences.
+
+
+ --- USER INTERFACE ---
+(4) ``ALL RANDOMIZERS``
+    (4.1) A Settings button is positioned in the bottom left corner of the randomizer window.
+        (4.1.1) Default icon state uses ic_settings.xml.
+        (4.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+    (4.2) A Close button is positioned in the top right corner of the randomizer window.
+        (4.2.1) Default icon state uses ic_close.xml.
+        (4.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+        
+(5) ``SPIN UI``
+    (5.1) The "spin dial" is a circle divided into colored wedges.
+        (5.1.1) The minimum number of wedges is 2.
+        (5.1.2) The maximum number of wedges is 44.
+        (5.1.3) There is one wedge for every item on a list.
+        (5.1.4) Wedges are always equally proportioned based on the number of items being shown.
+    (5.2) Each wedge has a different color.
+        (5.2.1) Colors meet or exceed contrast requirements for WCAG 2.2 AA standards.
+            (5.2.1.1) User-defined colors can override the contrast requirements.
+    (5.3) Above the spin dial is a "marquee", a rectangle with rounded corners.
+        (5.3.1) The marquee displays the active list title.
+		(5.3.2) The list title is bold font.
+    (5.4) Following the title (but within the marquee rectangle) is a downward facing arrow button
+        (5.4.1) The marquee arrow default state is ic_arrow_drop_down.xml.
+        (5.4.2) The marquee arrow active state is ic_arrow_drop_up.xml
+    (5.5) A selection arrow appears on the side of the spin dial
+        (5.5.1) It appears on the right side of the dial for left-to-right languages, using using ic_arrow_right.xml
+        (5.5.2) It appears on the left side of the dial for right-to-left languages, using ic_arrow_right.xml
+        (5.5.3) The selection arrow points at the randomized item selection.
+    (5.6) An item can be text, an emoji, an image, or a combination of the three.
+        (5.6.1) List items in a wedge align with the angle bisector from the center wedge point to the midpoint of its outer arc.
+            (5.6.1.1) This means that only the selected item will be perfectly horizontal.
+            (5.6.1.2) This means the item opposite of the selected item will be upside down.
+    (5.7) A spin button appears below the spin dial.
+        (5.7.1) Default icon state uses ic_spin.xml.
+        (5.7.2) Active state: Programmatically change fill colors for default state icons to #808080.
+   
+(6) ``SLOTS UI``
+    (6.1) "Slots" is three adjacent rectangles contained within one larger container rectangle.
+		(6.1.1) This is meant to mirror the design of a slot machine, as seen in this image: https://media.istockphoto.com/id/1408111718/vector/%C3%B0%C3%B0%C3%B1-%C3%B0%C3%B0%C3%B1%C3%B0%C2%B5%C3%B1%C3%B0%C3%B0%C2%B5%C3%B1%C3%B0.jpg?s=612x612&w=0&k=20&c=Je7yR0NLeB_befulI4C354Z6WMRRQZhX8209TzZL6qc=
+		(6.1.2) Each item rectangle may be called a "column", as the three rectangles act like three columnar lists.
+		(6.1.3) Minimum and maximum list quantities are the same as (5.1)
+		(6.1.4) There is one rectangle for every item on a list.
+	(6.2) Each rectangle has a different color.
+		(6.2.1) The rules for these colors are the same as (5.2).
+	(6.3) Above each rectangle is a marquee.
+		(6.3.1) Each marquee is placed on top of the containing rectangle.
+		(6.3.2) These marquees are the same as (5.3) and (5.4).
+	(6.4) A right-facing selection arrow appears on the left side of the containing rectangle, using ic_arrow_right.xml.
+		(6.4.1) This arrow aligns with the randomized selections.
+		(6.4.2) This arrow aligns with the left-facing selection arrow.
+	(6.5) A left-facing selection arrow appears on the right side of the containing rectangle, using ic_arrow_right.xml.
+		(6.5.1) This arrow aligns with the randomized selections.
+		(6.5.2) This arrow aligns with the right-facing selection arrow.
+    (6.6) An item can be text, an emoji, an image, or a combination of the three.
+	(6.7) Below each rectangle is a "lock" icon.
+		(6.7.1) Default state: ic_lock.xml
+		(6.7.2) Active state: ic_unlock.xml
+		(6.7.3) Each lock icon is 
+			(6.7.3.1) Centered with the item rectangle
+			(6.7.3.2) placed on top of the containing rectangle
+    (6.8) A spin button appears below the slots container rectangle.
+        (6.8.1) Default icon state uses ic_spin.xml.
+        (6.8.2) Active state: Programmatically change fill colors for default state icons to #808080.
+
+(7) ``DICE UI``
+    (7.1) "Dice" is a collection of polyhedrals called a "dice pool" that are randomized
+		(7.1.1) A die type is colloqually abbreviated as d*
+			(7.1.1.1) For example a six-sided die would be called a d6.
+		(7.1.2) Available dice are:
+			(7.1.2.1) d4 (d4_result_blank.xml)
+			(7.1.2.2) d6 (d6_result_blank.xml)
+			(7.1.2.3) d8 (d8_result_blank.xml)
+			(7.1.2.4) d10 (d10_result_blank.xml)
+			(7.1.2.5) d% (dp_result_blank.xml)
+				(7.1.2.5.1) This refers to percentile dice.
+					(7.1.2.5.2) Percentile dice are two d10 dice.
+						(7.1.2.5.2.1) The "ones" die uses numbers from 0 - 9
+						(7.1.2.5.2.2) The "tens" die adds a 0 following the 0 - 9 numbers (00 - 90)
+							(7.1.2.5.2.2.1) For example, a 1 on a "ones" d10 is 10 on a "tens" d10.
+						(7.1.2.5.2.3) A percentile roll displays as a sum of the two dice.
+							(7.1.2.5.2.3.1) For example, a roll of a 10 and a 1 is a roll of an 11.
+							(7.1.2.5.2.3.2) 00+0 equals 100 and not 0.
+				(7.1.2.5.2) Percentile dice are only included in the dice pool if they are turned on in the settings.
+			(7.1.2.6) d12 (d12_result_blank.xml)
+            (7.1.2.7) d20 (d20_result_blank.xml)
+		(7.1.3) Each die type can have a maximum of 10 dice.
+			(7.1.3.1) Multiple of one die type are colloquially abbreviated as #d*.
+				(7.1.3.1.1) For example, six six-sided dice would be called 6d6.
+	(7.2) Dice are displayed in the window 
+		(7.2.1) grouped by die type.
+			(7.2.1.1) All d4s are together, all d6s are together, and so on.
+			(7.2.1.2) Percentile dice are not mixed with d10s.
+		(7.2.2) spaced so that each group is distinct from the others.
+			(7.2.2.1) Two die types would appear horizontally in the center of the window with a large amount of space between them.
+			(7.2.2.2) Three die types would loosely form a triangle.
+			(7.2.2.3) Four die types would loosely form a rectangle
+			(7.2.2.4) Five die types would loosely form a pentagon
+			(7.2.2.5) Six die types would loosely form a hexagon.
+			(7.2.2.6) These shapes do not need to be exact, but offer a simple model for how to ensure space is available between each group of dice.
+	(7.3) Below the display area are three buttons
+		(7.3.1) Roll
+			(7.3.1.1) Default icon state uses ic_spin.xml.
+			(7.3.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+		(7.3.2) Reset
+			(7.3.2.1) Default icon state uses ic_reset.xml.
+			(7.3.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+		(7.3.3) Dice Pool
+	        (7.3.3.1) Default icon state uses ic_dice_pool.xml.
+			(7.3.3.2) Active state: Programmatically change fill colors for default state icons to #808080.
+
+
+(8) ``COIN FLIP UI``
+    (8.1) "Coin Flip" is a collection of coins called a "coin pool" that are randomized.
+		(8.1.1) Coins use imaginary currency
+			(8.1.1.1) "Bits" are
+				(8.1.1.1.1) the equivalent of cents in US dollars.
+				(8.1.1.1.2) colloqually referred to as b*
+					(8.1.1.1.2.1) for example, 25 bits are b25
+			(8.1.1.2) "Meatballs" are 
+				(8.1.1.2.1) the equivalent of dollars in US dollars.
+				(8.1.1.2.2) colloqually referred to as mb*
+					(8.1.1.2.2.1) for example, 2 meatballs are mb2
+		(8.1.2) Available coins are:
+			(8.1.2.1) b1 (b1_coin_flip_heads.xml and b1_coin_flip_tails.xml)
+			(8.1.2.2) b5 (b5_coin_flip_heads.xml and b5_coin_flip_tails.xml)
+			(8.1.2.3) b10 (b10_coin_flip_heads.xml and b10_coin_flip_tails.xml)
+			(8.1.2.4) b25 (b25_coin_flip_heads.xml and b25_coin_flip_tails.xml)
+			(8.1.2.5) mb1 (mb1_coin_flip_heads.xml and mb1_coin_flip_tails.xml)
+			(8.1.2.6) mb2 (mb2_coin_flip_heads.xml and mb2_coin_flip_tails.xml)
+		(8.1.3) Each coin type can have a maximum of 10 coins.
+			(8.1.3.1) Multiple of one coin type are colloquially abbreviated as #b* or #mb*.
+				(8.1.3.1.1) For example, six 25-bit coins would be called 6b25.
+	(8.2) Coins are displayed in the window 
+		(8.2.1) grouped by coin type.
+			(8.2.1.1) All b1s are together, all b5s are together, and so on.
+		(8.2.2) spaced so that each group is distinct from the others.
+			(8.2.2.1) Two coin types would appear horizontally in the center of the window with a large amount of space between them.
+			(8.2.2.2) Three coin types would loosely form a triangle.
+			(8.2.2.3) Four coin types would loosely form a rectangle
+			(8.2.2.4) Five coin types would loosely form a pentagon
+			(8.2.2.5) Six coin types would loosely form a hexagon.
+			(8.2.2.6) This shapes do not need to be exact, but offer a simple model for how to ensure space is available between each group of coins.
+	(8.3) Below the display area are three buttons
+		(8.3.1) Flip
+			(8.3.1.1) Default icon state uses ic_spin.xml.
+			(8.3.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+		(8.3.2) Reset
+			(8.3.2.1) Default icon state uses ic_reset.xml.
+			(8.3.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+		(8.3.3) Coin Pool
+	        (8.3.3.1) Default icon state uses ic_coin_pool.xml.
+			(8.3.3.2) Active state: Programmatically change fill colors for default state icons to #808080.
+
+
+ --- USER EXPERIENCE ---
+(9) ``SETTINGS BUTTON FOR ALL MODES``
+	(9.1) If a user taps the (4.1) settings button:
+		(9.1.1) its icon changes from (5.1) Default to (5.2) Active.
+		(9.1.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+			(9.1.2.1) The settings button remains active while the settings window is open.
+			(9.1.2.2) The settings window is rows with text.
+				(9.1.2.2.1) Some settings also include an icon after the text, such as a toggle or an edit icon.
+		(9.1.3) The settings menu includes the following settings ordered from top down:
+
+(10) ``MODE SETTING FOR ALL MODES``
+	(10.1.1) "Mode" appears first in order of settings for all four modes
+		(10.1.1.1) Following the word "Mode" is a drop-down arrow.
+			(10.1.1.1.1) The drop-down arrow's default state is ic_arrow_drop_down.xml
+			(10.1.1.1.2) The drop-down arrow's active state is ic_arrow_drop_up.xml
+		(10.1.1.2) If the user taps the word "Mode" or the drop-down arrow
+			(10.1.1.2.1) A horizontal drop-down menu opens with a smooth animation.
+				(10.1.1.2.1.1) The menu displays icons for each mode. 
+					(10.1.1.2.1.1.1) From left to right, the icon default states are:
+						(10.1.1.2.1.1.1.1) ic_spin.xml
+						(10.1.1.2.1.1.1.2) ic_slots.xml
+						(10.1.1.2.1.1.1.3) ic_dice.xml
+						(10.1.1.2.1.1.1.4) ic_coin_flip.xml
+					(10.1.1.2.1.1.2) Active state: 
+						(10.1.1.2.1.1.2.1) Programmatically change fill colors for default state icons to #808080
+						(10.1.1.2.1.1.2.2) A thick blue line appears beneath the icon.
+			(10.1.1.2.2) The randomizer changes to the newly selected.
+				(10.1.1.2.2.1) Only that randomizer changes modes. Any other randomizers that are also open remain unchanged.
+				(10.1.1.2.2.2) Any settings that appear in both modes remain the same.
+					(10.1.1.2.2.2.1) For example, if the user changes from SPIN to SLOTS:
+						(10.1.1.2.2.2.1.1) The list of items remains the same.
+						(10.1.1.2.2.2.1.2) The Announce toggle state remains the same. 
+
+(11) ``ADD ANOTHER SETTING FOR ALL MODES``
+	(11.1) "Add Another" appears last in order of settings for all four modes.
+		(11.1.1) Following the phrase "Add Another" is an add icon.
+			(11.1.1.1) The default icon state is ic_add_circle.xml.
+			(11.1.1.2) The active state icon programatically changes the fill color of the default icon to #808080.
+	(11.2) When a user touches the Add Another button, 
+		(11.2.1) Its icon becomes Active.
+			(11.2.1.1) Its icon returns to default when the onTouch event ends.
+		(11.2.2) A new randomizer appears at the geometric center of the screen.
+			(11.2.2.1) The new randomizer adopts the properties of the randomizer from which it was made.
+				(11.2.2.1.1) It is set to the same mode.
+				(11.2.2.1.2) It has the same height and width.
+				(11.2.2.1.3) If the source traffic light had a billboard image, that image appears in the new traffic light as well.
+			(11.2.2.2) If another randomizer already exists at the geometric center of the display screen, the new randomizer should appear in an offset position (e.g., +25px down and +25px right) from the centered randomizer.
+	(11.3) If four randomizers are already present on the screen, 
+		(11.3.1) The Add Another button is inactivated. Nothing happens if a user touches it.
+		(11.3.2) Dice mode allows seven instances to be created before Add Another is inactivated.
+		(11.3.3) The icon fill and outline colors change. (TODO: Define specific hex colors for an inactive icon.)
+
+(12) ``SPIN MODE SPECIFIC UX``
+    (12.1) If a user taps the marquee (the (5.4) title or the (5.5) arrow):
+		(12.1.1) The marquee arrow changes to its active state with a smooth animation
+		(12.1.2) A drop-down menu opens that displays all the available lists.
+			(12.1.2.1) The drop-down menu opens with a smooth animation. 
+			(12.1.2.2) The active list appears first in the order.
+			(12.1.2.3) All other lists are ordered alphanumerically.
+		(12.1.3) The user can tap any list title to apply that list
+			(12.1.3.1) The new list title replaces the existing list title in the marquee.
+				(12.1.3.1.1) The new title is bold font.
+			(12.1.3.2) The list items replace the existing list items on the spin dial.
+			(12.1.3.3) The drop-down menu closes with a smooth animation.
+			(12.1.3.4) The drop-down arrow returns to a default state with a smooth animation.
+	(12.2) If a user taps the (5.7) spin button:
+		(12.2.1) The spin button changes to its active state.
+		(12.2.2) The spin dial rotates with a smooth animation for 2.0 seconds.
+			(12.2.2.1) The spin dial rotates clockwise for left-to-right languages.
+			(12.2.2.2) The spin dial rotates counter-clockwise for right-to-left languages.
+			(12.2.2.3) Use a pseudo-random number generator to select an item from the list.
+				(12.2.2.3.1) An item's number is determined by its order in the list.
+				(12.2.2.3.2) Only one number result is generated per spin.
+				(12.2.2.3.3) Each spin is a unique event, generating a new number result.
+			(12.2.2.4) When the animation completes, the randomly selected list item should align with the (5.5) selection arrow.
+			(12.2.2.5) If spinning is turned off in the settings, the dial immediately displays the result.
+
+``SPIN MODE SETTINGS``
+	(12.3) The settings window for Spin mode includes these additional settings:
+		(12.3.1) Each setting includes text and an icon.
+
+``SPIN: LIST EDITOR``
+		(12.3.2) "List Editor"
+			(12.3.2.1) This settings title is followed by an edit icon.
+				(12.3.2.1.1) Default icon state uses ic_edit.xml.
+				(12.3.2.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+			(12.3.2.2) Tapping the phrase "List Editor" or the edit icon, opens the list collection editor:
+				(12.3.2.2.1) The list collection editor window opens overtop the settings window.
+				(12.3.2.2.2) This window includes:
+					(12.3.2.2.2.1) A back arrow in the top left corner of the window. 
+						(12.3.2.2.2.1.1) Default icon state uses ic_back.xml.
+						(12.3.2.2.2.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+						(12.3.2.2.2.1.3) When activated the list collection editor window closes.
+							(12.3.2.2.2.1.3.1) The user returns to the main settings window.
+					(12.3.2.2.2.2) A close button in the top right corner of the window.
+						(12.3.2.2.2.2.1) Default icon state uses ic_close.xml.
+						(12.3.2.2.2.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+						(12.3.2.2.2.2.3) When activated all settings related windows close.
+					(12.3.2.2.2.3) A list of each list title, ordered alphanumerically.
+						(12.3.2.2.2.3.1) There are six pregenerated lists:
+							(12.3.2.2.3.1.1) "Colors"
+								(12.3.2.2.3.1.1.1) List items are strings to be translated.
+								(12.3.2.2.3.1.1.2) List items are: "Red", "Orange", "Yellow", "Green", "Blue", and "Purple"
+								(12.3.2.2.3.1.1.3) Colors is the default list displayed if no list is saved in preferences.
+							(12.3.2.2.3.1.2) "Consonants (English)"
+								(12.3.2.2.3.1.2.1) List items are not strings.
+								(12.3.2.2.3.1.2.2) "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y*", "Z"
+							(12.3.2.2.3.1.3) "Continents"
+								(12.3.2.2.3.1.3.1) List items are strings to be translated.
+								(12.3.2.2.3.1.3.2) "Africa", "Antarctica", "Asia", "Australia", "Europe", "North America", and "South America"
+							(12.3.2.2.3.1.4) "Numbers"
+								(12.3.2.2.3.1.4.1) List items are not strings.
+								(12.3.2.2.3.1.4.2) "0", "1", "2", "3", "4", "5", "6", "7", "8", and "9"
+							(12.3.2.2.3.1.5) "Oceans"
+								(12.3.2.2.3.1.5.1) List items are strings to be translated.
+								(12.3.2.2.3.1.5.2) "Oceans" are "Arctic", "Atlantic", "Indian", "Pacific", and "Southern"
+							(12.3.2.2.3.1.6) "Vowels (English)"
+								(12.3.2.2.3.1.6.1) List items are not strings.
+								(12.3.2.2.3.1.6.2) "A", "E", "I", "O", "U", and "Y*"
+						(12.3.2.2.2.3.2) There is a maximum limit of 20 lists.
+						(12.3.2.2.2.3.3) "Add New List" appears as the first row in the list
+							(12.3.2.2.2.3.3.1) If there are already 20 lists, "Add New List" is not displayed.
+							(12.3.2.2.2.3.3.2) Clicking on "Add New List" opens an empty list item editor with empty fields.
+					(12.3.2.2.2.4) Each title is followed by a number in parentheses.
+						(12.3.2.2.2.4.1) This number is the quantity of items in that list.
+						(12.3.2.2.2.4.2) For example, Colors has six items, so "(6)" would appear after its title.
+					(12.3.2.2.2.5) Aligned to the right of each list row is a delete button.
+						(12.3.2.2.2.5.1) Default state: ic_delete.xml
+						(12.3.2.2.2.5.2) Active state: Programmatically change fill colors for default state icons to #808080.
+						(12.3.2.2.2.5.3) Tapping the Delete button
+							(12.3.2.2.2.5.3.1) Causes the icon to become active
+							(12.3.2.2.2.5.3.2) Opens the snackbar, "Are you sure you want to delete this? It cannot be undone."
+								(12.3.2.2.5.3.2.1) There is an oval with the string "Cancel"
+									(12.3.2.2.5.3.2.1.1) This oval has no fill.
+								(12.3.2.2.5.3.2.2) There is an oval with the string "Delete".
+									(12.3.2.2.5.3.2.2.1) This oval has a colored fill that matches development standards (blue?)
+							(12.3.2.2.2.5.3.3) If the user chooses Cancel:
+								(12.3.2.2.2.5.3.3.1) The snackbar closes.
+								(12.3.2.2.2.5.3.3.2) The delete icon returns to its default state.
+								(12.2.3.3.3.5.3.3.3) The list of lists remains unchanged.
+							(12.3.3.3.3.5.3.4) If the user chooses Delete:
+								(12.3.2.2.2.5.3.4.1) The snackbar closes.
+								(12.3.2.2.2.5.3.4.2) The delete icon returns to its default state.
+								(12.2.3.3.3.5.3.4.3) The list is:
+									(12.2.3.3.5.3.4.3) Remove from the list of lists
+									(12.2.3.3.5.3.4.3) Deleted from preferences.
+										(12.2.3.3.5.3.4.3.1) This deletion applies across all randomizer windows.
+											(12.2.3.3.5.3.4.3.1.1) If another randomizer displayed the list that was deleted, that randomizer defaults to the first list available in the updated order of lists.
+										(12.2.3.3.5.3.4.3.2) This list will not be loaded again on future launches.
+						(12.3.2.2.2.5.4) Pregenerated lists can be deleted.
+							(12.3.2.2.2.5.4.1) This is most likely to happen for non-English speakers who will choose to replace consonants and vowels from their own languages.
+			(12.3.2.3) Tapping the list title opens the list item editor:
+				(12.3.2.3.1) The list item editor window opens overtop the previous window.
+				(12.3.2.3.2) This window includes:
+					(12.3.2.3.2.1) A back arrow in the top left corner of the window. 
+						(12.3.2.3.2.1.1) Default icon state uses ic_back.xml.
+						(12.3.2.3.2.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+						(12.3.2.3.2.1.3) When activated the list item editor window closes.
+							(12.3.2.3.2.1.3.1) The user returns to the main settings window.
+							(12.3.2.3.2.1.3.2) If the user attempts to move back with an incomplete list:
+								(12.3.2.3.2.1.3.2.1) If there is a title but no items, a snackbar opens with the message, "A list must have at least two items to be created. Please add items or cancel this list creation."
+								(12.3.2.3.2.1.3.2.2) If there are items but not title, a snackbar opens with the message, "Please add a title to save this list."
+								(12.3.2.3.2.1.3.2.3) If there is a title and one item, the same snackbar from (12.3.2.3.2.1.3.2.1) opens.
+					(12.3.2.3.2.2) A close button in the top right corner of the window.
+						(12.3.2.3.2.2.1) Default icon state uses ic_close.xml.
+						(12.3.2.3.2.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+						(12.3.2.3.2.2.3) When activated all settings related windows close.
+					(12.3.2.3.2.3) A text field with the list title.
+						(12.3.2.3.2.3.1) If this is a new list, the string "List Title" appears
+						(12.3.2.3.2.3.2) Tapping on this text field opens the system keyboard.
+					(12.3.2.3.2.4) Below the title text field is 
+						(12.3.2.3.2.4.1) a discrete row for each item if the list has already been populated with one or more items.
+							(12.3.2.3.2.4.1.1) Each item is displayed in its own text field
+								(12.3.2.3.2.4.1.1.1) Tapping an item opens the system keyboard.
+							(12.3.2.3.2.4.1.2) Items are ordered alphanumerically 
+						(12.3.2.3.2.4.2) Each item row also includes
+							(12.3.2.3.2.4.2.1) a color square
+								(12.3.2.3.2.4.2.1.1) it immediately follows the text/emoji/image of an item
+								(12.3.2.3.2.4.2.1.2) its outline is black
+								(12.3.2.3.2.4.2.1.3) its fill is programmatically generated from a color picker library to ensure WCAG 2.2 AA contrast standards are met.
+								(12.3.2.3.2.4.2.1.4) If a user taps the color square, it opens a color selector.
+									(12.3.2.3.2.4.2.1.4.1) The color selector displays:
+										(12.3.2.3.2.4.2.1.4.1.1) The title "Background Color" at the top of the selector view.
+										(12.3.2.3.2.4.2.1.4.1.2) A color wheel
+											(12.3.2.3.2.4.2.1.4.1.2.1) Tapping anywhere on this wheel changes to the color to the one tapped.
+										(12.3.2.3.2.4.2.1.4.1.3) Text fields that show:
+											(12.3.2.3.2.4.2.1.4.1.3.1) RGB values of the current color
+											(12.3.2.3.2.4.2.1.4.1.3.2) Hex code values of the current color
+											(12.3.2.3.2.4.2.1.4.1.3.3) These values change when the color change in (12.3.2.3.2.4.2.1.4.1.2.1)
+											(12.3.2.3.2.4.2.1.4.1.3.4) Changing these values changes the color selected in (12.3.2.3.2.4.2.1.4.1.2.1)
+										(12.3.2.3.2.4.2.1.4.1.4) HSL sliders
+											(12.3.2.3.2.4.2.1.4.1.4.1) Dragging the value on the hue, saturation, or lightness slider applies that change to the color.
+										(12.3.2.3.2.4.2.1.4.1.5) Color "Pots"
+											(12.3.2.3.2.4.2.1.4.1.5.1) Below the sliders are six circles.
+												(12.3.2.3.2.4.2.1.4.1.5.1.1) Each circle has a black outline.
+												(12.3.2.3.2.4.2.1.4.1.5.1.2) A circle's fill matches a previous color used.
+													(12.3.2.3.2.4.2.1.4.1.5.1.2.1) The left-most circle fill is the most recently color used.
+													(12.3.2.3.2.4.2.1.4.1.5.1.2.2) Moving left-to-right, fills are colors that were used one time previous to the one to its left.
+														(12.3.2.3.2.4.2.1.4.1.5.1.2.2.1) Pots fill right-to-left rather than left-to-right for right-to-left languages.
+													(12.3.2.3.2.4.2.1.4.1.5.1.2.3) A color does not appear twice in the color pots. Anytime it is used, it moves to the left-most position.
+													(12.3.2.2.2.4.2.1.4.1.5.1.2.4) If not enough colors have been assigned to fill all six pots, empty pots have no fill.
+										(12.3.2.3.2.4.2.1.4.1.6) The bottom of the color includes two buttons.
+											(12.3.2.3.2.4.2.1.4.1.6.1) Cancel
+											(12.3.2.3.2.4.2.1.4.1.6.2) Continue
+											(12.3.2.3.2.4.2.1.4.1.6.3) These use the same design style as (12.3.2.2.2.5.3.2).
+											(12.3.2.3.2.4.2.1.4.1.6.4) If the user chooses Continue
+												(12.3.2.3.2.4.2.1.4.1.6.4.1) The chosen color populates the left-most color pot.
+												(12.3.2.3.2.4.2.1.4.1.6.4.2) The color picker window closes
+												(12.3.2.3.2.4.2.1.4.1.6.4.3) The color square on the item row matches the color selected.
+								(12.3.2.3.2.4.2.1.5) User selected colors do not have to conform to WCAG color constrast standards.
+									(12.3.2.3.2.4.2.1.5.1) Automatically generated colors following this list item will use it to determine contrast.
+							(12.3.2.3.2.4.2.2) a delete button, at the very end of the row
+								(12.3.2.3.2.4.2.2.1) This has the same behavior as (12.3.2.2.2.5).
+							(12.3.2.3.2.4.2.3) an image button adjacent to the delete button
+								(12.3.2.3.2.4.2.3.1) Default state ic_image.xml
+								(12.3.2.3.2.4.2.3.2) Active state: Programmatically change fill colors for default state icons to #808080.
+								(12.3.2.3.2.4.2.3.3) If image upload is activated, open system window to upload an image
+									(12.3.2.3.2.4.2.3.3.1) Supported images are png, jpg, gif, bmp, and webp.
+									(12.3.2.3.2.4.2.3.3.2) No more than 1 image can be added per line.
+									(12.3.2.3.2.4.2.3.3.3) An image cannot be larger than 1 MB in size
+										(12.3.2.3.2.4.2.3.3.3.1) If a user attempts to upload an image larger than 1MB, a snackbar opens with the warning "This image is too large. Would you like to optimize it?"
+											(12.3.2.3.2.4.2.3.3.3.1.1) The snackbar includes a Cancel button
+											(12.3.2.3.2.4.2.3.3.3.1.2) The snackbar includes an Optimize button
+											(12.3.2.3.2.4.2.3.3.3.1.3) These use the same design style as (12.3.2.2.2.5.3.2).
+											(12.3.2.3.2.4.2.3.3.3.1.4) If the user chooses Optimize, the image is compressed so that it's size is 900 kB or less.
+										(12.3.2.3.2.4.2.3.3.3.2) If the user taps the image button again, they receive a warning snackbar that says, "This action will replace your existing image. Would you like to continue?" 
+											(12.3.2.3.2.4.2.3.3.3.2.1) The snackbar includes a Cancel button
+											(12.3.2.3.2.4.2.3.3.3.2.2) The snackbar includes a Continue
+											(12.3.2.3.2.4.2.3.3.3.2.3) These use the same design style as (12.3.2.2.2.5.3.2).
+											(12.3.2.3.2.4.2.3.3.3.2.4) If the user chooses Continue, the previous image is replaced with the new upload.
+							(12.3.2.3.2.4.2.4) an emoji button adjacent to the image button
+								(12.3.2.3.2.4.2.4.1) Default state ic_emoji.xml
+								(12.3.2.3.2.4.2.4.2) Active state: Programmatically change fill colors for default state icons to #808080.
+								(12.3.2.3.2.4.2.4.2.1) If emoji is activated, open an emoji library
+									(12.3.2.3.2.4.2.4.2.1.1) The library is license free.
+									(12.3.2.3.2.4.2.4.2.1.2) The library closes after one emoji is selected.
+										(12.3.2.3.2.4.2.4.2.1.2.1) TODO: Confirm this is standard behavior.
+									(12.3.2.3.2.4.2.4.2.1.3) No more than 10 emoji can be added per line.
+						(12.3.2.3.2.4.3) A row with the string "Add an Item"
+							(12.3.2.3.2.4.3.1) This row always appears last.
+							(12.3.2.3.2.4.3.2) This row does not appear if there are 44 list items.
+							(12.3.2.3.2.4.3.3) Tapping on this row opens a large rectangular text field if list items do not already exist.
+								(12.3.2.3.2.4.3.3.1)This would be the size of five list title rows in the list collection editor view.
+								(12.3.2.3.2.4.3.3.2) In the top right corner of this text field is:
+									(12.3.2.3.2.4.3.3.2.1) An emoji icon button
+										(12.3.2.3.2.4.3.3.2.1.1) This follows the same rules as (12.3.2.3.2.4.2.4)
+									(12.3.2.3.2.4.3.3.2.2) An image icon button
+										(12.3.2.3.2.4.3.3.2.2.1) This follows the same rules as (12.3.2.3.2.4.2.3)
+								(12.3.2.3.2.4.3.3.3) Tapping the text field opens the system keyboard
+									(12.3.2.3.2.4.3.3.3.1) The return key creates a new row. It does not close the system keyboard.
+								(12.3.2.3.2.4.3.3.4) If the user press-hold until a paste prompt appears, they can post their entire list if it is already on the Android clipboard.
+								(12.3.2.3.2.4.3.3.5) Each line of the text field is considered its own item.
+									(12.3.2.3.2.4.3.3.5.1) Text, emoji, and an image can all appear on the same line.
+								(12.3.2.3.2.4.3.3.6) 1.5 seconds after the last input to the text field is made:
+									(12.3.2.3.2.4.3.3.6.1) the text field closes.
+									(12.3.2.3.2.4.3.3.6.2) Text/emoji/images in the text field are distributed into individual lists.
+
+``SPIN: SPIN ANIMATION``
+		(12.3.3) "Spin Animation"
+			(12.3.3.1) Following the phrase "Spin Animation" is a toggle.
+				(12.3.3.1.1) The toggle's default position is on.
+					(12.3.3.1.1.1) The toggle should include the words "On" and "Off"
+					(12.3.3.1.1.2) These words should be strings so they can be translated.
+			(12.3.3.2) If the setting is toggled on, activating the Spin button will cause a spin animation.
+			(12.3.3.3) If the setting is toggled off, activating the Spin button does not cause a spin animation.
+				(12.3.3.3.1) The result of that spin is immediately displayed.
+
+``SPIN: ANNOUNCE``
+		(12.3.4) "Announce"
+			(12.3.4.1) Following the phrase "Announce" is a toggle.
+				(12.3.4.1.1) The toggle's default position is off.
+					(12.3.4.1.1.1) The toggle should include the words "On" and "Off"
+					(12.3.4.1.1.2) These words should be strings so they can be translated.
+			(12.3.4.2) If the setting is toggled on:
+				(12.3.4.2.1) A smooth animation enlarges the randomized item selection to be displayed to the side of the spin dial.
+					(12.3.4.2.1.1) The item is displayed at 10f its size on the spin dial.
+					(12.3.4.2.1.2) Enlargement should not pixelate text, emoji, or images.
+					(12.3.4.2.1.3) This enlargement is an estimate and will need to be revised following trial and error.
+				(12.3.4.2.2) The announcement remains on the screen until the user taps the screen.
+			(12.3.4.3) If the setting is toggled off, no enlargement occurs after a spin.
+
+``SPIN: CELEBRATE``
+		(12.3.5) "Celebrate"
+			(12.3.5.1) This setting is only active when Announce is active.
+			(12.3.5.2) Following the phrase "Celebrate" is a toggle.
+				(12.3.5.2.1) The toggle's default position is off.
+					(12.3.5.2.1.1) The toggle should include the words "On" and "Off"
+					(12.3.5.2.1.2) These words should be strings so they can be translated.
+			(12.3.5.3) If Celebrate is toggled on:
+				(12.3.5.3.1) when Announce is toggled off, Announce is also toggled on.
+					(12.3.5.3.1.1) If Celebrate is then toggled off, Announce remains toggled on.
+				(12.3.5.3.2) A confetti animation displays above the announced result for 3.0 seconds
+					(12.3.5.3.2.1) Use the Konfetti animation
+					(12.3.5.3.2.2) Use the following colored confetti:
+						(12.3.5.3.2.2.1) confetti_piece_blue.xml
+						(12.3.5.3.2.2.3) confetti_piece_green.xml
+						(12.3.5.3.2.2.3) confetti_piece_red.xml
+						(12.3.5.3.2.2.4) confetti_piece_violet.xml
+						(12.3.5.3.2.2.5) confetti_piece_yellow.xml
+
+``SPIN: SEQUENCE``
+		(12.3.6) "Sequence"
+			(12.3.6.1) This setting is only active when Announce is toggled off.
+			(12.3.6.2) Following the phrase "Sequence" is a toggle.
+				(12.3.6.2.1) The toggle's default position is off.
+					(12.3.6.2.1.1) The toggle should include the words "On" and "Off"
+					(12.3.6.2.1.2) These words should be strings so they can be translated.
+			(12.3.6.3) If Sequence is toggled on:
+				(12.3.6.3.1) when Announce is on, Announce is toggled off
+				(12.3.6.3.2) when Celebrate is on, Celebrate is toggled off
+				(12.3.6.3.3) a spin animation lasts for 1 second for every 10 items on a list (rounded up to the next second)
+				(12.3.6.3.4) a randomized order is created for each item on the list 
+				(12.3.6.3.5) the first result in the sequence is displayed where one result is displayed for Announce.
+					(12.3.6.3.5.1) This is referred to as "the displayed result"
+					(12.3.6.3.5.2) Below the displayed result are the next three results in the sequence
+						(12.3.6.3.5.2.1) They appear smaller than the first result displayed.
+				(12.3.6.3.6) Beside the sequenced results are
+					(12.3.6.3.6.1) An up arrow.
+						(12.3.6.3.6.1.1) Default state: ic_arrow_drop_up.xml
+						(12.3.6.3.6.1.2) Active state: Programmatically change fill colors for default state icons to #808080
+					(12.3.6.3.6.2) A down arrow.
+						(12.3.6.3.6.2.1) Default state: ic_arrow_drop_down.xml
+						(12.3.6.3.6.2.2) Active state: Programmatically change fill colors for default state icons to #808080
+				(12.3.6.3.7) If the user taps the down arrow:
+					(12.3.6.3.7.1) The down arrow is activated for the duration of the onTouch event
+					(12.3.6.3.7.2) The displayed result moves up with a smooth animation.
+						(12.3.6.3.7.2.1) It appears smaller like the items below the displayed result.
+					(12.3.6.3.7.3) The next item in the sequence moves up with a smooth animation. It is now the displayed result.
+					(12.3.6.3.7.4) If the list has more than four items, the next item in the sequence that had not been visible now becomes the last item shown below the displayed result.
+						(12.3.6.3.7.4.1) No more than three items appear below the displayed result.
+						(12.3.6.3.7.4.2) No more than three items appear above the displayed result.
+					(12.3.6.3.7.5) If the displayed result is the last item in the sequence, tapping the down button yields no result 
+				(12.3.6.3.8) If the user taps the up arrow:
+					(12.3.6.3.8.1) The up arrow is activated for the duration of the onTouch event.
+					(12.3.6.3.8.2) The displayed result moves down with a smooth animation.
+					(12.3.6.3.8.3) The previous item in the sequence moves down with a smooth animation. It is now the displayed result.
+					(12.3.6.3.8.4) If the displayed result is the first item in the sequence, tapping the up button yields no result.
+				(12.3.6.3.9) Pressing the spin button creates an entirely new sequence.
+				(12.3.6.3.10) Changing the list that is displayed on the spin dial clears the displayed sequence
+					(12.3.6.3.10.1) A new sequence is not created until the user presses the spin button.
+
+
+(13) ``SLOTS MODE SPECIFIC UX``
+    (13.1) If a user taps any marquee (the (5.3) title or the (5.5) arrow):
+		(13.1.1) That marquee arrow changes to its active state with a smooth animation
+		(13.1.2) A drop-down menu opens that displays all the available lists.
+			(13.1.2.1) The drop-down menu opens with a smooth animation. 
+			(13.1.2.2) The active list appears first in the order.
+			(13.1.2.3) All other lists are ordered alphanumerically.
+				(13.1.2.3.1) Slots uses the same pregenerated lists as Spin, as per (12.3.2.2.2.3.1)
+		(13.1.3) The user can tap any list title to apply that list to that column
+			(13.1.3.1) The new list title replaces the existing list title in the marquee.
+				(13.1.3.1.1) The new title is bold font.
+			(13.1.3.2) The list items replace the existing list items on the spin dial.
+			(13.1.3.3) The drop-down menu closes with a smooth animation.
+			(13.1.3.4) The drop-down arrow returns to a default state with a smooth animation.
+			(13.1.3.5) The same list can be assigned to more than one column.
+	(13.2) If a user taps the (6.8) spin button:
+		(13.2.1) The spin button changes to its active state.
+		(13.2.2) The item rectangles randomize for 2.0 seconds.
+			(13.2.2.1) Because there is no spin dial, slots spinning briefly displays a new item from the list until the final selection is made.
+				(13.2.2.1.1) Use a pseudo-random number generator to sequence the list items.
+					(13.2.2.1.1.1) Each list has its own distinct sequence order.
+					(13.2.2.1.1.2) An item's number is determined by its order in the list.
+				(13.2.2.1.2) Display rectangles in this randomized sequence order.
+					(13.2.2.1.2.1) Rectangles change every 0.2 seconds.
+					(13.2.2.1.2.2) The final selections are the tenth rectangle shown in each column.
+					(13.2.2.1.2.3) If a list has fewer than 10 items, the list repeats.
+				(13.2.2.1.3) Each spin is a unique event, generating a new number result for each column.
+		(13.2.3) When the animation completes, the randomly selected list item should align with the (5.5) selection arrow.
+		(13.2.4) If spinning is turned off in the settings, the slots immediately display their results.
+	(13.3) If a user taps the the (6.7) lock button:
+		(13.3.1) The lock button changes to its active state
+		(13.3.2) The locked column does not randomize when the spin button is activated.
+			(13.3.2.1) There is no color change.
+			(13.3.2.2) The displayed item remains the same.
+
+``SLOTS MODE SETTINGS``
+	(13.4) The settings window for Slots mode includes these additional settings:
+		(13.4.1) Each setting includes text and an icon.
+		(13.4.2) "Column Number"
+			(13.4.2.1) Following the phrase "Column Number" is a toggle.
+				(13.4.2.1.1) The toggle's default state is "3" 
+					(13.4.2.1.1.1) The toggle should include the numerals "3" and "5".
+			(13.4.2.2) when the toggle is set to "3", it appears as detailed above.
+			(13.4.2.3) When the toggle is set to "5", the three-column UI changes to a five-column UI
+				(13.4.2.3.1) Two new item rectangles appear within the containing rectangle
+				(13.4.2.3.2) Each new rectangle has its own marquee.
+				(13.4.2.3.3) Each new rectangle has its own lock button.
+		(13.4.3) "List Editor" uses the same behavior as (12.3.2)
+		(13.4.4) "Spin Animation" uses the same behavior as (12.3.3)
+		(13.4.5) "Announce" uses the same behavior as (12.3.4)
+
+
+(14) ``DICE SPECIFIC UX``
+	(14.1) If no preferences load on launch, the default dice pool is 1d6
+		(14.1.1) Any dice in the dice pool show their highest number on top of the polyhedral svg.
+			(14.1.1.1) For example, all d6 show a 6 face until they are rolled.
+    (14.2) If a user taps the Roll button
+		(14.2.1) The Roll icon changes to its active state
+		(14.2.2) Using a pseudo-random number generator, determine the outcome for each die in the pool.
+			(14.2.2.1) The number range for a randomized list is equal to the number of sides on each die.
+			(14.2.2.2) Each die has its own randomized outcome.
+			(14.2.2.3) Each roll is a unique event.
+		(14.2.3) Dice roll in a smooth animation for 1 second.
+			(14.2.3.1) TODO: Explore whether dice need to animate in place or if they can move about the display space.
+		(14.2.4) Following 1 second:
+			(14.2.4.1) The animation ends
+			(14.2.4.2) Each die shows the numeric result on top of the polyhedral svg.
+				(14.2.4.2.1) TODO: Explore whether it's possible to show numbers on the other visible faces of a die.
+					(14.2.4.2.1.1) If it's possible, use this rule: "f the number of sides of the polyhedral = n, then two opposites faces added together = n+1."
+			(14.2.4.3) The roll icon returns to its default state.
+	(14.3) If a user taps the Reset button
+		(14.3.1) The Reset icon changes to its active state for the duration of the onTouch event.
+		(14.3.2) All dice in the dice pool shows its highest number for its die type.
+		(14.3.3) If the animation moves, as per (14.2.3.1), return the dice to their starting points.
+		(14.3.4) Any results shown while (14.5.6) Announce is toggled on are cleared.
+		(14.3.5) Any graph data shown while (14.5.10) Graph Distribution is toggled on are cleared.
+	(14.4) If a user taps the Dice Pool button
+		(14.4.1) The Dice Pool icon change to its active state
+		(14.4.2) A popup window opens above the Dice Pool button
+			(14.4.2.1) A tooltip arrow points to the dice pool icon
+			(14.4.2.2) The window contains icons for each die type
+				(14.4.2.2.1) Percentile dice are included only if they are turned on in the settings
+				(14.4.2.2.2) Dice are ordered from left-to-right by increasing value
+					(14.4.2.2.2.1) A d4 is the left-most die type
+					(14.4.2.2.2.2) A d20 is the right-most die type
+					(14.4.2.2.2.3) Percentile dice appear between the d10 and the d12.
+			(14.4.2.3) Below each polyhedral SVG is:
+				(14.4.2.3.1) An up arrow
+					(14.4.2.3.1.1) Default state: ic_arrow_drop_up.xml
+					(14.4.2.3.1.2) Active state: Programmatically change fill colors for default state icons to #808080
+				(14.4.2.3.2) A text field that shows the quantity of that die type currently in the dice pool
+					(14.4.2.3.2.1) The default state would have d6 at 1 and all other dice at 0.
+					(14.4.2.3.2.2) Tapping this text field opens the number pad.
+				(14.4.2.3.3) A down arrow
+					(14.4.2.3.3.1) Default state: ic_arrow_drop_down.xml
+					(14.4.2.3.3.2) Active state: Programmatically change fill colors for default state icons to #808080
+			(14.4.2.4) Pressing the up arrow:
+				(14.4.2.4.1) Changes the icon state to active for the duration of the onTouch event
+				(14.4.2.4.2) Increases the numeric value in the text field of that die type by one.
+					(14.4.2.4.2.1) The maximum number of dice for a die type is 10.
+			(14.4.2.5) Pressing the down arrow:
+				(14.4.2.5.1) Changes the icon state to active for the duration of the onTouch event
+				(14.4.2.5.2) Decreases the numeric value in the text field of that die type by one.
+					(14.4.2.5.2.1) The minimum number of dice for a die type is 0.
+		(14.4.3) Tapping the Dice Pool button a second time closes the window.
+		(14.4.4) Tapping outside of the Dice Pool window closes the Dice Pool window.
+
+``DICE MODE SETTINGS``
+	(14.5) The settings window for Dice mode includes these additional settings:
+		(14.5.1) Each setting includes text and an icon.
+
+``COLOR``
+		(14.5.2) "Color"
+			(14.5.2.1) Following the word "Color" is a color square, like (12.3.2.3.2.4.2.1)
+				(14.5.2.1.1) If all die types have the same color, the color square fill matches that color.
+				(14.5.2.1.2) If different die types have different colors, the color square fill is rainbow swirl.
+			(14.5.2.2) If the user taps the word "Color" or the color square, a color picker opens.
+			(14.5.2.3) The color picker layout includes:
+				(14.5.2.2.1) A checkbox followed by the string "Apply to all"
+					(14.5.2.2.1.1) The checkbox is unchecked by default.
+					(14.5.2.2.1.2) If the checkbox is checked, a color selectin for one die type applies to all dice.
+				(14.5.2.2.2) two columns
+					(14.5.2.2.2.1) The left column has each die type in descending order
+						(14.5.2.2.2.1.1) This includes percentile dice regardless of whether that setting is turned on.
+					(14.5.2.2.2.2) The right column has color squares, one for each die type
+						(14.5.2.2.2.2.1) Each square is aligned with each die type to form a row.
+						(14.5.2.2.2.2.2) Tapping a square opens PurramidPalette.kt for the user to choose a color.
+						(14.5.2.2.2.2.3) The default color is white.
+
+``PIPS``
+		(14.5.3) "d6 Pips"
+			(14.5.3.1) Following the phrase "d6 Pips" is an on/off toggle.
+				(14.5.3.1.1) The toggle includes the strings "On" and "Off"
+				(14.5.3.1.2) The default state is Off.
+			(14.5.3.2) If the setting is toggled on, the d6 face shows pips instead of numbers.
+				(14.5.3.2.1) Pips use the industry standard position for each die face
+					(14.5.3.2.1.1) For example, one pip is centered on the die face
+					(14.5.3.2.1.2) For example, six pips form two columns of three pips.
+
+``PERCENTILE DICE``
+		(14.5.4) "Percentile Dice"
+			(14.5.4.1) Following the phrase "Percentile Dice" is an on/off toggle.
+				(14.5.4.1.1) The toggle includes the strings "On" and "Off"
+				(14.5.4.1.2) The default state is Off.
+			(14.5.3.2) If the setting is toggled on, percentile dice are available in the (14.4.2) Dice Pool selection window.
+		
+``ROLL ANIMATION``
+		(14.5.5) "Roll Animation"
+			(14.5.5.1) Following the phrase "Roll Animation" is an on/off toggle.
+				(14.5.5.1.1) The toggle includes the strings "On" and "Off"
+				(14.5.5.1.2) The default state is On.
+			(14.5.5.2) If the setting is toggled off, roll results are shown immediately. There is no roll animation.
+
+``ANNOUNCE``
+		(14.5.6) "Announce"
+			(14.5.6.1) Following the phrase "Announce" is an on/off toggle.
+				(14.5.6.1.1) The toggle includes the strings "On" and "Off"
+				(14.5.6.1.2) The default state is Off.
+			(14.5.6.2) If the setting is toggled on, roll results are displayed enlarged on the screen.
+				(14.5.6.2.1) This behavior is similar to (12.3.4)
+				(14.5.6.2.2) If only one die type is rolled, the result number is displayed.
+					(14.5.6.2.2.1) If that die type rolls more than one die, results are
+						(14.5.6.2.2.1.1) listed sequentially from lowest to highest result
+						(14.5.6.2.2.1.2) separated by a comma
+				(14.5.6.2.3) If two or more different die types are rolled, the result numbers are displayed:
+					(14.5.6.2.3.1) on a row for each die type
+						(14.5.6.2.3.1.1) Each row starts with an icon of the die type
+						(14.5.6.2.3.1.2) Rows are in descending order from smallest die type to largest die type.
+					(14.5.6.2.3.2) If a die type rolls more than one die, the numbers of its row are separated by a comma.
+				(14.5.6.2.3) If (14.5.7) Sum Results is toggled on:
+					(14.5.6.2.3.1) and (14.5.7.2.1) Sum by Type is also toggled on, those results are displayed in rows in the same fashion as (14.5.6.2.3).
+					(14.5.6.2.3.2) and (14.5.7.2.1) Sum by Type is toggled off, that result is displayed in the same fashion as (14.5.6.2.2)
+
+``SUM RESULTS``
+		(14.5.7) "Sum Results"
+			(14.5.7.1) This setting requires Announce to be toggled on.
+                (14.5.7.1.1) If this setting is toggled on when Announce is toggled off, Announce is also toggled on.
+                (14.5.7.1.2) If this setting is toggled off after toggling on Announce, Announce remains toggled on.
+            (14.5.7.2) Following the phrase "Sum Results is an on/off toggle.
+				(14.5.7.2.1) The toggle includes the strings "On" and "Off"
+				(14.5.7.2.2) The default state is Off.
+			(14.5.7.3) If the setting is toggled on
+				(14.5.7.3.1) A new setting option becomes available: "Sum by type"
+					(14.5.7.3.1.1) Following the phrase "Sum by Type" is an on/off toggle
+						(14.5.7.3.1.1.1) The toggle includes the strings "On" and "Off"
+						(14.5.7.3.1.1.2) The default state is On.
+                    (14.5.7.3.1.2) This new setting option appears beneath Sum Results
+            (14.5.7.4) If Sum by Type is toggled on, the results of each die of a die type are summed
+                (14.5.7.4.1) For example, 2d6 and 3d10 are rolled. The results are 3, 6 and 4, 4, 7. Two sums are displayed, 9 and 15.
+            (14.5.7.5) If Sum by Type is toggled off, the results of all dice rolled are summed
+                (14.5.7.5.1) For example, 2d6 and 3d10 are rolled. The results are 3, 6 and 4, 4, 7. The sum displayed is 24.
+            (14.5.7.6) If modifiers have been applied in the "Add Modifiers" setting, that modifier is added to a sum for each instance of a die type included in the dice pool.
+                (14.5.7.6.1) For example, if d6 has a modifier value of +2, the sums displayed in (14.5.7.4.1) would be 13 and 15.
+                (14.5.7.6.2) For example, if d6 has a modifier value of +2, the sum displayed in (14.5.7.5.1) would be 28.
+
+		
+``ADD MODIFIERS``
+		(14.5.8) "Add Modifiers"
+			(14.5.8.1) This setting requires Announce to be toggled on.
+                (14.5.8.1.1) If this setting is toggled on when Announce is toggled off, Announce is also toggled on.
+                (14.5.8.1.2) If this setting is toggled off after toggling on Announce, Announce remains toggled on.
+            (14.5.8.2) Following the phrase "Add Modifiers" is an edit icon.
+                (14.5.8.2.1) Default state: ic_edit.xml
+                (14.5.8.2.2) Active state: Programmatically change fill colors for default state icons to #808080
+			(14.5.8.3) If the user taps the phrase "Add Modifiers" or the edit button, a modifier window opens.
+ 			(14.5.8.4) The modifier window layout includes:              
+				(14.5.8.4.1) A checkbox followed by the string "Apply to all"
+					(14.5.8.4.1.1) The checkbox is unchecked by default.
+					(14.5.8.4.1.2) If the checkbox is checked, a modifier value added to one die type is applied to all dice types.
+				(14.5.8.4.2) two columns
+					(14.5.8.4.2.1) The left column has each die type in descending order
+						(14.5.8.4.2.1.1) This includes percentile dice regardless of whether that setting is turned on.
+					(14.5.8.4.2.2) The right column has text fields, one for each die type
+                        (14.5.8.4.2.2.1) If the user taps the text field, the number pad opens
+                        (14.5.8.4.2.2.2) The maximum number that can be entered is 100.
+                        (14.5.8.4.2.2.3) The minimum number that can be entered is -100.
+
+
+``CRITICIAL CELEBRATION``
+		(14.5.9) "Critical Celebration"
+			(14.5.9.1) This setting requires Announce to be toggled on.
+                (14.5.9.1.1) If this setting is toggled on when Announce is toggled off, Announce is also toggled on.
+                (14.5.9.1.2) If this setting is toggled off after toggling on Announce, Announce remains toggled on.
+            (14.5.9.2) Following the phrase "Critical Celebration" is an on/off toggle.
+				(14.5.9.2.1) The toggle includes the strings "On" and "Off"
+				(14.5.9.2.2) The default state is Off.
+			(14.5.9.3) If the setting is toggled on, a confetti display, as per (12.3.5.3.2), occurs anytime a user rolls a 20 on a d20.
+                (14.5.9.3.1) This animation occurs only if the die face is a 20.
+                    (14.5.9.3.1.1) This is referred to as a "natural 20" or a "nat 20".
+                (14.5.9.3.2) Values of 20 or higher that would occur as a result of a modifier do not trigger this celebration.
+
+
+``GRAPH DISTRIBUTION``
+		(14.5.10) "Graph Distribution"
+			(14.5.10.1) This setting cannot be active while Announce, Sum Results, or Add Modifiers are toggled on.
+				(14.5.10.1.1) If this setting is toggled on when Announce, Sum Results, and/or Add Modifiers are toggled on, they are all toggled off.
+				(14.5.10.1.2) If this setting is then toggled off, those settings remain toggled off.
+			(14.5.10.2) Following the phrase "Graph Distribution" is a drop-down arrow.
+				(14.5.10.2.1) Default state: ic_arrow_drop_down.xml
+				(14.5.10.2.2) Active state: ic_arrow_drop_up.xml
+			(14.5.10.3) If the user taps the phrase "Graph Distribution" or the drop-down arrow:
+				(14.5.10.3.1) The drop-down arrow changess to its active state
+				(14.5.10.3.2) A Graph Distribution window opens over the current settings window.
+			(14.5.10.4) The Graph Distribution window inclues:
+				(14.5.10.4.1) A back arrow in the top left corner of the window. 
+					(14.5.10.4.1.1) Default icon state uses ic_back.xml.
+					(14.5.10.4.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+					(14.5.10.4.1.3) When activated the list collection editor window closes.
+						(14.5.10.4.1.3.1) The user returns to the main settings window.
+				(14.5.10.4.2) A close button in the top right corner of the window.
+					(14.5.10.4.2.1) Default icon state uses ic_close.xml.
+					(14.5.10.4.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+					(14.5.10.4.2.3) When activated all settings related windows close.
+				(14.5.10.4.3) Below the back arrow and close button is a header string: "Distribution Type"
+				(14.5.10.4.4) Below the distribution type header are 
+					(14.5.10.4.4.1) a column of four radio buttons
+					(14.5.10.4.4.2) a column four distribution type strings:
+						(14.5.10.4.4.2.1) "Off"
+							(14.5.10.4.4.2.1.1) This is the default state.
+						(14.5.10.4.4.2.2) "Manual"
+						(14.5.10.4.4.2.3) "Normal"
+						(14.5.10.4.4.2.4) "Uniform"
+					(14.5.10.4.4.3) To the right of "Normal" is a text field
+						(14.5.10.4.4.3.1) It includes the number 1,000
+						(14.5.10.4.4.3.2) Tapping this text field opens the system numberpad
+						(14.5.10.4.4.3.3) The user can enter a number from 2 - 10,000
+					(14.5.10.4.4.4) To the right of "Uniform" is a text field
+						(14.5.10.4.4.4.1) It includes the number 1,000
+						(14.5.10.4.4.4.2) Tapping this text field opens the system numberpad
+						(14.5.10.4.4.4.3) The user can enter a number from 2 - 10,000
+				(14.5.10.4.5) Below the distribution types is a header string: "Graph Type"
+				(14.5.10.4.6) Below the graphy type header are 
+					(14.5.10.4.6.1) a column of three radio buttons
+					(14.5.10.4.6.2) three graph type strings:
+						(14.5.10.4.6.2.1) "Histogram"
+						(14.5.10.4.6.2.2) "Line Graph"
+							(14.5.10.4.6.2.2.1) This is the default state.
+						(14.5.10.4.6.2.3) "Q-Q Scatter Plot"
+			(14.5.10.5) If a user selects any distrubtion type other than "Off", a "Graph Distribution" button appears below the dice beside the Dice Pool button.
+				(14.5.10.5.1) Default state: ic_graph.xml
+				(14.5.10.5.2) Active state: Programmatically change fill colors for default state icons to #808080
+			(14.5.10.6) If a user taps the graph button:
+				(14.5.10.6.1) The graph distribution button changes to its active state
+				(14.5.10.6.2) A graph appears in the space where roll results are normally displayed.
+					(14.5.10.6.2.1) (0,0) on the x-/y-axis never maps values. It creates a buffer between the axes and the plotted results.
+					(14.5.10.6.2.2) The x-axis 
+						(14.5.10.6.2.2.1) Is consistently positioned at the bottom of the graph.
+						(14.5.10.6.2.2.2) Has an interval between axis values of 1f
+						(14.5.10.6.2.2.3) Has interval labels for every number that can be rolled
+							(14.5.10.6.2.2.3.1) For example, if a dice pool includes 1d6 and 2d20, the x-axis intervals range from 1 to 20.
+							(14.5.10.6.2.2.3.2) If percentile dice are included, interval labels are increments of five.
+								(14.5.10.6.2.2.3.2.1) For example, if a dice pool includes 1d6, 2d20, and 1d%, the x-axis intervals range from 5 to 100, in increments of five (making 20 total interval labels).
+								(14.5.10.6.2.2.3.2.2) This will cause many results to be blotted not in line with an interval line. A result of 1 should be plotted 0.2f of the distance between 0 and 5.
+					(14.5.10.6.2.3) The y-axis
+						(14.5.10.6.2.3.1) Is consistently positioned at the side of the graph.
+						(14.5.10.6.2.3.2) Has an interval between axis values of 1f
+						(14.5.10.6.2.3.3) Has interval labels defined by this rule "If increment value = i and the maximum possible results = y, then i = y/50, with fractions rounded up to the next whole number."
+							(14.5.10.6.2.3.3.1) If the distribution method is "manual", the maximum possible results is set to 20.
+								(14.5.10.6.2.3.3.1.1) If the user exceeds 20 rolls while using manual distribution, the maximum possible results incdrease by 10.
+								(14.5.10.6.2.3.3.1.2) Any time the user exceeds the current manual maximum value, increase the maximum value by 10.
+								(14.5.10.6.2.3.3.1.3) If the user surpasses a maximum value of 50, interval labels should be listed in increments of 2 so that the y-axis never has more than 50 intervals.
+							(14.5.10.6.2.3.3.2) If the distribution method is "normal", the maximum possible result is defined by (14.5.10.4.4.3).
+								(14.5.10.6.2.3.3.2.1) For example, the default value of 1,000 would cause y-axis intervals to be 0 to 1000 in increments of 20.
+									(14.5.10.6.2.3.3.2.1.1) This creates 50 intervals
+									(14.5.10.6.2.3.3.2.1.2) There is no instance where the y-axis will have more than 50 intervals.
+							(14.5.10.6.2.3.3.3) If the distribution method is "uniform", the maximum possible result is defined by (14.5.10.4.4.4).
+								(14.5.10.6.2.3.3.3.1) For example, the default value of 1,000 would cause y-axis intervals to be 0 to 1000 in increments of 20.
+									(14.5.10.6.2.3.3.3.1.1) This creates 50 intervals
+									(14.5.10.6.2.3.3.3.1.2) There is no instance where the y-axis will have more than 50 intervals.
+			(14.5.10.7) If a user taps the roll button while a graph distribution other than "Off" is selected:
+				(14.5.10.7.1) The results are graphed on (14.5.10.6.2) graph lines.
+					(14.5.10.1.1) If Manual distribution is selected:
+						(14.5.10.1.1.1) The roll animation lasts for 0.5 seconds.
+						(14.5.10.1.1.2) The result is plotted on the graph.
+						(14.5.10.1.1.3) Additional rolls add additional results to the graph.
+							(14.5.10.1.1.3.1) A Histogram bar lengthens every time that number is rolled as a result.
+							(14.5.10.1.1.3.2) A Line Graph line adjusts upward to the new value every time that number is rolled as a result.
+							(14.5.10.1.1.3.3) A new dot is added to the scatter plot for eery result rolled.
+						(14.5.10.1.1.4) The roll animation does not need to complete for the user to press Roll again.
+							(14.5.10.1.1.4.1) The roll animation continues for a total length of time equal to 0.5 seconds for every time the roll buttonw as pressed.
+							(14.5.10.1.1.4.2) Results populate on the graph when their specific animation completes, even if additional roll animations are occuring.
+					(14.5.10.1.2) If Normal distribution is selected:
+						(14.5.10.1.2.1) The roll animation lasts for 3.0 seconds
+						(14.5.10.1.2.2) A number of results equal to the value entered in (14.5.10.4.4.3) are plotted on the graph
+							(14.5.10.1.2.2.1) Use a Box-Muller Transformation to generate normally distributed results.
+						(14.5.10.1.2.3) Plotting should occur during the roll animation. All values should be plotted when the animation ends.
+						(14.5.10.1.2.4) If the user presses the roll button a second time while the first distribution is calculating, the first roll is cancelled and a new roll begins.
+					(14.5.10.1.3) If Uniform distribution is selected:
+						(14.5.10.1.3.1) The roll animation lasts for 3.0 seconds.
+						(14.5.10.1.3.2) A number of results equal to the value entered in (14.5.10.4.4.4) are plotted on the graph
+						(14.5.10.1.3.3) Plotting should occur during the roll animation. All values should be plotted when the animation ends.
+						(14.5.10.1.3.4) If the user presses the roll button a second time while the first distribution is calculating, the first roll is cancelled and a new roll begins.
+					(14.5.10.1.4) If the graph distribution button is not active:
+						(14.5.10.1.4.1) Graphing data are still retained.
+						(14.5.10.1.4.2) Graphing data are displayed if the graph distribution button is activated.
+						(14.5.10.1.4.3) If the graph distribution is returned to its default state, results continue to be graphed
+							(14.5.10.1.4.3.1) These new results are displayed if the graph is active again.
+						(14.5.10.1.4.4) It is the Graphing Distribution setting that determines whether results data are plotted, not whether the graph itself is visible or not.
+				(14.5.10.7.2) Results are not differentiated by die type.
+					(14.5.10.7.2.1) For example, if a dice pool includes 1d6 and 2d20 with roll results of 3, 11, and 17, the graph would plot points (3,1), (11,1), and (17,1).
+					(14.5.10.7.2.2) TODO: Research whether to differentiate results by die type.
+
+
+(15) ``COIN FLIP SPECIFIC UX``
+    (15.1) If no preferences load on launch, the default coin pool is 1b25
+		(15.1.1) Any coins in the coin pool show the heads side of that coin.
+    (15.2) If a user taps the Flip button
+		(15.2.1) The Flip icon changes to its active state
+		(15.2.2) Using a pseudo-random number generator, determine the outcome for each coin in the pool.
+			(15.2.2.1) The number range for a randomized list is one (heads) or two (tails).
+			(15.2.2.2) Each coin has its own randomized outcome.
+			(15.2.2.3) Each flip is a unique event.
+		(15.2.3) Coins flip in a smooth animation for 1 second.
+		(15.2.4) Following 1 second:
+			(15.2.4.1) The animation ends
+			(15.2.4.2) Each coin shows the the appropriate heads or tails svg.
+			(15.2.4.3) The flip icon returns to its default state.
+	(15.3) If a user taps the Reset button
+		(15.3.1) The Reset icon changes to its active state for the duration of the onTouch event.
+		(15.3.2) All coins in the coin pool show the heads side of the coin.
+	(15.4) If a user taps the Coin Pool button
+		(15.4.1) The Coin Pool icon change to its active state
+		(15.4.2) A popup window opens above the Coin Pool button
+			(15.4.2.1) A tooltip arrow points to the coin pool icon
+			(15.4.2.2) The window contains icons for each coin type
+				(15.4.2.2.1) Coins are ordered from left-to-right by increasing value
+					(15.4.2.2.1.1) A b1 is the left-most coin type
+					(15.4.2.2.1.2) A mb2 is the right-most coin type
+			(15.4.2.3) Below each coin SVG is:
+				(15.4.2.3.1) An up arrow
+					(15.4.2.3.1.1) Default state: ic_arrow_drop_up.xml
+					(15.4.2.3.1.2) Active state: Programmatically change fill colors for default state icons to #808080
+				(15.4.2.3.2) A text field that shows the quantity of that coin type currently in the coin pool
+					(15.4.2.3.2.1) The default state would have b25 at 1 and all other coins at 0.
+					(15.4.2.3.2.2) Tapping this text field opens the number pad.
+				(15.4.2.3.3) A down arrow
+					(15.4.2.3.3.1) Default state: ic_arrow_drop_down.xml
+					(15.4.2.3.3.2) Active state: Programmatically change fill colors for default state icons to #808080
+			(15.4.2.4) Pressing the up arrow:
+				(15.4.2.4.1) Changes the icon state to active for the duration of the onTouch event
+				(15.4.2.4.2) Increases the numeric value in the text field of that coin type by one.
+					(15.4.2.4.2.1) The maximum number of coins for a coin type is 10.
+			(15.4.2.5) Pressing the down arrow:
+				(15.4.2.5.1) Changes the icon state to active for the duration of the onTouch event
+				(15.4.2.5.2) Decreases the numeric value in the text field of that coin type by one.
+					(15.4.2.5.2.1) The minimum number of coins for a coin type is 0.
+		(15.4.3) Tapping the Coin Pool button a second time closes the window.
+		(15.4.4) Tapping outside of the Coin Pool window closes the Coin Pool window.
+
+
+``COIN FLIP MODE SETTINGS``
+	(15.5) The settings window for Coin Flip mode includes these additional settings:
+		(15.5.1) Each setting includes text and an icon.
+
+``COLOR``
+		(15.5.2) "Color" functions identially to (14.5.2), replacing dice with coins.
+			(15.5.2.1) "Goldenrod" is the default color.
+
+``FLIP ANIMATION``
+		(15.5.3) "Flip Animation"
+			(15.5.3.1) Following the phrase "Flip Animation" is an on/off toggle.
+				(15.5.3.1.1) The toggle includes the strings "On" and "Off"
+				(15.5.3.1.2) The default state is On.
+			(15.5.3.2) If the setting is toggled off, flip results are shown immediately. There is no flip animation.
+
+``FREE FORM``
+		(15.5.4) "Free Form"
+			(15.5.4.1) Following the phrase "Free Form" is an on/off toggle.
+				(15.5.4.1.1) The toggle includes the strings "On" and "Off"
+				(15.5.4.1.2) The default state is Off.
+			(15.5.4.2) If the setting is toggled on:
+                (15.5.4.2.1) All coins in the coin pool start on their heads (obverse) side.
+                (15.5.4.2.2) The "Flip" button is replaced with a Tails button.
+                    (15.5.4.2.2.1) Default state: b25_coin_flip_tails.xml
+                    (15.5.4.2.2.2) Active state: b25_coin_flip_heads.xml
+            (15.5.4.3) If the Tails button is pressed:
+                (15.5.4.3.1) the button changes to its active state.
+                (15.5.4.3.2) all coins on the screen change to their tails (reverse) side.
+            (15.5.4.4) If a user taps an individual coin, that coin flips to the opposite face from what is shown.
+                (15.5.4.4.1) If a coin has been individually flipped to its reverse side when the user taps a default tails button, that coin does not change its displayed face.
+                (15.5.4.4.2) If a coin has been individually flipped to its obverse side when the user taps an aactive tails button, that coin does not change its displayed face.
+            (15.5.4.5) If the user press-hold-drags a coin away from its default starting location, it moves to wherever the onTouch event ends.
+                (15.5.4.5.1) This allows the teacher to organize coins in a pattern useful to their instruction, such as five different coins in a row.
+
+``ANNOUNCE``
+		(15.5.5) "Announce" functions identically to (14.5.6), replacing dice with coins.
+
+``PROBABILITY``
+        (15.5.6) "Probability"
+			(15.5.6.1) This setting cannot be active while Announce is toggled on.
+				(15.5.6.1.1) If this setting is toggled on when Announce is toggled on, Announce is toggled off.
+				(15.5.6.1.2) If this setting is then toggled off, Announce remains toggled off.
+            (15.5.6.2) Following the word "Probability" is a drop-down arrow.
+			(15.5.6.2.1) The drop-down arrow's default state is ic_arrow_drop_down.xml
+			(15.5.6.2.2) The drop-down arrow's active state is ic_arrow_drop_up.xml
+		(15.5.6.3) If the user taps the word "Mode" or the drop-down arrow
+			(15.5.6.3.1) A drop-down menu opens that displays a probability selection window (similar to (14.5.10.4)) that includes:
+                (15.5.6.3.1.1) A back arrow in the top left corner of the window. 
+                    (15.5.6.3.1.1.1) Default icon state uses ic_back.xml.
+                    (15.5.6.3.1.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+                    (15.5.6.3.1.1.3) When activated the list collection editor window closes.
+                        (15.5.6.3.1.1.3.1) The user returns to the main settings window.
+                (15.5.6.3.1.2) A close button in the top right corner of the window.
+                    (15.5.6.3.1.2.1) Default icon state uses ic_close.xml.
+                    (15.5.6.3.1.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+                    (15.5.6.3.1.2.3) When activated all settings related windows close.
+                (15.5.6.3.1.3) Below the back arrow and close button are the following menu option strings:
+                    (15.5.6.3.1.3.1) "None"
+                        (15.5.6.3.1.3.1.1) This is the default state.
+                    (15.5.6.3.1.3.2) "Two Columns"
+                    (15.5.6.3.1.3.3) "3✖3 Grid"
+                    (15.5.6.3.1.3.4) "6✖6 Grid"
+                    (15.5.6.3.1.3.5) "10✖10 Grid"
+        (15.5.6.4) If any probability option other than "None" is selected, a probability chart opens where Announce typically appears.
+            (15.5.6.4.1) "Two Columns" displays a two-column chart.
+                (15.5.6.4.1.1) The string "Heads" appears on the left.
+                (15.5.6.4.1.2) The string "Tails" appears on the right.
+                    (15.5.6.4.1.2.1) It is aligned with "Heads" so they form a single row.
+                (15.5.6.4.1.3) Heads and Tails are separated by a vertical line that runs the length of the display area.
+                (15.5.6.4.1.4) A horizontal line separates Heads and Tails from the display area beneath them.
+                (15.5.6.4.1.5) Following a flip, each coin is placed in its respective column based on its result.
+                    (15.5.6.4.1.5.1) For example, the user flips 3b25 and 4mb2. The results are heads, heads, tails and tails, tails, tails, heads. Two b25 and 1mb2 coins would appear on the left, in the heads column, and 1n25 and 3mb2 would appear on the right, in the tails column.
+                (15.5.6.4.1.6) The reset button clears all coins from the chart.
+            (15.5.6.4.2) "3✖3 Grid" displays a grid of three columns and three rows (making a grid with nine boxes).
+                (15.5.6.4.2.1) If a user taps the flip button, the result of that flip is displayed in the first open box.
+                    (15.5.6.4.2.1.1) Boxes are ordered from top left, moving horizontally, and then wrapping to the next row, all the way to the final box in the bottom right.
+                        (15.5.6.4.2.1.1.1) For example, if the first two boxes of the first row have been filled, the next flip will fill the third box of the top row. Another flip will fill the first box of the second row, and so on.
+                    (15.5.6.4.2.1.2) Results are shown as H or T.
+                        (15.5.6.4.2.1.2.1) If multiple coins are included, results are shown as #H/#T
+                            (15.5.6.4.2.1.2.1.1) For example, if a user flips 2b25 and 4mb1 with results T, T, H, H, H, T, the box would show "3H/3T".
+                            (15.5.6.4.2.1.2.1.2) If a result is entirely the same coin face (all heads or all tails), the side with no results is not displayed.
+                            (15.5.6.4.2.1.2.1.3) For example, if a user flips 2b25 and 4mb1 with all results as heads, the box would show "6H".
+                (15.5.6.4.2.2) If a user taps an empty box in the grid:
+                    (15.5.6.4.2.2.1) a flip action is initiated for each empty box up to and including the one touched.
+                        (15.5.6.4.2.2.1.1) For example, if no boxes are filled and the user taps the bottom right box, nine flips will occur.
+                    (15.5.6.4.2.2.2) the result of each flip is listed sequentially, following the rules of (15.5.6.4.2.1.2).
+                (15.5.6.4.2.3) If all boxes of the grid are full, the flip button can no longer be activated.
+                (15.5.6.4.2.4) If coins are added to the coin pool while a grid is partially filled, these new coins add to the values displayed in all boxes filled in the future.
+                (15.5.6.4.2.5) If the reset button is tapped, all grid boxes are cleared.
+            (15.5.6.4.3) "6✖6 Grid" displays a grid of six columns and six rows (making a grid with 36 boxes).
+                (15.5.6.4.3.1) This functions the same as (15.5.6.4.2) with more boxes available.
+            (15.5.6.4.4) "10✖10 Grid" displays a grid of ten columns and ten rows (making a grid with 100 boxes).
+                (15.5.6.4.4.1) This functions the same as (15.5.6.4.2) with more boxes available.
+
+
+``GRAPH DISTRIBUTION``
+		(15.5.7) "Graph Distribution" functions identically to (14.5.10), replacing dice with coins.
+			(15.5.7.1) An x-axis would never have more than two intervals, one for heads and one for tails.

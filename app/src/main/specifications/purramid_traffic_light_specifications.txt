@@ -1,0 +1,447 @@
+// the_purramid_0_1\app\src\main\specifications
+// TrafficLightService.kt
+The traffic light is a vector image of a common traffic light with three colored "bulbs" or "lights": red, yellow, and green. One bulb can be lit at a time, used by the teacher to better manage the classroom.
+
+
+ --- RUNTIME EVENTS ---
+(1) On launch, the traffic light 
+	(1.1) checks if the system has a mic array or other active mic input
+		(1.1.1)This will be referred to as "mic array" going forward, regardless of what type of microphone is actually being used. 
+	(1.2) opens in a windowed state.
+		(1.2.1) Windowed describes the user experience. Traffic Light launches a service. 
+		(1.2.1) Whether it is using an overlay or an Android window, both will be referred to as "windowed" for the purposes of these specifications.
+	(1.3) activates red then yellow then green every 0.3 seconds. 
+		(1.3.1) When one light activates, the previous one returns to default. 
+		(1.3.2) Repeat the sequence once
+		(1.3.3) Following the second sequence, all three lights flash default-active-default in unison three times, flashing every 0.3 seconds. 
+		(1.3.4) Following (1.3.3), all lights return to default. 
+		(1.3.5) If app initiation requires more than three seconds, the sequence should repeat.
+		(1.3.6) If "Blinking Lights" is toggled off in the user settings, this sequence is ignored. Lights remain in default during startup.
+(2) The most recent traffic light user preferences are saved. Save the following:
+	(2.1) Traffic light size
+	(2.2) Mode
+	(2.3) Orientation toggle, vertical or horizontal state
+	(2.4) Blinking lights toggle on/off state
+	(2.5) Adjusted values
+			(2.5.1) Adjusted values are saved regardless of whether the final mode is Responsive Change or not. It is possible for a user to modify values in Responsive Change mode and then change to Manual mode or Timed Change mode.
+	(2.6) Added messages
+			(2.6.1) Added messages are saved regardless of the final mode.
+	(2.7) Sequences
+			(2.7.1) Sequences are saved regardless of the final mode.
+	(2.8) Show time remaining toggle on/off state
+	(2.9) Show timeline toggle on/off state
+	(2.10) Traffic light position on the screen if not full-screen
+(3) On future app-intent launches, the traffic light loads saved user preferences.
+
+
+ --- USER INTERFACE ---
+(4) The body of the traffic light is a yellow rectangle similar to this picture: https://www.insurancejournal.com/app/uploads/2012/09/traffic-lights.jpg
+	(4.1) It includes three "bulbs" or "lights". These are circle with a black outline and the following fill colors: 
+		(4.1.1) Red
+			(4.1.1.1) Default state is #B81B0E
+			(4.1.1.2) Active state is #FF0000
+		(4.1.2) Yellow
+			(4.1.2.1) Default state is #B8BB0E
+			(4.1.2.2) Active state is #FFFF00
+		(4.1.3) Green
+			(4.1.3.1) Default state is #549C30
+			(4.1.3.2) Active state is #00FF00
+		(4.1.4) An active light also includes the image ic_mask_stamp.xml.
+			(4.1.4.1) The image's width is equal to 0.6f of the bulb's circle diameter.
+                (4.1.4.1.1) The image's height should adjust proportionately to its width.
+	(4.2) A traffic light can appear in one of two orientations based on user settings choices:
+		(4.2.1) Vertical (the default orientation)
+			(4.2.1.1) The red light is on top.
+			(4.2.1.2) The yellow light is in the middle.
+			(4.2.1.3) The green light is on the bottom.
+		(4.2.2) Horizontal
+			(4.2.2.1) The red light is on the left.
+			(4.2.2.2) The yellow light is in the middle.
+			(4.2.2.3) The green light is on the right.
+(5) A Settings button is positioned in the bottom left corner.
+	(5.1) Default icon state uses ic_settings.xml.
+	(5.2) Active state: Programmatically change fill colors for default state icons to #808080.
+(6) A Close button is positioned in the top right corner.
+	(6.1) Default icon state uses ic_close.xml.
+	(6.2) Active state: Programmatically change fill colors for default state icons to #808080.
+		
+
+ --- USER EXPERIENCE ---
+(7) ``SETTINGS SUMMARY``
+	(7.1) When a user touches the settings button, its icon changes from (5.1) Default to (5.2) Active.
+	(7.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+		(7.2.1) The settings button remains active while the settings window is open.
+		(7.2.2) The settings window is rows of strings and an icon:
+			(7.2.2.1) "Mode"
+				(7.2.2.1.1) Following the word "Mode" is a drop-down arrow.
+					(7.2.2.1.1.1) The drop-down arrow's default state is ic_arrow_drop_down.xml
+					(7.2.2.1.1.2) The drop-down arrow's active state is ic_arrow_drop_up.xml
+				(7.2.2.1.2) When tapping anywhere in the drop-down menu (text or arrow)
+					(7.2.2.1.2.1) A drop-down menu smoothly opens overtop the settings menu
+					(7.2.2.1.2.2) A list of mods is displayed in this order from the top down:
+						(7.2.2.1.2.2.1) Manual
+							(7.2.2.1.2.2.1.1) This is the default mode when no other mode is saved in preferences.
+						(7.2.2.1.2.2.2) Responsive Change
+                            (7.2.2.1.2.2.2.1) If no mic array is detected, Responsive Change is hidden.
+						(7.2.2.1.2.2.3) Timed Change
+			(7.2.2.2) "Orientation"
+				(7.2.2.2.1) Following the word "Orientation" is a toggle.
+					(7.2.2.2.1.1) The toggle's default position is off.
+			(7.2.2.3) "Blinking Lights"
+				(7.2.2.3.1) Following the phrase "Blinking Lights" is a toggle.
+					(7.2.2.3.1.1) The toggle's default position is on.
+						(7.2.2.3.1.1.1) The toggle should include the words "On" and "Off"
+						(7.2.2.3.1.1.2) These words should be strings so they can be translated.
+			(7.2.2.4) "Adjust Values"
+				(7.2.2.4.1) Following the phrase "Adjust values" is an edit icon
+					(7.2.2.4.1) Default icon state uses ic_edit.xml.
+					(7.2.2.4.2) Active state: Programmatically change fill colors for default state icons to #808080.
+			(7.2.2.5) "Add Messages"
+				(7.2.2.5.1) Following the phrase "Add Messages" is an edit icon
+					(7.2.2.5.1) Default icon state uses ic_edit.xml.
+					(7.2.2.5.2) Active state: Programmatically change fill colors for default state icons to #808080.
+			(7.2.2.6) "Edit Sequence"
+				(7.2.2.4.1) Following the phrase "Adjust values" is an edit icon
+					(7.2.2.4.1) Default icon state uses ic_edit.xml.
+					(7.2.2.4.2) Active state: Programmatically change fill colors for default state icons to #808080.
+			(7.2.2.8) "Show Time Remaining"
+				(7.2.2.8.1) Following the phrase "Show Time Remaining" is a toggle.
+					(7.2.2.8.1.1) The toggle's default position is off.
+			(7.2.2.9) "Show Timeline"
+				(7.2.2.2.1) Following the phrase "Show Timeline" is a toggle.
+					(7.2.2.2.1.1) The toggle's default position is off.
+			(7.2.2.10) "Add Another"
+				(7.2.2.10.1) Following the phrase "Add Another" is an add icon.
+					(7.2.2.10.1.1) The default icon state is ic_add_circle.xml.
+					(7.2.2.10.1.2) The active state icon programatically changes the fill color of the default icon to #808080.
+	(7.3) When deactivated, the settings menu folds back into the settings button with a smooth transition animation.
+		(7.3.1) A user choosing a setting (e.g., orientation) deactivates the settings menu.
+		(7.3.2) A user touching outside of the settings window deactivates the settings menu.
+		(7.3.3) A user touching the settings button deactivates the settings menu.
+		(7.3.4) The settings button returns to default icon state
+		
+(8) ``ORIENTATION``
+    (8.1) When the orientation setting toggle state is left, the traffic light is oriented vertically.
+    (8.2) When the orientation setting toggle state is right, the traffic light is oriented horizontally.
+    
+(9) ``BLINKING LIGHTS``
+    (9.1) When the Blinking Lights setting toggle state is on, lights blink wherever defined in the specifications.
+    (9.2) When the Blinking Lights setting toggle state is off, lights do not blink regardless of specifications.
+        
+(10) ``ADJUST VALUES``
+    (10.1) Adjust Values setting is only visible when the Traffic Light mode is set to Responsive Change.
+    (10.2) When the edit icon for Adjust Values is activated, a window expands with a smooth transition animation.
+        (10.2.1) This window includes:
+            (10.2.1.1) A back arrow in the top left corner of the window. 
+            	(10.2.1.1.1) Default icon state uses ic_back.xml.
+                (10.2.1.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+                (10.2.1.1.3) When activated the Adjust Values window closes.
+                    (10.2.1.1.3.1) The user returns to the main settings window.
+            (10.2.1.2) A close button in the top right corner of the window.
+            	(10.2.1.2.1) Default icon state uses ic_close.xml.
+                (10.2.1.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+                (10.2.1.2.3) When activated all settings related windows close.
+            (10.2.1.3) A decibel (dB) range table.
+                (10.2.1.3.1) The first column is three color circles.
+                    (10.2.1.3.1.1) The order of the lights matches the order of a vertical traffic light.
+                (10.2.1.3.2) The second column is three text fields. (These are the minimum decibel levels for the light colors.)
+                    (10.2.1.3.2.1) Each text field aligns with one of the three lights from (10.2.1.3.1).
+                    (10.2.1.3.2.2) The first row (red light) displays the number "80".
+                    (10.2.1.3.2.3) The second row (yellow light) displays the number "60".
+                    (10.2.1.3.2.4) The third row (green light) displays the number "0".
+                (10.2.1.3.3) The third column has three rows, each with the same string, "dB".
+                (10.2.1.3.4) The fourth column has three rows, each with a hyphen.
+                (10.2.1.3.5) The fifth column is three text fields. (These are the maximum decibel levels for the light colors.)
+                    (10.2.1.3.5.1) Each text field aligns with one of the three lights from (10.2.1.3.1).
+                    (10.2.1.3.5.2) The first row (red light) displays the number "120".
+                    (10.2.1.3.5.3) The second row (yellow light) displays the number "79".
+                    (10.2.1.3.5.4) The third row (green light) displays the number "59".
+                (10.2.1.3.6) The sixth column has three rows, each with the same string, "dB".
+            (10.2.1.4) If the user taps on a text field:
+                (10.2.1.4.1) The system number pad opens.
+                (10.2.1.4.2) The smallest value any text field can be set to is 0.
+                (10.2.1.4.3) The largest value any text field can be set to is 149.
+            (10.2.1.5) When the minimum value of a light is changed, the adjacent maximum value changes also.
+                (10.2.1.5.1) A minimum decibel level value is always 1 away from the next light's maximum decibel value.
+                (10.2.1.5.2) For example, if the minimum decibel level for yellow is changed from 60 to 65, the maximum decibel level for green changes from 59 to 64.
+            (10.2.1.6) When the maximum value of a light is changed, the adjacent minimum value changes also.
+                (10.2.1.6.1) A maximum decibel level value is always 1 away from the next light's minimum decibel value.
+                (10.2.1.6.2) For example, if the maximum decibel level for yellow is changed from 79 to 74, the minimum decibel level for red changes from 80 to 75.
+            (10.2.1.7) If a change to the green maximum or the red minimum is larger than the entirety of the yellow range, the yellow text fields change to the string N/A.
+                (10.2.1.7.1) For example, if the minimum value of red was cahnged from 80 to 60 and the green maximum value was still set to 59, yellow would display the string N/A.
+                (10.2.1.7.2) If the minimum value of red was changed from 80 to 55 and the green maximum value was still set to 59:
+                    (10.2.1.7.2.1) Yellow would display the string N/A.
+                    (10.2.1.7.2.2) The green maximum value would change to 54.
+            (10.2.1.8) Below the decibel table, there is:
+                (10.2.1.8.1) A checkbox
+                (10.2.1.8.2) A string that says "Dangerous Sound Alert"
+                (10.2.1.8.3) This string is followed by an information 
+					(10.2.1.8.3.1) The default icon state is ic_info.xml.
+					(10.2.1.8.3.2) The active state icon programatically changes the fill color of the default icon to #808080.
+            (10.2.1.9) If the user touches the checkbox, an X appears in the checkbox, marking it as active
+            (10.2.1.10) If the user touches the information button:
+                (10.2.1.10.1) A snackbar opens with the following string: "Check this box to display an alert that says "Warning: Notify your instructor immediately." should your hardware's microphone report a sound of 150 decibels or higher. The US Occupational Safety and Health Organization projects the loudest classroom noise would reach 95 dB. 120 db is the sound of a car backfire. 150 dB is the sound of a gunshot. The Purramid is a software application dependent on the readings provided by your microphone. Purramid Learning® makes no guarantee that the sound detected is 150 db or what made the sound is a firearm. But this is the reality that US students live in, and we are committed to providing teachers any tools possible to make their classrooms places of learning and not fear."
+                    (10.2.1.10.1.1) The word "Purramid" is never translated.
+                    (10.2.1.10.1.2) The phrase "Purramid Learning®" is never translated.
+            
+(11) ``DANGEROUS SOUND ALERT``
+    (11.1) If the traffic light app-intent detects a sound at 150 dB or louder:
+        (11.1.1) It overrides any mode parameters currently in effect.
+        (11.1.2) The following message is displayed beside the traffic light.
+            (11.1.2.1) Aligned with the red light: "Warning"
+            (11.1.2.2) Aligned with the yellow light: "Notify your instructor immediately."
+            (11.1.2.3) Aligned with the green light: "Double-tap green to dismiss this alert."
+        (11.1.3) The red and yellow lights alternate blinking every 0.2 seconds.
+            (11.1.3.1) This blinking overrides the "Blinking Lights" setting.
+    (11.2) If multiple traffic lights have been opened (as per "Add Another"), all traffic lights implement (11.1).
+    (11.3) If the user double-taps the green light, the behavior of all traffic lights returns to its previous settings.
+        (11.3.1) As long as the Dangerous Sound Alert checkbox is active, future sounds of 150 dB or louder can trigger this event again.
+    (11.4) If all app windows are closed, the app is killed, or an onDestroy event occurs while the Dangerous Sound Alert is active, it is no longer active when the app reopens.
+
+(12) ``ADD MESSAGES``
+    (12.1) Add Messages setting is only available when the Traffic Light mode is set to Manual or Responsive Change.
+    (12.2) When the edit icon for Add Messages is activated, a window expands with a smooth transition animation.
+        (12.2.1) This window includes:
+            (12.2.1.1) A back arrow in the top left corner of the window. 
+            	(12.2.1.1.1) Default icon state uses ic_back.xml.
+                (12.2.1.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+                (12.2.1.1.3) When activated the Adjust Values window closes.
+                    (12.2.1.1.3.1) The user returns to the main settings window.
+            (12.2.1.2) A close button in the top right corner of the window.
+            	(12.2.1.2.1) Default icon state uses ic_close.xml.
+                (12.2.1.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+                (12.2.1.2.3) When activated all settings related windows close.
+            (12.2.1.3) A messages table.
+                (12.2.1.3.1) The first column is three color circles.
+                    (12.2.1.3.1.1) The order of the lights matches the order of a vertical traffic light.
+                (12.2.1.3.2) The second column is three text fields.
+                    (12.2.1.3.2.1) Each text field aligns with one of the three lights from (12.2.1.3.1).
+                    (12.2.1.3.2.2) Each text field includes 
+                        (12.2.1.3.2.2.1) The string "Add Message" in gray text
+                        (12.2.1.3.2.2.2) An add emoji button
+                        (12.2.1.3.2.2.3) An upload image button
+        (12.2.2) If a user touches a text field:
+            (12.2.2.1) The string "Add Message" disappears.
+            (12.2.2.2) The system keyboard opens.
+        (12.2.3) A text field can include a maximum of:
+            (12.2.3.1) 27 characters
+            (12.2.3.2) 10 emoji
+            (12.2.3.3) One image
+	(12.3) Messages:
+		(12.3.1) Appear when their assigned colors are active.
+		(12.3.2) Disappear when their assigned colors are default.
+		(12.3.3) Situated outside the body of the traffic light vector image, aligned with their assigned light.
+		(12.3.4) Text and emoji are 0.8f the size of the bulb.
+		(12.3.5) Images are 1.5f the size of the bulb
+			(12.3.5.1) Images are centered with the bulb, so their excess height  is equally distributed above and below the light.
+	(12.4) If nothing is entered in message fields, no screen space is dedicated to messages.
+                    
+(13) ``EDIT SEQUENCE``
+    (13.1) Edit Sequence setting is only available when the Traffic Light mode is set to Timed Change.
+    (13.2) When the edit icon for Edit Sequence is activated, a window expands with a smooth transition animation.
+	(13.3) The layout of this window is similar to the layout of the system alarm clock
+		(13.3.1) Up to ten sequences can be created.
+			(13.3.1.1) If there are fewer than ten sequences, the last row shown always displays default values
+                (13.3.1.1.1) When a user creates a sequence step, a new default row appears below it in the list.
+			(13.3.1.2) If there are ten sequences, no default row appears.
+		(13.3.2) Existing sequences are ordered alphanumerically by title.
+	(13.4) A sequence row includes the following:
+		(13.4.1) The sequence title
+		(13.4.2) A circle for each step of the sequence.
+			(13.4.2.1) Each circle has a black outline.
+			(13.4.2.2) Each cirle fill matches the color assigned for that step of the sequence.
+			(13.4.2.3) Circles are ordered to match their order in the sequence.
+				(13.4.2.3.1) For example, if a sequence has three steps, with steps 1 and 2 assigning a red light and step 3 assigning a green light, three circles would appear in order of red-red-green.
+		(13.4.3) The sum total of all the steps.
+			(13.4.3.1) For example, if a sequence has three steps, each 30 minutes long, time displayed would be 1:30:00
+	(13.5) If a user taps a sequence, it opens a sequence editor view
+		(13.5.1) The top of this view is a title text field.
+			(13.5.1.1) If no title has been previously entered, there is a string "Sequence Title"
+			(13.5.1.2) If a title has been previously entered, it appears here.
+			(13.5.1.3) If the user taps the text field
+				(13.5.1.3.1) the "Sequence Title" string disappears (if it was present).
+				(13.5.1.3.2) the system keyboard opens.
+					(13.5.1.3.2.1) A title may not be longer than 27 characters.
+		(13.5.2) Below the title are rows for each step of the sequence.
+            (13.5.2.1) The maximum number of rows allowed is 10 steps in a sequence.
+            (13.5.2.2) Unless there are 10 steps, the last row will always be "Add a Sequence Step".
+            (13.5.2.3) A new sequence step row includes the following:
+                (13.5.2.3.1) A reorder handle (ic_drag_handle.xml)
+                    (13.5.2.3.1.1) If the user press-hold-drags the handle, the row moves with a smooth animation and can be placed elsewhere in the order.
+                    (13.5.2.3.1.2) When the user lifts their finger, the animation ends and the sequence row fits back in with the larger list.
+                (13.5.2.3.2) A numerical value of the row's order.
+                    (13.5.2.3.2.1) Rows are numbered sequentially, beginning at 1, from top of the order to the bottom.
+                    (13.5.2.3.2.2) If the row changes order, per (13.5.2.3.1), this number updates accordingly.
+                (13.5.2.3.3) A circle with
+                    (13.5.2.3.3.1) A black outline
+                    (13.5.2.3.3.2) A fill that shows the assigned color
+                        (13.5.2.3.3.2.1) When the user touches this button, a menu opens with a smooth animation.
+                            (13.5.2.3.3.2.1.1) It displays three circles, one for each color of the traffic light.
+                            (13.5.2.3.3.2.1.2) When the user touches one of those colors
+                                (13.5.2.3.3.2.1.2.1) That color is assigned to the sequence.
+                                (13.5.2.3.3.2.1.2.2) The circle fill in the sequence row changes to the assigned color.
+                                (13.5.2.3.3.2.1.2.3) The color selection menu folds closed with a smooth animation.
+                            (13.5.2.3.3.2.1.2) If a user taps on the Edit Sequence window (and not on one of the three colored circles), the color seelction menu folds closed with a smooth animation.
+                        (13.5.2.3.3.2.1) If no color has been assigned yet, the fill is divided into 1/3 red, 1/3 yellow, and 1/3 green
+                            (13.5.2.3.3.2.1.1) If a user attempts to create a sequence without assigning a color, a snackbar appears that says, "Please assign a color to continue."
+                        (13.5.2.3.3.2.2) A circle may never be assigned more than one color.
+                (13.5.2.3.4) A text field for time duration
+                    (13.5.2.3.4.1) If no time has been entered, the text field includes the string "H:MM:SS"
+                        (13.5.2.3.4.1.1) If a user attempts to create a sequence without assigning a color, a snackbar appears that says, "Please set a time duration to continue."
+                    (13.5.2.3.4.2) If the user taps into the text field
+                        (13.5.2.3.4.2.1) The string "H:MM:SS" disappears
+                        (13.5.2.3.4.2.2) The system numberpad opens.
+                            (13.5.2.3.4.2.2.1) Numbers entered populate seconds, then minutes, then hours.
+                                (13.5.2.3.4.2.2.1.1) For example, if a user enters 30, that is 30 seconds.
+                                (13.5.2.3.4.2.2.1.2) If a user enters 53030, that is 5 hours, 30 minutes, and 30 seconds.
+                            (13.5.2.3.4.2.2.2) Leading zeroes are always shown.
+                                (13.5.2.3.4.2.2.1) For example, if a user enters 30, it is displayed as "0:0030".
+                            (13.5.2.3.4.2.2.3) Time cannot be set at a value larger than 9:59:59
+                    (13.5.2.3.4.3) If time has been entered, that time is displayed in a similar format.
+                        (13.5.2.3.4.3.1) For example, if the user entered 30 minutes, it would display as "0:30:00".
+                (13.5.2.3.5) A text field for a message
+                    (13.5.2.3.5.1) This matches the functionality of (13) Add Messages, but for Timed Change mode.
+                    (13.5.2.3.5.2) A sequence step does not require a message to be included.
+
+(14) ``SHOW TIME REMAINING``
+    (14.1) Show Time Remaining setting is only available when the Traffic Light mode is set to Timed Change.
+    (14.2) This setting is toggled off by default.
+    (14.3) When toggled on, a digital timer for that sequence step appears before the text of any message.
+        (14.3.1) If no message is set, time displays in the same location, between the body of the traffic light and where a message would be displayed.
+        (14.3.2) Time is displayed H:MM:SS
+            (14.3.2.1) If no hour is included, time is displayed MM:SS
+            (14.3.2.2) If no minute is included, time is displayed 0:SS
+            (14.3.2.3) When time counts down, leading zeroes are eliminated except for the final minute O.
+                (14.3.2.3.1) For example, when time changes from 1:00:00 to 59:59, the hour number is dropped.
+                (14.3.2.3.2) For example, when time changes from 10:00 to 9:59, the tens-minute number is dropped.
+        (14.3.3) If Show Timeline is also toggled on, the digital timer (14.3) appears as part of the timeline rather than beside the message text.
+
+(15) ``SHOW TIMELINE``
+    (15.1) Show Timeline setting is only available when the Traffic Light mode is set to Timed Change.
+    (15.2) This setting is toggled off by default.
+    (15.3) When toggled on
+        (15.3.1) A black timeline appears to the left of the traffic light.
+            (15.3.1.1) A circle appears at the beginning and end of the timeline.
+                (15.3.1.1.1) The circle outline is black.
+                (15.3.1.1.2) The circle fill matches the color assigned at the step it represents.
+                (15.3.1.1.3) The final circle fill is always white.
+            (15.3.1.2) Circles also appear proportionately along the timelne for each step of the sequence.
+                (15.3.1.2.1) For example, a three-step sequence assigns a red light for 10 minutes, a red light for 5 minutes, and a green light for 5 minutes. The timeline would like like:
+                    (15.1.2.1) A starting cirlce that is red
+                    (15.1.2.2) A second circle that is red
+                        (15.1.2.2.1) This circle appears 50% down the timeline.
+                    (15.1.2.3) A third circle that is green
+                        (15.1.2.3.1) This circle appears 75% down the timeline.
+                    (15.1.2.4) An ending circle that is white.
+    (15.4) If Show Time Remaining is also active, the digital timer appears on the timeline, in the segment pertaining to the current step.
+        (15.4.1) For example, in the previous example, the digital timer appears between the red circles for the first step in the sequence and then between the second red and the green circle for the second step in the sequence.
+
+(16) ``Add Another``
+	(16.1) When a user touches the Add Another button, its icon changes from (7.2.2.10.1.1) Default to (7.2.2.10.1.2) Active.
+	(16.2) When Add Another is activated:
+		(16.2.1) The Add Another button returns to its default state.
+		(16.2.2) A new traffic light appears at the geometric center of the screen.
+			(16.2.2.1) The new traffic light adopts the properties of the traffic light from which it was made.
+				(16.2.2.1.1) It has the same height and width.
+				(16.2.2.1.2) If the source traffic light had a billboard image, that image appears in the new traffic light as well.
+			(16.2.2.2) If another traffic light already exists at the geometric center of the display screen, the new traffic light should appear in an offset position (e.g., +25px down and +25px right) from the centered traffic light.
+	(16.3) If four traffic lights are already present on the screen, 
+		(16.3.1) The Add Another button is inactivated. Nothing happens if a user touches it.
+		(16.3.2) The icon fill and outline colors change. (TODO: Define specific hex colors for an inactive icon.)
+
+(17) ``MANUAL MODE``
+    (17.1) When a user taps a default bulb when no bulbs are active, that bulb becomes active.
+    (17.2) If a user taps an active bulb, it returns to its default.
+    (17.3) When a user taps a default bulb when another bulb is active,
+        (17.3.1) The tapped bulb becomes active.
+        (17.3.2) The previously active bulb returns to its default.
+
+(18) ``RESPONSIVE CHANGE MODE``
+    (18.1) The app-intent fetches a Maxamplitude measure from the mic array every two seconds.
+        (18.1.1) Maxamplitude is measured using standard Google APIs.
+    (18.2) Based on the decibel (dB) value, as per the (10.2.1.3) decibel range table:
+        (18.2.1) The light assigned to that dB range activates.
+        (18.2.2) Any previously active light returns to default.
+        (18.2.3) If the range is in the same color range as before, no visual change occurs.
+        (18.2.4) If the dB value is within 5 dB of the maximum value for that range:
+            (18.2.4.1) The color blinks (moving from default to active and back)
+            (18.2.4.2) Blinking occurs every 0.5 seconds.
+            (18.2.4.3) For example, a measurement of 58 dB is within 5 dB of Green's maximum value. The green light would blink every 0.5 seconds until a measure returns that is not withint 5 dB of Green's maximum value.
+                (18.2.4.3.1) Lights do not blink if the value is within 5 dB of the minimum of a range.
+                (18.2.4.3.2) For example, a dB value of 62 would not cause yellow to blink.
+        (18.2.4) If a measure returns a value that skips an entire color range, the skipped color is not shown.
+            (18.2.4.1) For example, a first measure of 50 dB causes the green light to be lit. The next measure is 85. This causes the red light to be lit. Yellow is not lit as part of that transition.
+    (18.3) Manual light changing is not permitted. Only decibel values change which bulbs are lit.
+    (18.4) If the app-intent loses access to the mic array while in Responsive Change mode:
+        (18.4.1) The Traffic Light returns to Manual mode.
+        (18.4.2) All lights return to their default state.
+        (18.4.3) A snackbar shows the warning "No microphone detected."
+    (18.5) TODO: Is it possible for the app-intent to remember that it was in Responsive mode for a fixed period after losing access to the mic array so that the mode can re-establish itself if the loss is brief?
+
+(19) ``TIMED CHANGE MODE``
+    (19.1) A play/pause and a reset button are added to the traffic light layout
+        (19.1.1) Play/Pause appears on the left (for left-to-right languages).
+            (19.1.1.1) Play is the default state, ic_play.xml
+            (19.1.1.2) Pause is the active state, ic_pause.xml
+        (19.1.2) Reset appears on the right (for left-to-right languages).
+            (19.1.2.1) Default state: ic_reset.xml
+            (19.1.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+                (19.1.2.2.1) The active state occurs only when the button is pressed.
+                (19.1.2.2.2) The button returns to its default state when the button press ends.
+        (19.1.3)The buttons appear beneath the traffic light image.
+    (19.2) When play/pause is activated
+        (19.2.1) The sequence step begins or resumes its timing
+        (19.2.2) The color assigned to that sequence step activates
+        (19.2.3) Any message assigned to that sequence step is displayed.
+            (19.2.3.1) The message aligns with the active bulb for that sequence step.
+        (19.2.4) Time remaining begins counting down if that setting is turned on.
+        (19.2.5) When play/pause is active and Timeline is toggled on, the timeline animates.
+            (19.2.5.1) The circle assigned to that sequence step travels down the timeline in a smooth animation.
+            (19.2.5.2) When a circle reaches the circle for the next sequence step, the active circle moves behind the upcoming circle.
+    (19.3) When time ellapses in a sequence step, the next step begins.
+        (19.3.1) The active light returns to default.
+        (19.3.2) The new sequence step light activates.
+        (19.3.3) If the previous and new sequence both use the same color, that light blinks twice, once every 0.3 seconds.
+        (19.3.4) If the final sequence step elapses:
+            (19.3.4.1) sequence timing ends
+            (19.3.4.2) All lights return to default
+            (19.3.4.3) No messages are displayed
+            (19.3.4.4) The digital timer reads 0:00:00, if the show time remaining setting is turned on.
+            (19.3.4.5) The final timeline circle ends behind the white circle, if the timeline setting is turned on.
+    (19.4) When play/pause returns to default
+        (19.4.1) The current sequence pauses its timing.
+        (19.4.2) The current active light remains active.
+        (19.4.3) The current message conntinues to display.
+        (19.4.3) The countdown timer stops, if the Show Time Remaining setting is turned on.
+        (19.4.4) The timeline animation stops, if the Show Timeline setting is turned on.
+    (19.5) When Reset is activated:
+        (19.5.1) while play/pause is active
+            (19.5.1.1) the current sequence step resets its time to its beginning
+            (19.5.1.2) the digital timer resets to its full value for that sequence step if the show timing remaning setting is turned on
+            (19.5.1.3) the color circle traveling down the timeline returns to its starting point if the show timeline setting is turned on
+            (19.5.1.4) the sequence immediately resumes timing
+            (19.5.1.5) the lit color blinks once to show the change
+        (19.5.2) while play/pause is default
+            (19.5.2.1) the current sequence step resets its time to its beginning
+            (19.5.2.2) the digital timer resets to its full value for that sequence step if the show timing remaning setting is turned on
+            (19.5.2.3) the color circle traveling down the timeline returns to its starting point if the show timeline setting is turned on
+            (19.5.2.4) the sequence does not resume timing.
+            (19.5.2.5) the lit color blinks once to show the change
+        (19.5.3) while a sequence step is at its beginning (e.g., having just completed (19.5.2))
+            (19.5.3.1) the sequence rests to its first sequence step
+            (19.5.3.2) the light that was active when the reset button was pressed blinks twice at a 0.3 second interval
+            (19.5.3.3) the light assigned to the first sequence step blinks once 0.3 seconds later
+                (19.5.3.3.1) For example, resetting from a red light sequence step to a green light sequence step would cause the red light to blink twice and the green light to blink once, all at a 0.3 second interval.
+                (19.5.3.3.2) For example, resetting from a green light sequence step to another green light sequence step would cause the green light to blink three times, at a 0.3 second interval.
+        (19.5.4) If the entire sequence time has ellapsed, the reset button behaves the same as (19.5.2) in the final sequence step.
+            (19.5.4.1) Pressing reset once sets time to the beginning of the last sequence step.
+            (19.5.4.2) Pressing reset a second time would set time to the beginning of the first sequence step.
+            (19.5.4.3) In both examples, timing is paused after the reset.
+
+(20) ``CLOSE``
+	(20.1) When a user touches the Close button, its icon changes from (6.1) Default to (6.2) Active.
+	(20.2) The traffic light to which the Close button is attached closes.
+		(20.2.1) When a traffic light is closed:
+			(20.2.1.1) If it is the only traffic light currently open, its size, position (if not fullscreen), and settings selecitons are saved as the most recent user preferences, as per (2).
+			(20.2.1.2) If it is one of multiple traffic lights currently open, its preferences are cleared.
+		(20.2.2) If the traffic lgiht is the only traffic light open, the traffic light service ends.

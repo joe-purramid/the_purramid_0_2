@@ -1,0 +1,11 @@
+// the_purramid_0_1\app\src\main\specifications
+// WidgetConfigActivity.kt
+
+The Purramid includes widgets that allow users to add each app-intent (except for About) to their home screen.
+
+``LAUNCHER IMAGES``
+(1) Each app-intent has a launcher image named (tp_*_launcher
+    (1.1) For example, tp_timers_launcher.png
+(2) Each app-intent launcher image has multiple versions to accommodate different resolutions.
+    (2.1) Each of these is saved in a mipmap_* folder
+        (2.1.1) For example, mipmap-mdpi.

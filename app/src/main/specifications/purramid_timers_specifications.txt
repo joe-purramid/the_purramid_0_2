@@ -1,0 +1,239 @@
+// the_purramid_0_1\app\src\main\specifications
+// TimersService.kt
+Timers are companion countdown timer and stopwatch. These appear only as digital clocks.
+
+ --- RUNTIME EVENTS ---
+(1) On first app-intent launch, the timer opens in a windowed state.
+(2) The most recent timer user preferences are saved. Save the following:
+	(2.1) Timer size
+	(2.2) Background color
+	(2.3) Set countdown time
+	(2.4) Hundredths toggle state
+	(2.5) Play Sound on Finish user definitions
+	(2.6) User-defined music URLs
+    (2.7) Lap toggle state
+    (2.8) Sounds toggle state
+(3) On future app-intent launches, the timer loads saved user preferences.
+
+
+ --- USER INTERFACE ---
+(4) A Settings button is positioned in the bottom left corner.
+	(4.1) Default icon state uses ic_settings.xml.
+	(4.2) Active state: Programmatically change fill colors for default state icons to #808080.
+(5) A Close button is positioned in the top right corner.
+	(5.1) Default icon state uses ic_close.xml.
+	(5.2) Active state: Programmatically change fill colors for default state icons to #808080.
+(6) All timers use a digital clock face HH:MM:SS
+    (6.1) Hundredths will be abbreviated as cs (centiseconds) in the instructions, but all user-facing strings say Hundredths.
+    (6.2) If Hundredths is toggled on, time displays as HH:MM:SS.cs
+        (6.2.1) Hundredths appear 0.6f the size of the other numbers.
+        (6.2.2) Hundredths are separated from seconds with a period not a colon.
+
+``BUTTONS``
+(7) Below the timer clock is two buttons:
+	(7.1) Play/Pause
+		(7.1.1) Default state: ic_pause.xml
+		(7.1.2) Active state: ic_play.xml
+	(7.2) Reset
+		(7.2.1) Default state: ic_reset.xml
+		(7.2.2) Active state: Programmatically change fill colors for default state icons to #808080
+	(7.3) Play/Pause is on the left, and Reset is on the right.
+		(7.3.1) This order is reversed for right-to-left languages.
+
+``NESTED``
+(8) A nested timer:
+    (8.1) is reduced in size, 75px by 75px
+    (8.2) is affixed to the top right corner of the screen
+        (8.2.1) This includes 20px of padding so that the timer does not appear flush against the edge
+    (8.3) does not have any (7) control buttons visible.
+    (8.4) can still be moved or resized by the user with dragging or pinching actions, like normal.
+    (8.5) is stacked if multiple nested timers are added, with multiple timers in the top right corner of the screen 
+		(8.5.1) Nested timers are are stacked one above the other, with the newest timer on the bottom.
+
+
+ --- USER EXPERIENCE ---
+(9) ``SETTINGS SUMMARY``
+	(9.1) When a user touches the settings button
+		(9.1.1) its icon changes from (4.1) Default to (4.2) Active.
+		(9.1.2) time is paused if it is actively counting
+	(9.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+		(9.2.1) The settings button remains active while the settings window is open.
+		(9.2.2) The settings window is rows of strings and an icon:
+			(9.2.2.1) "Mode"
+				(9.2.2.1.1) Following the word "Mode" are two icons:
+					(9.2.2.1.1.1) A countdown icon
+					(9.2.2.1.1.2) A stopwatch icon
+				(9.2.2.1.2) The active mode has:
+					(9.2.2.1.2.1) its fill programmatically changed to #808080
+					(9.2.2.1.2.2) A thick blue bar beneath the icon
+				(9.2.2.1.3) The default mode is (9.2.2.1.2.2) Countdown Timer
+				(9.2.2.1.4) When a mode is activated, the UI changes to that timer type
+			(9.2.2.2) "Colors"
+				(9.2.2.2.1) Following the word "Color" is a color square
+					(9.2.2.2.1.1) The fill for this square is the color current used for the timer background
+					(9.2.2.2.1.2) The default color is White.
+				(9.2.2.2.2) If the user taps the word "Color" or the color square, a color picker opens.
+				(9.2.2.2.3) The color picker displays the six color options from PurramidPalette.kt
+					(9.2.2.2.3.1) This color applies to the timer background
+					(9.2.2.2.3.2) Timer numbers are either black and white depending on which option creates the best color contrast with the background color.
+			(9.2.2.3) "Set Countdown"
+				(9.2.2.3.1) This setting option is only visible if timer mode is set to Countdown Timer.
+				(9.2.2.3.2) Following the phrase "Set Countdown" is an edit button
+					(9.2.2.3.2.1) Default state: ic_edit.xml
+					(9.2.2.3.2.2) Active state: Programmatically change fill colors for default state icons to #808080
+				(9.2.2.3.3) If the user taps the phrase "Set Countdown" or the edit button
+					(9.2.2.3.3.1) the current time is displayed with all zeroes present for HH:MM:SS
+						(9.2.2.3.3.1.1) For example, if time was 30:00, time would display as 00:30:00 when Set Countdown is open.
+					(9.2.2.3.3.2) an up arrow appears above each numeral of HH:MM:SS
+					(9.2.2.3.3.3) a down arrow appears below each numeral of HH:MM:SS
+					(9.2.2.3.3.4) three circular buttons appear below the down arrows
+						(9.2.2.3.3.4.1) a +1:00:00 button is centered between the two HH arrows
+						(9.2.2.3.3.4.2) a +5:00 button is centered between the two MM arrows
+						(9.2.2.3.3.4.3) a +0:30 button is centered between the two SS arrows
+					(9.2.2.3.3.5) No arrows appear above or below centiseconds even if that setting is toggled on
+					(9.2.2.3.3.6) If the user swipes a number 
+						(9.2.2.3.3.6.1) upward
+							(9.2.2.3.3.6.1.1) that number counts down in a smooth animation
+							(9.2.2.3.3.6.1.2) the longer the swipe, the greater the change in numbers
+						(9.2.2.3.3.6.2) downward
+							(9.2.2.3.3.6.2.1) that number counts up in a smooth animation
+							(9.2.2.3.3.6.2.2) the longer the swipe, the greater the change in numbers
+						(9.2.2.3.3.6.3) If a user swipes again before the first animation completes, that animation continues until all swipes have been accounted for.
+						(9.2.2.3.3.6.4) If the time change adds or subtracts an increment, that change is reflected in the time shown
+							(9.2.2.3.3.6.4.1) For example, a user swipes down on the "tens second" numeral. When the number goes from 5 to 0, one minute is added to the "ones minute" numeral
+					(9.2.2.3.3.7) If the user press-hold-drags a number, the behavior is the same as (9.2.2.3.3.6) except time changes only one number at a time.
+				(9.2.2.3.3) The maximum time that can be set is 99:59:59.00
+			(9.2.2.4) "Hundredths"
+				(9.2.2.4.1) This setting option is only visible if timer mode is set to Stopwatch.
+				(9.2.2.4.2) Following the word "Hundredths" is an on/off toggle.
+					(9.2.2.4.2.1) The toggle includes the strings "On" and "Off"
+					(9.2.2.4.2.2) The default state is
+						(9.2.2.4.2.2.1) Off if the mode is countdown timer
+						(9.2.2.4.2.2.2) On if the mode is stopwatch
+				(9.2.2.4.3) If the setting is toggled on, hundredths are included in the displayed time
+				(9.2.2.4.4) If the setting is toggled off, hundredths are not included in the displayed time
+			(9.2.2.5) "Play Sound on Finish"
+				(9.2.2.5.1) This setting option is only visible if timer mode is set to Countdown Timer.
+				(9.2.2.5.2) Following the phrase "Play Sound on Finish" is a drop-down arrow.
+					(9.2.2.5.2.1) The drop-down arrow's default state is ic_arrow_drop_down.xml
+					(9.2.2.5.2.2) The drop-down arrow's active state is ic_arrow_drop_up.xml
+				(9.2.2.5.3) If the user taps the word "Mode" or the drop-down arrow
+					(9.2.2.5.3.1) A horizontal drop-down menu opens with a smooth animation.
+						(9.2.2.5.3.1.1) The menu displays a "sounds" button and a "music" button
+							(9.2.2.5.3.1.1.1) "Sounds" displays a list of sounds available on the device
+							(9.2.2.5.3.1.1.2) "Music" displays the (9.2.2.6) Music URL interface
+							(9.2.2.6.3.1.1.3) The functionality and behavior here is similar to the sounds/music options in the Android system alarm clock.
+			(9.2.2.6) "Music URL"
+				(9.2.2.6.1) Following the phrase "Set Music URL" is an edit button
+					(9.2.2.6.1.1) Default state: ic_edit.xml
+					(9.2.2.6.1.2) Active state: Programmatically change fill colors for default state icons to #808080
+				(9.2.2.6.2) If the user taps the phrase "Music URL" or the edit button
+					(9.2.2.6.2.1) A music window opens over the settings window
+					(9.2.2.6.2.2) The top of the window includes:
+						(9.2.2.6.2.2.1) A back arrow in the top left corner of the window. 
+							(9.2.2.6.2.2.1.1) Default icon state uses ic_back.xml.
+							(9.2.2.6.2.2.1.2) Active state: Programmatically change fill colors for default state icons to #808080.
+							(9.2.2.6.2.2.1.3) When activated the Music URL display closes.
+								(9.2.2.6.2.2.1.3.1) The user returns to the main settings window.
+						(9.2.2.6.2.2.2) A close button in the top right corner of the window.
+							(9.2.2.6.2.2.2.1) Default icon state uses ic_close.xml.
+							(9.2.2.6.2.2.2.2) Active state: Programmatically change fill colors for default state icons to #808080.
+							(9.2.2.6.2.2.2.3) When activated all settings related windows close.
+					(9.2.2.6.2.3) Below the back arrow and close button is a row consisting of:
+						(9.2.2.6.2.3.1) the string "Music URL"
+						(9.2.2.6.2.3.2) a text field
+							(9.2.2.6.2.3.2.1) the text field includes the text (not string) https://
+								(9.2.2.6.2.3.2.1.1) the text is gray in color
+								(9.2.2.6.2.3.2.1.2) this text disappears when the user taps into the text field.
+							(9.2.2.6.2.3.2.2) if the user taps the text field, the system keyboard opens
+								(9.2.2.6.2.3.2.2.1) once the cursor is present in the text field, a press-hold event allows the user to paste URL text from the system clipboard
+						(9.2.2.6.2.3.3) a play button
+							(9.2.2.6.2.3.3.1) Default state: ic_play.xml
+							(9.2.2.6.2.3.3.2) Active state: programmatically changes the fill color of the default icon to #808080.
+							(9.2.2.6.2.3.3.3) If the user taps the play button
+								(9.2.2.6.2.3.3.3.1) The play icon changes to its active state
+								(9.2.2.6.2.3.3.3.2) The music URL is played
+									(9.2.2.6.2.3.3.3.2.1) If no supported music is at the defined URL, a snackbar warning opens that says "This is not a valid music URL. Please provide an updated URL to play."
+									(9.2.2.6.2.3.3.3.2.2) The music plays until
+										(9.2.2.6.2.3.3.3.2.2.1) the user taps the play button again
+										(9.2.2.6.2.3.3.3.2.2.2) the user taps anywhere else on the screen
+										(9.2.2.6.2.3.3.3.2.2.3) the music ends
+											(9.2.2.6.2.3.3.3.2.2.3.1) music does not loop
+								(9.2.2.6.2.3.3.3.3) Once music ends or is stopped, the play icon changes to its default state.
+					(9.2.2.6.2.4) Below the music URL are the three most recently used URLs
+						(9.2.2.6.2.4.1) The most recently used URL is on top
+						(9.2.2.6.2.4.2) The least recently used URL is on bottom
+						(9.2.2.6.2.4.3) If the user taps one of these URLs
+							(9.2.2.6.2.4.3.1) it moves to the top of the three URL list
+							(9.2.2.6.2.4.3.2) the URL text is added to the text field.
+						(9.2.2.6.2.4.4) If the user adds a new music URL to the (9.2.2.6.2.3.2) text field, it will appear on the top of these three URLs the next time the user opens the settings.
+					(9.2.2.6.2.5) If the user opens the Music URL setting after having added a URL previously during this app-intent active session, the URL appears
+						(9.2.2.6.2.5.1) in the (9.2.2.6.2.3.2) text field
+						(9.2.2.6.2.5.2) on the top entry of the three most recently used URLs.
+			(9.2.2.7) "Lap Time"
+				(9.2.2.7.1) This setting option is only visible if timer mode is set to Stopwatch.
+				(9.2.2.7.2) Following the phrase "Lap Time" is an on/off toggle.
+					(9.2.2.7.2.1) The toggle includes the strings "On" and "Off"
+					(9.2.2.7.2.2) The default state is Off.	
+				(9.2.2.7.3) If the setting is toggled on
+					(9.2.2.7.3.1) a "Lap" button appears beside the reset button
+						(9.2.2.7.3.1.1) Default state: ic_lap.xml
+						(9.2.2.7.3.1.2) Active state: programatically changes the fill color of the default icon to #808080
+			(9.2.2.8) "Sounds"
+				(9.2.2.8.1) This setting option is only visible if timer mode is set to Stopwatch.
+				(9.2.2.8.2) Following the word "Sounds" is an on/off toggle.
+					(9.2.2.8.2.1) The toggle includes the strings "On" and "Off"
+					(9.2.2.8.2.2) The default state is Off.	
+				(9.2.2.8.3) If the setting is toggled on, a monotone "beep" sound plays for 0.1 seconds every time the play/pause or reset buttons are pressed.
+			(9.2.2.9) "Nest Timer"
+				(9.2.2.9.1) This setting option is only visible if timer mode is set to Countdown Timer.
+				(9.2.2.9.2) Following the phrase "Nest Timer" is an on/off toggle.
+					(9.2.2.9.2.1) The toggle includes the strings "On" and "Off"
+					(9.2.2.9.2.2) The default state is Off.	
+				(9.2.2.9.3) If the setting is toggled on, the timer becomes Nested, as per (8).
+			(9.2.2.10) "Add Another"
+				(9.2.2.10.1) Following the phrase "Add Another" is an add icon.
+					(9.2.2.10.1.1) Default icon state: ic_add_circle.xml.
+					(9.2.2.10.1.2) The active icon state: programatically changes the fill color of the default icon to #808080.
+				(9.2.2.10.2) When a user touches the Add Another button
+					(9.2.2.10.2.1) its icon changes from Default to Active for the duration of the onTouch event
+					(9.2.2.10.2.2) a new timer appears at the geometric center of the screen.
+						(9.2.2.10.2.2.1) the new timer is offset 25px to the right and 25px down if a timer already exists at the center of the screen.
+						(9.2.2.10.2.2.2) it adopts all the preferences of the timer from which it was opened
+							(9.2.2.10.2.2.2.1) For example, a new timer opened from a 300px by 300px stopwatch that has a light blue background would also be a 300px by 300px stopwatch with a light blue background.
+					(9.2.2.10.2.3) If four timers already exist on the screen, the Add Another setting is inactivated.
+
+
+ --- Non-Settings UX ---
+(10) ``PLAY/PAUSE``
+	(10.1) When a user taps the play/pause button while it is in its default state:
+		(10.1.1) the icon changes to its active state
+		(10.1.2) the time counting animation stops (is paused)
+	(10.2) When a user taps the play/pause button while it is in its active state:
+		(10.2.1) the icon changes to its default state
+		(10.2.2) time resumes counting (plays) from the point at which it was paused
+			
+(11) ``LAP``
+	(11.1) When a user taps the lap button
+		(11.1.1) the icon changes to its active state for the duration of the onTouch event
+		(11.1.2) The header string "Lap Times" appears beside the digital clock
+		(11.1.3) the time at which the button was pressed is displayed below the header string
+			(11.1.3.1) A maximum of ten laps can be displayed
+				(11.1.3.1.1) The first lapped time appears on top
+				(11.1.3.1.2) Each successive lap is added to the bottom of the list.
+				(11.1.3.1.3) When ten lap times are displayed, the lap button becomes inactive.
+			(11.1.3.2) Reference "Announce" in the randomizers app-intent for examples of how this text should appear.
+
+(12) ``RESET``
+	(12.1) When a user taps the reset button
+		(12.1.1) the icon changes to its active state for the duration of the onTouch event
+		(12.1.2) a countdown timer resets to the set time
+		(12.1.3) a stopwatch resets to 00:00:00.00
+			(12.1.3.1) If there were lap times displayed, all lap times are cleared
+		(12.1.4) if time was paused
+			(12.3.4.1) time remains paused
+		(12.1.5) if time was playing
+			(12.3.5.1) time continues counting.
+
+
+(13) TODO: Is "Enable Overlay" implemented correctly? It should be an auto-prompt and not a button.

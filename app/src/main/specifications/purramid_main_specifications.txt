@@ -1,0 +1,39 @@
+// the_purramid_0_1\app\src\main\specifications
+// MainActivity.kt
+
+The Purramid is an application built in Kotlin for Android 13 or more current versions to be run on large-screen tablets (55" or larger). It is represented by an actionable button shown on the screen as an app icon (thepurramid_launcher.png). The app icon serves as the button itself, allowing users to interact directly with it to trigger specific actions. This icon should visually convey its purpose and fit seamlessly into the design. Include animations or visual cues to indicate interactivity, such as highlighting, pulsating, or transitioning effects when tapped.
+
+(1) When the user interacts with the app icon button
+	(1.1) a list of availabe intents unfolds in a smooth animation.
+		(1.1.1) Each app-intent
+			(1.1.1.1) has a corresponding launcher image
+			(1.1.1.2) lists its name as a string
+			(1.1.1.3) Is ordered from top to bottom:
+				(1.1.1.3.1) Clock (tp_clock_launcher.png)
+				(1.1.1.3.2) Randomizers (tp_randomizers_launcher.png)
+				(1.1.1.3.3) Screen Mask (tp_screen_mask_launcher.png)
+				(1.1.1.3.4) Spotlight (tp_spotlight_launcher.png)
+				(1.1.1.3.5) Timers (tp_timers_launcher.png)
+				(1.1.1.3.6) Traffic Light (tp_traffic_light_launcher.png)
+				(1.1.1.3.7) About (tp_about_launcher.png)
+		(1.1.2) The list displays in a pleasing fashion
+			(1.1.1.3) Perhaps with a slight curve
+
+(2) When the user interactis with the app icon when the app-intent list is open, the list folds closed in a smooth animation.
+	
+(3) When the user interacts with an app-intent icon or name string
+	(3.1) highlight the icon and string with a light blue border
+		(3.1.1) If there is a best practice for showing an app being activated, use that in place of the blue border
+	(3.2) the app-intent list folds closed in a smooth animation.
+	(3.3) the corresponding app-intent activity or service launches.
+		(3.3.1) ClockOverlayService.kt
+		(3.3.2) RandomizerHostsActivity.kt
+		(3.3.3) ScreenMaskService.kt
+		(3.3.4) SpotlightService.kt
+		(3.3.5) TimersService.kt
+		(3.3.6) TrafficLightService.kt
+		(3.3.7) AboutActivity.kt
+		
+(4) If the user touches anywhere on the screen that is not an app-intent icon, the app-intent list folds closed with a smooth animation. 
+
+(5) If the user touches an app-intent that is already open, bring its window/overlay into focus.

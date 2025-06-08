@@ -1,0 +1,179 @@
+// the_purramid_0_1\app\src\main\specifications
+// SpotlightService.kt
+Spotlight applies a semi-opaque overlay to the entire screen, with an opening in the screen that creates a spotlight effect. It is meant to bring focus to a specific area of the screen.
+
+(1) If the phrase "app-intent" does not follow the word "spotlight", the word "spotlight" is referring to the spotlight opening.
+
+ --- RUNTIME EVENTS ---
+(2) On first app-intent launch, the spotlight screen covers the entire screen.
+(3) The most recent spotlight user preferences are saved. Save the following:
+	(3.1) Spotlight size
+	(3.2) Spotlight shape
+	(3.3) Lock state
+		(3.3.1) The locked state of a spotlight (and the fact it cannot be closed while locked) must be saved and correctly restored if the app relaunches after a crash or an onDestroy event.
+	(3.4) Spotlight position on screen.
+(4) On future app-intent launches, the spotlight loads saved user preferences.
+
+
+ --- USER INTERFACE ---
+(5) The screen overlay:
+	(5.1) is colored Charcoal #36454F
+	(5.2) is 0.5 opacity
+	(5.3) prevents pass-through events
+		(5.3.1) while screen content will be visible beneath the screen because of the semi-opacity, that content cannot be interacted with.
+(6)	The spotlight opening:
+	(6.1) is not a transparent color fill. It is an actual hole in the overlay screen.
+		(6.1.1) It allows pass-through events.
+	(6.2) defaults at first launch are:
+		(6.2.1) Circular shape
+		(6.2.2) 250px in diameter
+		(6.2.3) The spotlight is positioned at the geometric center of the display screen.
+(7) User interface buttons shall be positioned around the spotlight opening, external to the opening itself.
+	(7.1) For rounded spotlights, icon placement will be determined as if the circular opening were a rectangle, with icons placed 15px from the edges of this conceptual square. This ensures icons do not encroach upon the spotlight opening.
+		(7.1.1) If the spotlight is a circlde, icons are placed as if it was a square.
+		(7.1.2) If the spotlight is an oval, icons are placed as if it was a rectangle.
+	(7.2) Icon positions create a conceptual bounding box.
+		(7.2.1) A "Conceptual Bounding Box" shall be defined as the smallest square that perfectly encloses the current circular spotlight opening.
+		(7.2.2) Let this be SpotlightBB:
+			(7.2.2.1) SpotlightBB.left: The x-coordinate of the left edge of this square.
+			(7.2.2.2) SpotlightBB.top: The y-coordinate of the top edge of this square.
+			(7.2.2.3) SpotlightBB.right: The x-coordinate of the right edge of this square.
+			(7.2.2.4) SpotlightBB.bottom: The y-coordinate of the bottom edge of this square.
+		(7.2.3) When referring to icon placement:
+			(7.2.3.1) "Top left" refers to the intersection of SpotlightBB.left and SpotlightBB.top.
+			(7.2.3.2) "Top right" refers to the intersection of SpotlightBB.right and SpotlightBBtop.
+			(7.2.3.3) "Bottom left" refers to the intersection of SpotlightBB.left and SpotlightBBbottom.
+			(7.2.3.4) "Bottom right" refers to the intersection of SpotlightBB.right and SpotlightBBbottom.
+(8) A Resize Handle is positioned to the bottom right of the spotlight.
+	(8.1) Default state resize handle uses ic_resize_right_handle.xml.
+	(8.2) Active state resize handle uses ic_resize_right_handle_active.xml.
+(9) A Move handle is positioned to the top left of the spotlight.
+	(9.1) Default icon state uses ic_move.xml.
+	(9.2) Active state: Programmatically change fill colors for default state icons to #808080.
+(10) A Settings button is positioned in the bottom left corner.
+	(10.1) Default icon state uses ic_settings.xml.
+	(10.2) Active state: Programmatically change fill colors for default state icons to #808080.
+(11) A Close button is positioned in the top right corner.
+	(11.1) Default icon state uses ic_close.xml.
+	(11.2) Active state: Programmatically change fill colors for default state icons to #808080.
+	
+
+ --- USER EXPERIENCE ---
+(12) ``RESIZING``
+	(12.1) When a user touches the resize handle, its icon changes from (8.1) Default to (8.2) Active.
+		(12.1.1) As an exception to the Universal Requirements, a tooltip does NOT pop up when a resize handle is pressed and held.
+	(12.2) A user my drag an active resize handle to change the size of the spotlight.
+		(12.2.1) When using one finger, use the move icon as the anchor point.
+		(12.2.2) If the user places one finger on the resize handle and uses a second finger to make a pinching motion, use the center of the spotlight as the anchor point.
+			(12.2.3.1) This may cause the resize handle to move from beneath the user's finger. This is acceptable. Continue resizing as long as the onTouch event continues.
+		(12.2.4) Spotlight width and height may be resized independently of one another.
+			(12.2.4.1) If a user drags the resize handle straight down, spotlight height increases, but spotlight width remains the same (creating an oval).
+			(12.2.4.2) If a user drags the resize handle straight to the right, spotlight width increases, but spotlight height remains the same (creating an oval).
+	(12.3) When a user releases an active resize handle, its icon returns to (8.1) Default.
+
+(13) ``PASS-THROUGH EVENTS``
+	(13.1) The screened area of the app-intent prevents pass-through events.
+	(13.1) The spotlight opening allows pass-through events to the visible content on screen.
+		(13.1.1) This allows users to interact with visible content, such as launching an application or writing on a whiteboard.
+			(13.1.2) Because Spotlight is a service, new app launches open beneath the mask layer. The spotlight service does not end.
+
+(14) ``MOVING``
+	(14.1) When a user touches the move handle, its icon changes from (9.1) Default to (9.2) Active.
+		(14.1.1) As an exception to the Universal Requirements, a tooltip does NOT pop up when a move handle is pressed and held.
+	(14.2) A spotlight may not move off the screen.
+		(14.2.1) If a user attempts to move the spotlight beyond the edge of the screen, the spotlight's movement is constrained to the screen edge, preventing any part of the spotlight from becoming inaccessible.
+		(14.2.2) Attempting to move the spotlight off the edge of the screen does not cause resizing. Once constrained, the spotlight can not continue to move toward the edge.
+	(14.3) When a user releases an active move handle, its icon returns to (9.1) Default.
+
+(15) ``SETTINGS``
+	(15.1) When a user touches the settings button, its icon changes from (10.1) Default to (10.2) Active.
+	(15.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+		(15.2.1) The settings button remains active while the settings window is open.
+		(15.2.2) The settings window is a collection of icons ordered from top down as follows:
+			(15.2.2.1) "Shape"
+				(15.2.2.1.1) The default icon state is ic_spotlight_shape.xml.
+				(15.2.2.1.2) The active state icon programatically changes the fill color of the default icon to #808080.
+			(15.2.2.2) "Lock in place"
+				(15.2.2.2.1) The default icon state is ic_lock.xml.
+				(15.2.2.2.2) The active icon state is ic_lock_open.xml.
+			(15.2.2.3) "Lock all in place"
+				(15.2.2.3.1) The default icon state is ic_lock_all.xml.
+				(15.2.2.3.2) The active icon state is ic_lock_all_open.xml.
+			(15.2.2.4) "Add Another"
+				(15.2.2.4.1) The default icon state is ic_add_circle.xml.
+				(15.2.2.4.2) The active state icon programatically changes the fill color of the default icon to #808080.
+	(15.3) When deactivated, the settings menu folds back into the settings button with a smooth transition animation.
+		(15.3.1) A user choosing a setting (e.g., lock in place) deactivates the settings menu.
+		(15.3.2) A user touching outside of the settings window deactivates the settings menu.
+		(15.3.3) A user touching the settings button deactivates the settings menu.
+		(15.3.4) The settings button returns to default icon state
+
+(16) ``SHAPE``
+	(16.1) When a user touches the Shape button, its icon changes from (15.2.2.1.1) Default to (15.2.2.1.2) Active.
+	(16.2) When shape is activated:
+		(16.2.1) The current shape changes to its opposite:
+			(16.2.1.1) A circle changes to a square.
+			(16.2.1.2) A square changes to a circle.
+			(16.2.1.3) An oval changes to a rectangle.
+				(16.2.1.3.1) The rectangle's height is equal to the maximal height of the oval.
+				(16.2.1.3.2) The rectangle's width is equal to the maximal width of the oval.
+			(16.2.1.4) A rectangle changes to an oval.
+				(16.2.1.4.1) The oval's maximal height is equal to the rectangle's height.
+				(16.2.1.4.2) The oval's maximal width is equal to the rectangle's width.
+		(16.2.2) The shape icon returns to its default state.
+
+(17) ``LOCK IN PLACE``
+	(17.1) When a user touches the Lock button, its icon changes from (15.2.2.2.1) Default to (15.2.2.2.2) Active.
+	(17.2) When Lock is activated, the following functionality is not allowed:
+		(17.2.1) The user cannot move the spotlight.
+		(17.2.2) The resize handle is inactive. The user cannot resize the spotlight.
+		(17.2.3) The close button is inactive. The user cannot close the spotlight.
+	(17.3) While locked, the spotlight is highlighted with a red border.
+	(17.4) When a user touches the active Lock button, it deactivates Lock
+		(17.4.1) The icon returns to its default state.
+		(17.4.2) All functionality is permitted again.
+		(17.4.3) The red border is removed.
+
+(12) ``LOCK ALL IN PLACE``
+	(12.1) When a user touches the Lock All button, the Lock icons for ALL masks change from (10.2.2.1.1) Default to (10.2.2.1.2) Active.
+	(12.2) When a user touches the Lock All button, the Lock All icons for ALL masks change from (10.2.2.2.1) Default to (10.2.2.2.2) Active.
+	(12.3) When Lock All is activated, the following functionality is not allowed for any mask:
+		(12.3.1) The user cannot drag to move the mask.
+		(12.3.2) Resize handles are inactive. The user cannot resize the mask.
+		(12.3.3) The close button is inactive. The user cannot close the mask.
+	(12.4) While locked, all masks are highlighted with a red border.
+	(12.5) When a user touches a Lock button in any mask
+		(12.5.1) That mask only becomes unlocked as per (11.4)
+		(12.5.2) The Lock icon for that mask only returns to its default state. 
+			(12.5.2.1) If the user presses the Lock button of the unlocked mask, it locks, as per (11)
+		(12.5.3) The Lock All icon for that mask only returns to its default state.
+			(12.5.3.1) If the user presses the Lock All button of the unlocked mask, it locks, as per (11).
+				(12.5.2.2.1) All other masks are unaffected
+		(12.5.3) All other masks remain locked.
+	(12.6) When a user touches the any active Lock All button, it deactivates Lock for all masks
+		(12.6.1) Lock and Lock All icon return to their default states.
+		(12.6.2) All functionality is permitted again.
+		(12.6.3) Red borders are removed.
+		(12.6.4) Any masks that were already unlocked, as per (12.5), are unaffected.
+
+(13) ``ADD ANOTHER``
+	(13.1) When a user touches the Add Another button, its icon changes from (15.2.2.4.1) Default to (15.2.2.4.2) Active.
+	(13.2) When Add Another is activated:
+		(13.2.1) The Add Another button returns to its default state.
+		(13.2.2) A new spotlight appears at the geometric center of the screen.
+			(13.2.2.1) The new spotlight adopts the properties of the spotlight from which it was made.
+				(13.2.2.1.1) It has the same height and width.
+                (13.2.2.1.2) It has the same shape.
+			(13.2.2.2) If another mask already exists at the geometric center of the display screen, the new mask should appear in an offset position (e.g., +25px down and +25px right) from the centered mask.
+	(13.3) If four masks are already present on the screen, 
+		(13.3.1) The Add Another button is inactivated. Nothing happens if a user touches it.
+		(13.3.2) The icon fill and outline colors change. (TODO: Define specific hex colors for an inactive icon.)
+    (13.4) TODO: Confirm my understanding that because Spotlight is a service, both spotlight circles appear in the same overlay, creating two openings in the same shaded screen.
+
+(14) ``CLOSE``
+	(14.1) When a user touches the Close button, its icon changes from (11.1) Default to (11.2) Active.
+	(14.2) The spotlight to which the Close button is attached closes.
+		(14.2.1) When a spotlight is closed:
+			(14.2.1.1) If it is the only spotlight currently open, its size, shape, lock state, and position are saved as the most recent user preferences, as per (3).
+			(14.2.1.2) If it is one of multiple spotlights currently open, its preferences are cleared.
+		(14.2.2) If the spotlight is the only spotlight open, the spotlight service ends.

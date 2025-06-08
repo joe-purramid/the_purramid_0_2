@@ -1,0 +1,149 @@
+// the_purramid_0_1\app\src\main\specifications
+// Universal Requirements
+
+(1) This app is built for interactive flat panels (IFPs).
+	(1.1) These are large-form tablets
+		(1.1.1) They run Android 13 or more recent Android versions.
+		(1.1.2) They are 55", 65", 75", or 86" large
+		(1.1.3) They have resolutions of 2K and 4K
+			(1.1.3.1) Pixel density needs to accommodate both resolutions to ensure a consistent user experience.
+			
+(2) Layout and functionality is consistent across app-intents.
+	(2.1) Use up-to-date Kotlin best practices.
+	(2.2) Meet feature requirements for Android 13 or later.
+		(2.2.1) This includes freeform windows.
+	(2.3) These builds use: 
+		(2.3.1) build.gradle.kts
+		(2.3.2) libs.versions.toml.
+		(2.3.3) Hilt data injection
+		(2.3.4) Room database
+		(2.3.5) file fragments
+		(2.3.6) UUID for each instance.
+			(2.3.6.1) "Instance" or "window" are used colloquially to refer to the user experience of there being multiple iterations of an app-intent (e.g., four clocks on screen at once). These may not actually be instances in a technical sense.
+	(2.4) Layouts are described for left-to-right languages. Right-to-left languges will often have a horizontally flipped layout order.
+	(2.5) Layouts should be responsive to allow text to remain visible when translated.
+		(2.5.1) All strings are written first in English, but their translations may include many more characters.
+		(2.5.2) No string should be cut off because the area it is displayed does not have room for the complete word.
+			
+(3) All app-intents:
+	(3.1) open in a windowed state
+		(3.1.1) Screen Mask is an exception
+		(3.1.2) Spotllight is an exception
+	(3.2) Load preferences from the last time the app-intent was used.
+		(3.2.1) If this is the first time the app-intent is opened, use default values defined in the specifications.
+	(3.3) can be resized with a pinching motion
+		(3.3.1) Screen Mask has additional requirements for resizing.
+		(3.3.2) Spotlight has additional requirements for resizing.
+	(3.4) can be moved with a press-hold-drag motion
+		(3.4.1) Screen mask has additional requirements for moving.
+		(3.4.2) Spotlihgt has additional requirements for moving.
+	(3.5) can have up to four instances active at the same time.
+		(3.5.1) About does not allow for extra instances.
+		(3.5.2) Dice mode in the Randomizers app-intent allows for seven instances at the saem time.
+
+(4) Windowed app-intents allow pass-through events.
+	(4.1) A touch event on an area not on the clock UI passes through its Overlay layer to interact with the screen below.
+	(4.2) This allows users to interact with other content on the screen
+		(4.2.1) For example, the user may write on a digital whiteboard while the Traffic Light is active.
+		(4.2.2) For example the user may open an app other than The Purramid while Spotlight is active.
+		
+(5) All text is implemented as strings to allow for translation.
+	(5.1) Log text is an exception to this rule.
+	(5.2) Supported languages other than US English are values-*:
+		(5.2.1) ar
+		(5.2.2) b+zh+Hans
+		(5.2.3) b+zh+Hant
+		(5.2.4) ca
+		(5.2.5) cr
+		(5.2.6) cs
+		(5.2.7) de-rDE
+		(5.2.8) en-rGB
+		(5.2.9) es
+		(5.2.10) fr-rFR
+		(5.2.11) ha
+		(5.2.12) haw
+		(5.2.13) hi
+		(5.2.14) it
+		(5.2.15) ja
+		(5.2.16) kk
+		(5.2.17) pl
+		(5.2.18) pt-rBR
+		(5.2.19) pt-rPT
+		(5.2.20) ru
+		(5.2.21) ta
+		(5.2.22) tl
+		(5.2.23) yo
+
+(6) Messaging is delivered by snackbar and not toast
+	(6.1) Because of the size of the IFPs, toast messages are commonly missed in the bottom left corner. 
+	(6.2) Snackbars should appear near the button that triggered them.
+	
+(7) Each app-intent has its own user settings.
+	(7.1) Unless specified otherwise, settings apply only to the window from which the settings menu was opened.
+	(7.2) The window from which the settings menu was opened will be highlighted with a yellow border (#FFFACD; highlight_border.xml)
+		(7.2.1) This border is present while the settings menu is open.
+		(7.2.2) This border is removed when the settings menu is closed.
+    (7.3) There are no settings for the main app, only the app-intents.
+		
+(8) When the user selects the "Add Another" option from the settings, the new instance duplicates the preferences of the instance from which it was cloned.
+
+(9) The preferences for all active instances are tracked.
+	(9.1) If an app crashes or has an onDestroy event, these instances should reload when the app is opened again.
+	(9.2) If an instance is closed by the user
+		(9.2.1) If it is the only window open for that app-intent, its preferences are saved.
+		(9.2.2) If it is not the only window open for that app-intent, its preferences are cleared.
+		
+(10) Icons display a tool tip following a long press-and-hold.
+	(10.1) Move and Resize icons in Screen Mask do not display tool tips.
+	(10.2) Move and Resize icons in Spotlight do not display tool tips.
+	(10.3) Tooltips are displayed as strings.
+	(10.4) A user touching anywhere outside of the tool tip closes the tool tip.
+	
+(11) Colors and icons should meet WCAG 2.2 AA constrast standards.
+	(11.1) User-defined colors are an exception to these standards.
+	(11.2) Most app-intents share PurramidPalette to ensure color contrast is easily managed.
+
+(12) ``RESIZING and MOVING``
+    (12.1) When a user touches two fingers anywhere on the app-intent window that is not a button and performs a pinching motion
+        (12.1.1) Pinching open enlarges the window's height and width equally.
+        (12.1.2) Pinching closed reduces the window's height and width equally.
+		(12.1.3) Screen Mask and Spotlight require one finger to be in a specific location on the window to initiate resizing.
+    (12.2) When a user press-hold-drags anywhere on the app-intent window that is not a button, they can move the traaffic light window anywhere on the screen.
+		(12.2.1) An app-intent window may not move off the screen.
+			(12.2.1.1) If a user attempts to move the app-intent beyond the edge of the screen, the window's movement is constrained to the screen edge, preventing any part of the app-intent from becoming inaccessible.
+			(12.2.1.2) Attempting to move the app-intent off the edge of the screen does not cause resizing. Once constrained, the window can not continue to move toward the edge.
+		(12.2.2) Screen Mask and Spotlight require one finger to be in a specific location on the window to initiate moving.
+    (12.3) Resizing and moving are exclusionary actions.
+        (12.3.1) If a user is resizing the app-intent windonw, they cannot move the window.
+            (12.3.1.1) If a user removes one finger after resizing, they cannot move. They must remove both fingers and begin a new onTouch event to move the app-intent.
+            (12.3.1.2) If a user removes one finger after resizing and then places that finger down again, they may continue resizing.
+        (12.3.2) If the user is moving the app-intent window, they cannot resize the app-intent.
+            (12.3.2.1) If the user is moving the app-intent and adds a second finger to the screen, that finger is ignored.
+            (12.3.2.2) After moving the app-intent, the user must end the current onTouch event before using two fingers to resize.
+        (12.3.3) A movement buffer should be included to ignore minor movements during an onTouch event caused by natural human shakiness.
+
+(13) ``TEXT FIELDS``
+	(13.1) When an app-intent includes an editable text field, behavior is uniform.
+		(13.1.1) When the user taps an editable text field:
+			(13.1.1.1) Any string not entered by the user disappears.
+				(13.1.1.1.1) For example, The text field for the Edit Sequence setting in Traffic Light includes the string "Sequence Title" if the user has not entered a title. This string disappears when the user taps the text field.
+				(13.1.1.1.2) If user-entered text is already present, that text remains unchanged.
+			(13.1.1.2) A cursor appears in the text field.
+				(13.1.1.2.1) If user-entered text is already present, the cursor appears after the text.
+			(13.1.1.3) The system keyboard or the system numberpad opens.
+				(13.1.1.3.1) Each app-intent specifies when a keyboard or a numberpad should open.
+			(13.1.1.4) If the user taps the text field when there is user-entered text and a cursor already present, the cursor moves to the position of the touch event (e.g., moving the cursor between numerals).
+			(13.1.1.5) If the Android clipboard is populated, and the user presses-and-holds a touch event in the text field
+				(13.1.1.5.1) A paste button appears
+					(13.1.1.5.1.1) If they select paste, content is pasted into the text field if it is permissible.
+						(13.1.1.5.1.1.1) This will only ever be text, emoji, or images.
+							(13.1.1.5.1.1.1.1) If the app-intent includes character limits, any text beyond that limit is deleted/lost.
+							(13.1.1.5.1.1.1.2) If the app-intent includes emoji quantity limits, any emoji beyond that limit are deleted/lost.
+							(13.1.1.5.1.1.1.3) If the app-intent includes image size limits, any image pasted above that size limits triggers the error event as defined in that app-intent's specifications.
+					(13.1.1.5.1.2) If they tap away from the paste button, the button is removed.
+		(13.1.2) If the user presses the enter button on the system keyboard or system numberpad:
+			(13.1.2.1) The keyboard/numberbad closes.
+			(13.1.2.2) The cursor is removed.
+			(13.1.2.3) Any text entered remains.
+				(13.1.2.3.1) If no text was entered in a field that shows a default string, that default string returns.
+					(13.1.2.3.1.1) For example, the Edit Sequence title field in Traffic Light includes the string "Sequence Title." This string disappears when the text field is in use. When the user exits the text field without entering text, "Sequence Title" is displayed again.

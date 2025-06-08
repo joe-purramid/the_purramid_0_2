@@ -1,0 +1,14 @@
+// the_purramid_0_1\app\src\main\specifications
+// AboutActivity.kt
+(1) About (or About this Application) is a text-based citation page that provides license information, application details, and suggested best practices. Text wraps. There is no horizontal scroll bar.
+
+(2) This app-intent opens in a freeform window 386 px width by 500 px height
+
+(3) It includes a close button in the top right corner.
+	(3.1) Default icon state uses ic_close.xml.
+	(3.2) Active state: Programmatically change fill colors for default state icons to #808080.
+
+(4) ``CLOSE``
+	(4.1) When a user touches the Close button, its icon changes from (3.1) Default to (3.2) Active.
+	(4.2) The window closes.
+	(4.3) The About activity ends.
