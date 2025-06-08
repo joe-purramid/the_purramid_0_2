@@ -1,4 +1,4 @@
-// the_purramid_0_1\app\src\main\specifications
+// the_purramid_0_2\app\src\main\specifications
 // RandomizersHostActivity.kt
 Randomizers is a collection of four different randomization tools: Spin, Slots, Dice, and Coin Flip. Spin and Slots display a random selection from a defined list of items. Dice displays random results of selected polyhedral dice. Coin Flip displays heads or tails results from selected coins.
 

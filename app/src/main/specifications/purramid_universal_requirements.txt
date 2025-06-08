@@ -1,4 +1,4 @@
-// the_purramid_0_1\app\src\main\specifications
+// the_purramid_0_2\app\src\main\specifications
 // Universal Requirements
 
 (1) This app is built for interactive flat panels (IFPs).

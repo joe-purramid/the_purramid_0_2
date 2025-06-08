@@ -1,4 +1,4 @@
-// the_purramid_0_1\app\src\main\specifications
+// the_purramid_0_2\app\src\main\specifications
 // ScreenMaskService.kt
 Screen Mask (formerly named Screen Shade) creates a black, opaque mask that covers some or all of the screen. It is meant to hide the content it covers. 
 

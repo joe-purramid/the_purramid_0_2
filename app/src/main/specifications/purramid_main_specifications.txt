@@ -1,4 +1,4 @@
-// the_purramid_0_1\app\src\main\specifications
+// the_purramid_0_2\app\src\main\specifications
 // MainActivity.kt
 
 The Purramid is an application built in Kotlin for Android 13 or more current versions to be run on large-screen tablets (55" or larger). It is represented by an actionable button shown on the screen as an app icon (thepurramid_launcher.png). The app icon serves as the button itself, allowing users to interact directly with it to trigger specific actions. This icon should visually convey its purpose and fit seamlessly into the design. Include animations or visual cues to indicate interactivity, such as highlighting, pulsating, or transitioning effects when tapped.

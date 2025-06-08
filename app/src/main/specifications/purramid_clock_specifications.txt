@@ -1,4 +1,4 @@
-// the_purramid_0_1\app\src\main\specifications
+// the_purramid_0_2\app\src\main\specifications
 // ClockOverlayService.kt
 Clock is a collection of timekeeping services that allows teachers to demonstrate how time works across the globe. It creates a digital or analog clock to manage classroom time.
 
@@ -190,8 +190,8 @@ Clock is a collection of timekeeping services that allows teachers to demonstrat
 						(10.2.2.4.2.3.3) by pressing the circle between the left and right arrows
 							(10.2.2.4.2.3.3.1) Pressing this button centers the globe on the current time zone.
 					(10.2.2.4.2.4) UTC offset, city, and country information are included in a database.
-                        (10.2.2.4.2.4.1) See ThePurramid01\app\src\main\assets\cities_timezones.csv
-                        (10.2.2.4.2.4.2) See ThePurramid01\app\src\main\assets\time_zones.geojson
+                        (10.2.2.4.2.4.1) See ThePurramid02\app\src\main\assets\cities_timezones.csv
+                        (10.2.2.4.2.4.2) See ThePurramid02\app\src\main\assets\time_zones.geojson
 					(10.2.2.4.2.5) When a user taps on a time zone:
 						(10.2.2.4.2.5.1) it becomes the active time zone
 						(10.2.2.4.2.5.2) it no longer has a colored overlay
