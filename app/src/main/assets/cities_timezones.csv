@@ -1,0 +1,190 @@
+utc_std,city,lat,lng,country,timezone
+UTC-1,Mindelo,16.886,-24.988,Cabo Verde,Atlantic/Cape_Verde
+UTC-1,Ponta Delgada,37.74,-25.67,Portugal,Atlantic/Azores
+UTC-1,Praia,14.9177,-23.5092,Cabo Verde,Atlantic/Cape_Verde
+UTC-1,Lagoa,37.1347,-8.4528,Portugal,Atlantic/Azores
+UTC-10,Honolulu,21.3294,-157.846,Hawaii,Pacific/Honolulu
+UTC-10,Papeete,-17.5334,-149.5667,French Polynesia,Pacific/Tahiti
+UTC-10,Kailua,21.392,-157.7396,Hawaii,Pacific/Honolulu
+UTC-10,Hilo,19.6883,-155.0863,Hawaii,Pacific/Honolulu
+UTC-10,Avarua,-21.207,-159.771,Cook Islands,Pacific/Rarotonga
+UTC-11,Pago Pago,-14.274,-170.7046,American Samoa,Pacific/Pago_Pago
+UTC-11,Alofi,-19.056,-169.921,Niue,Pacific/Niue
+UTC-2,Nuuk,64.1767,-51.7361,Greenland,America/Nuuk
+UTC-2,Qaanaaq,77.4667,-69.2306,Greenland,America/Nuuk
+UTC-2,Grytviken,-54.2806,-36.508,South Georgia Islands,Atlantic/South_Georgia
+UTC-3,Sao Paulo,-23.5504,-46.6339,Brazil,America/Sao_Paulo
+UTC-3,Buenos Aires,-34.6036,-58.3814,Argentina,America/Argentina/Buenos_Aires
+UTC-3,Rio de Janeiro,-22.9111,-43.2056,Brazil,America/Sao_Paulo
+UTC-3,Montevideo,-34.9056,-56.1842,Uruguay,America/Montevideo
+UTC-3,Stanley,-51.7,-57.85,Falkland Islands,Atlantic/Stanley
+UTC-3:30,St. Johns,47.4817,-52.7971,Canada,America/St_Johns
+UTC-4,Santiago,-33.4372,-70.6506,Chile,America/Santiago
+UTC-4,Caracas,10.4806,-66.9036,Venezuela,America/Caracas
+UTC-4,San Juan,18.3985,-66.061,Puerto Rico,America/Puerto_Rico
+UTC-4,Asuncion,-25.2945,-57.6435,Paraguay,America/Asuncion
+UTC-4,Halifax,44.6475,-63.5906,Canada,America/Halifax
+UTC-4,La Paz,-16.4958,-68.1333,Bolivia,America/La_Paz
+UTC-5,Lima,-12.06,-77.0375,Peru,America/Lima
+UTC-5,Bogota,4.7111,-74.0722,Colombia,America/Bogota
+UTC-5,Miami,25.784,-80.2101,United States,America/New_York
+UTC-5,Detroit,42.3834,-83.1024,United States,America/Detroit
+UTC-5,Toronto,43.7417,-79.3733,Canada,America/Toronto
+UTC-5,Montreal,45.5089,-73.5617,Canada,America/Toronto
+UTC-5,Havana,23.1367,-82.3589,Cuba,America/Havana
+UTC-5,Quito,-0.22,-78.5125,Ecuador,America/Guayaquil
+UTC-5,Cancun,21.1606,-86.8475,Mexico,America/Cancun
+UTC-5,Rio Branco,-9.9781,-67.8117,Brazil,America/Rio_Branco
+UTC-5,Nassau,25.0442,-77.3503,Bahamas,America/Nassau
+UTC-5,New York City,40.6943,-73.9249,United States,America/New_York
+UTC-5,Boston,42.3188,-71.0852,United States,America/New_York
+UTC-5,Nashua,42.7491,-71.491,United States,America/New_York
+UTC-6,Mexico City,19.4333,-99.1333,Mexico,America/Mexico_City
+UTC-6,Chicago,41.8375,-87.6866,United States,America/Chicago
+UTC-6,Monterrey,25.6844,-100.3181,Mexico,America/Monterrey
+UTC-6,Austin,30.3005,-97.7522,United States,America/Chicago
+UTC-6,New Orleans,30.0687,-89.9288,United States,America/Chicago
+UTC-6,Columbia,38.9472,-92.3268,United States,America/Chicago
+UTC-6,St. Louis,44.9488,-93.3649,United States,America/Chicago
+UTC-6,San Salvador,13.6989,-89.1914,El Salvador,America/El_Salvador
+UTC-6,Tegucigalpa,14.1057,-87.204,Honduras,America/Tegucigalpa
+UTC-6,Regina,50.4547,-104.6067,Canada,America/Regina
+UTC-7,Phoenix,33.5722,-112.0892,United States,America/Phoenix
+UTC-7,Denver,39.762,-104.8758,United States,America/Denver
+UTC-7,Ciudad Juárez,31.745,-106.485,Mexico,America/Ciudad_Juarez
+UTC-7,Calgary,51.05,-114.0667,Canada,America/Edmonton
+UTC-7,Mazatlan,23.2167,-106.4167,Mexico,America/Mazatlan
+UTC-7,Boise,43.6005,-116.2308,United States,America/Boise
+UTC-7,Yellowknife,62.4709,-114.4053,Canada,America/Yellowknife
+UTC-8,Los Angeles,34.1141,-118.4068,United States,America/Los_Angeles
+UTC-8,Seattle,47.6211,-122.3244,United States,America/Los_Angeles
+UTC-8,San Francisco,37.7558,-122.4449,United States,America/Los_Angeles
+UTC-8,Vancouver,49.25,-123.1,Canada,America/Vancouver
+UTC-8,Tijuana,32.525,-117.0333,Mexico,America/Tijuana
+UTC-8,Mexicali,32.6633,-115.4678,Mexico,America/Tijuana
+UTC-8,Burnaby,49.2667,-122.9667,Canada,America/Vancouver
+UTC-8,Adamstown,-25.0667,-130.0833,Pitcairn Islands,Pacific/Pitcairn
+UTC-9,Anchorage,61.1508,-149.1091,United States,America/Anchorage
+UTC-9,Fairbanks,64.8353,-147.6533,United States,America/Anchorage
+UTC-9,Juneau,58.4546,-134.1739,United States,America/Juneau
+UTC+0,London,51.5072,-0.1275,England,Europe/London
+UTC+0,Bamako,12.6458,-7.9922,Mali,Africa/Bamako
+UTC+0,Dakar,14.6726,-17.432,Senegal,Africa/Dakar
+UTC+0,Marrakech,31.63,-8.0089,Morocco,Africa/Casablanca
+UTC+0,Dublin,53.3497,-6.2603,Ireland,Europe/Dublin
+UTC+0,Belfast,54.5967,-5.93,Northern Ireland,Europe/London
+UTC+0,Glasgow,55.8611,-4.25,Scotland,Europe/London
+UTC+0,Cardiff,51.4817,-3.1792,Wales,Europe/London
+UTC+0,Reykjavík,64.1458,-21.9425,Iceland,Atlantic/Reykjavik
+UTC+0,Lisbon,38.7122,-9.134,Portugal,Europe/Lisbon
+UTC+1,Lagos,6.455,3.3841,Nigeria,Africa/Lagos
+UTC+1,Kinshasa,-4.3219,15.3119,DRCongo,Africa/Kinshasa
+UTC+1,Paris,48.8567,2.3522,France,Europe/Paris
+UTC+1,Luanda,-8.8383,13.2344,Angola,Africa/Luanda
+UTC+1,Madrid,40.4169,-3.7033,Spain,Europe/Madrid
+UTC+1,Barcelona,41.3833,2.1833,Spain,Europe/Madrid
+UTC+1,Berlin,52.52,13.405,Germany,Europe/Berlin
+UTC+1,Rome,41.8931,12.4828,Italy,Europe/Rome
+UTC+1,Brazzaville,-4.2667,15.2667,RCongo,Africa/Brazzaville
+UTC+1,Algiers,36.7325,3.0872,Algeria,Africa/Algiers
+UTC+1,Vienna,48.2083,16.3725,Austria,Europe/Vienna
+UTC+1,Budapest,47.4983,19.0408,Hungary,Europe/Budapest
+UTC+1,Amsterdam,52.3728,4.8936,Netherlands,Europe/Amsterdam
+UTC+1,Copenhagen,55.6805,12.5615,Denmark,Europe/Copenhagen
+UTC+1,Stockholm,59.3275,18.0547,Sweden,Europe/Stockholm
+UTC+1,Oslo,59.9133,10.7389,Norway,Europe/Oslo
+UTC+1,Tunis,36.8064,10.1817,Tunisia,Africa/Tunis
+UTC+1,Windhoek,-22.57,17.0836,Namibia,Africa/Windhoek
+UTC+1,Warsaw,52.23,21.0111,Poland,Europe/Warsaw
+UTC+1,Belgrade,44.8178,20.4569,Serbia,Europe/Belgrade
+UTC+10,Melbourne,-37.8142,144.9631,Australia,Australia/Melbourne
+UTC+10,Sydney,-33.8667,151.2,Australia,Australia/Sydney
+UTC+10,Brisbane,-27.4678,153.0281,Australia,Australia/Brisbane
+UTC+10,Vladivostok,43.115,131.8853,Russia,Asia/Vladivostok
+UTC+10,Canberra,-35.2931,149.1269,Australia,Australia/Sydney
+UTC+10,Port Moresby,-9.4789,147.1494,Papua New Guinea,Pacific/Port_Moresby
+UTC+10,Hobart,-42.8806,147.325,Australia,Australia/Hobart
+UTC+10,Maina,13.4692,144.7332,Guam,Pacific/Guam 
+UTC+10,Weno,7.4417,151.8583,Micronesia,Pacific/Chuuk
+UTC+11,Noumea,-22.2625,166.4443,New Caledonia,Pacific/Noumea
+UTC+11,Magadan,59.5667,150.8,Russia,Asia/Magadan
+UTC+11,Honiara,-9.4333,159.95,Solomon Islands,Pacific/Guadalcanal
+UTC+11,Port-Vila,-17.7333,168.3167,Vanuatu,Pacific/Efate
+UTC+11,Okha,53.5889,142.9492,Russia,Asia/Sakhalin
+UTC+12,Auckland,-36.8492,174.7653,New Zealand,Pacific/Auckland
+UTC+12,Wellington,-41.2889,174.7772,New Zealand,Pacific/Auckland
+UTC+12,Petropavlovsk-Kamchatskiy,53.0167,158.65,Russia,Asia/Kamchatka
+UTC+12,Suva,-18.1333,178.4333,Fiji,Pacific/Fiji
+UTC+12,Tarawa,1.3382,173.0176,Kiribati,Pacific/Tarawa
+UTC+12:45,Waitangi,-43.9514,-176.5611,New Zealand,Pacific/Chatham
+UTC+13,Apia,-13.8333,-171.75,Samoa,Pacific/Apia
+UTC+13,Nukualofa,-21.1333,-175.2,Tonga,Pacific/Tongatapu
+UTC+13,Neiafu,-18.6508,-173.9831,Tonga,Pacific/Tongatapu
+UTC+13,Afega,-13.8019,-171.8217,Samoa,Pacific/Apia
+UTC+2,Cairo,30.0444,31.2358,Egypt,Africa/Cairo
+UTC+2,Khartoum,15.6031,32.5265,Sudan,Africa/Khartoum
+UTC+2,Johannesburg,-26.2044,28.0456,South Africa,Africa/Johannesburg
+UTC+2,Cape Town,-33.9253,18.4239,South Africa,Africa/Johannesburg
+UTC+2,Kyiv,50.45,30.5233,Ukraine,Europe/Kyiv
+UTC+2,Beirut,33.8981,35.5058,Lebanon,Asia/Beirut
+UTC+2,Bucharest,44.4325,26.1039,Romania,Europe/Bucharest
+UTC+2,Harare,-17.8292,31.0522,Zimbabwe,Africa/Harare
+UTC+2,Helsinki,60.1708,24.9375,Finland,Europe/Helsinki
+UTC+2,Kigali,-1.9536,30.0606,Rwanda,Africa/Kigali
+UTC+2,Maputo,-25.9153,32.5764,Mozambique,Africa/Maputo
+UTC+2,Jerusalem,31.7789,35.2256,Israel,Asia/Jerusalem
+UTC+2,Tripoli,32.8872,13.1914,Libya,Africa/Tripoli
+UTC+2,Athens,37.9842,23.7281,Greece,Europe/Athens
+UTC+3,Moscow,55.7506,37.6175,Russia,Europe/Moscow
+UTC+3,Istanbul,41.0136,28.955,Turkey,Europe/Istanbul
+UTC+3,Riyadh,24.65,46.71,Saudi Arabia,Asia/Riyadh
+UTC+3,Baghdad,33.3153,44.3661,Iraq,Asia/Baghdad
+UTC+3,Addis Ababa,9.03,38.74,Ethiopia,Africa/Addis_Ababa
+UTC+3,Nairobi,-1.2864,36.8172,Kenya,Africa/Nairobi
+UTC+3,Damascus,33.502,36.2981,Syria,Asia/Damascus
+UTC+3,Mogadishu,2.0392,45.3419,Somalia,Africa/Mogadishu
+UTC+3,Kampala,0.3136,32.5811,Uganda,Africa/Kampala
+UTC+3:30,Tehran,35.6889,51.3897,Iran,Asia/Tehran
+UTC+4,Dubai,25.2631,55.2972,United Arab Emirates,Asia/Dubai
+UTC+4,Muscat,23.6139,58.5922,Oman,Asia/Muscat
+UTC+4,Tbilisi,41.7225,44.7925,Georgia,Asia/Tbilisi
+UTC+4,Yerevan,40.1814,44.5144,Armenia,Asia/Yerevan
+UTC+4:30,Kabul,34.5253,69.1783,Afghanistan,Asia/Kabul
+UTC+5,Karachi,24.86,67.01,Pakistan,Asia/Karachi
+UTC+5,Lahore,31.5497,74.3436,Pakistan,Asia/Karachi
+UTC+5,Ashgabat,37.9375,58.38,Turkmenistan,Asia/Ashgabat
+UTC+5,Samarkand,39.6547,66.9758,Uzbekistan,Asia/Samarkand
+UTC+5,Atyrau,47.1167,51.8833,Kazakhstan,Asia/Atyrau
+UTC+5:30,Delhi,28.61,77.23,India,Asia/Kolkata
+UTC+5:30,Mumbai,19.0761,72.8775,India,Asia/Kolkata
+UTC+5:30,Chennai,13.0825,80.275,India,Asia/Kolkata
+UTC+5:30,Hyderabad,17.3617,78.4747,India,Asia/Kolkata
+UTC+5:30,Colombo,6.9167,79.8333,Sri Lanka,Asia/Colombo
+UTC+5:45,Kathmandu,27.71,85.32,Nepal,Asia/Kathmandu
+UTC+6,Dhaka,23.7289,90.3944,Bangladesh,Asia/Dhaka
+UTC+6,Almaty,43.24,76.915,Kazakhstan,Asia/Almaty
+UTC+6,Omsk,54.9833,73.3667,Russia,Asia/Omsk
+UTC+6,Kashgar,39.4681,75.9938,China,Asia/Urumqi
+UTC+6:30,Mandalay,21.9831,96.0844,Myanmar,Asia/Yangon
+UTC+7,Jakarta,-6.175,106.8275,Indonesia,Asia/Jakarta
+UTC+7,Bangkok,13.7525,100.4942,Thailand,Asia/Bangkok
+UTC+7,Ho Chi Minh City,10.7756,106.7019,Vietnam,Asia/Ho_Chi_Minh
+UTC+7,Ulaanbaatar,47.9214,106.9055,Mongolia,Asia/Hovd
+UTC+8,Guangzhou,23.13,113.26,China,Asia/Shanghai
+UTC+8,Manila,14.5958,120.9772,Philippines,Asia/Manila
+UTC+8,Shanghai,31.2286,121.4747,China,Asia/Shanghai
+UTC+8,Beijing,39.9067,116.3975,China,Asia/Shanghai
+UTC+8,Chengdu,30.66,104.0633,China,Asia/Shanghai
+UTC+8,Kuala Lumpur,3.1686,101.698,Malaysia,Asia/Kuala_Lumpur
+UTC+8,Hong Kong,22.3,114.2,Hong Kong,Asia/Hong_Kong
+UTC+8,Singapore,1.3,103.8,Singapore,Asia/Singapore
+UTC+8,Perth,-31.9558,115.8597,Australia,Australia/Perth
+UTC+8,Irkutsk,52.2892,104.28,Russia,Asia/Irkutsk
+UTC+9,Tokyo,35.687,139.7495,Japan,Asia/Tokyo
+UTC+9,Seoul,37.5667,126.9833,South Korea,Asia/Seoul
+UTC+9,Osaka,34.6939,135.5022,Japan,Asia/Tokyo
+UTC+9,Pyongyang,39.0167,125.7475,North Korea,Asia/Pyongyang
+UTC+9,Jayapura,-2.533,140.717,Indonesia,Asia/Jayapura
+UTC+9:30,Adelaide,-34.9275,138.6,Australia,Australia/Adelaide
+UTC+9:30,Darwin,-12.4381,130.8411,Australia,Australia/Darwin
+UTC+9:30,Broken Hill,-31.95,141.4667,Australia,Australia/Broken_Hill

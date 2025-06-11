@@ -1,0 +1,45 @@
+You are an expert software developer. You are taking over a project already in progress. The project folder is attached to this prompt. "The Purramid" is a classroom management app built in Kotlin for Android 13. It is intended for interactive flat panels (large-form tablets) of 55" or larger in K-12 classrooms. It includes 7 app-intents: Clock, Randomizers, Screen Mask, Spotlight, Timers, Traffic Light, and About. Take the following steps to complete The Purramid app.
+
+(1) Thoroughly analyze and internalize the universal requirements detailed in .../src/main/specifications/purramid_universal_requirements.txt. Identify and list the key functional and non-functional requirements.
+
+(2) Statically analyze the existing Kotlin codebase. Identify and document specific instances of:
+- Inconsistencies in coding style or architecural patterns across different modules or files.
+- Potential runtime errors, logical errors, or unhandled exceptions.
+- Areas where code can be optimized for performance (e.g., algorithmic efficiency, resource usage) or readability
+- Deviations from idiomatic Kotlin and established Android development best practices (e.g., null safety, coroutine usage, Jetpack Compose guidelines).
+- Specific instances where impelmeneted code does not meet the universal reqauirements identified in step (1).
+
+(3) Thoroughly analyze and internalize the individual main activity, app-intent, and widget specification documents:
+
+MainActivity - the_purramid_0_1\app\src\main/specifications/purramid_main_specifications.txt
+Clock - the_purramid_0_1\app\src\main/specifications/purramid_clock_specifications.txt
+Randomizers - the_purramid_0_1\app\src\main/specifications/purramid_randomizers_specifications.txt
+Scree Mask - the_purramid_0_1\app\src\main/specifications/purramid_screen_mask_specifications.txt
+Spotlight - the_purramid_0_1\app\src\main/specifications/purramid_spotlight_specifications.txt
+Timers - the_purramid_0_1\app\src\main/specifications/purramid_timers_specifications.txt
+Traffic Light - the_purramid_0_1\app\src\main/specifications/purramid_traffic_light_specifications.txt
+About - the_purramid_0_1\app\src\main/specifications/purramid_about_specifications.txt
+Widget - the_purramid_0_1\app\src\main\specifications\purramid_widget_specifications.txt
+
+Identify and list the key functional and non-functional requirements of each.
+
+(4) Generate a detailed report categorized as follows. For each point, provide a specific coe snippet or file reference where applicable, a description of the issue, and the relevant requireemnt/best practice it violates: 
+
+- inconsistencies in implemented code (e.g., variable naming, UI component styling, data handling patterns)
+- coding errors (e.g., null pointer exceptions, resource leaks, concurrency issues)
+- coding inefficencies (e.g., suboptimal algorithms, redundant computations, inefficient UI rendering)
+- departures from Kotlin best practices (e.g., improper use of scope functions, lack of immutability where appropriate)
+- non-compliance with universal requirements (List each universal requirement not met, referencing the specific section of purramid_universal_requirements.txt and the code location.)
+- non-compliance with app-intent specifications (For each app-intent, list discrepancies between the specification document and the implemented code. Some app-intent specifications have changed since original implementation [such as in Spotlight]. Clearly note significant discrepancies when found.)
+
+(5) Compile a list of critical assumptions made during your analysis where specification details were ambiguous or missing. Phrase these as specific questions that need clarification before proceeding with code modifications. For each assumption, briefly explain its potential impact if incorrect.
+
+(6) Based on the findings in step (4), propose a prioritized and actionable plan to:
+- correct all identified inconsistencies, errors, inefficiencies, and deviations from best practices
+- implement any missing features or functionalities required by the universal and app-intent specifications.
+
+The plan should suggest a logical sequence of tasks, estimate relative effort (e.g., high, medium, low) for major items, and identify any dependencies between tasks. Prioritize critical bug fixes and core functionality alignment first.
+
+(7) Provide suggested code modifications for a selection of the most critical issues (e.g., 3-5 examples spanning different categories from step [4]). These suggestions should clearly show the 'before' and 'after' code, or explain the necessary changes in detail.
+
+(8) Once feedback and approval are provided on the analysis and proposed plan, subsequent prompts will implement code modifications in an iterative approach.

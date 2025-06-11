@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    tools:context=".randomizers.RandomizersHostActivity">
+
+    <ImageView
+    android:id="@+id/closeButton"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:contentDescription="@string/close"
+    android:focusable="true"
+    android:src="@drawable/ic_close"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/settingsButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/settings"
+        android:focusable="true"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintEnd_toStartOf="@id/closeButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/listTitleMarquee"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/closeButton">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/listTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@string/select_list"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/listTitleCaret"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@string/show_lists"
+                android:src="@drawable/ic_arrow_drop_down" /> </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.example.purramid.thepurramid.randomizers.ui.SpinDialView
+        android:id="@+id/spinDialView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/spinButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_split"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/listTitleMarquee" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_split"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" /> <Button
+        android:id="@+id/spinButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/spin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_split"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/announcementTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text=""
+        android:textSize="36sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/spinDialView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_split"
+        app:layout_constraintTop_toTopOf="@+id/spinDialView"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/announcementImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/announcementTextView"
+        app:layout_constraintEnd_toEndOf="@+id/announcementTextView"
+        app:layout_constraintStart_toStartOf="@+id/announcementTextView"
+        app:layout_constraintTop_toTopOf="@+id/announcementTextView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <FrameLayout
+        android:id="@+id/celebrationContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/listDropdownCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/listTitleMarquee">
+
+        <ListView
+            android:id="@+id/listDropdownListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="250dp" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sequenceDisplayContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/spinDialView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_split"
+        app:layout_constraintTop_toTopOf="@+id/spinDialView"
+        tools:visibility="visible">
+
+        <FrameLayout
+            android:id="@+id/frameLayoutPrev4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/textSequencePrev3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textSequencePrev4"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Prev 4" />
+
+        <View
+            android:id="@+id/fadeOverlayPrev4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:background="@drawable/fade_to_top" />
+    </FrameLayout>
+
+        <TextView
+            android:id="@+id/textSequencePrev3"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/textSequencePrev2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Prev 3" />
+        <TextView
+            android:id="@+id/textSequencePrev2"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/textSequencePrev1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Prev 2" />
+        <TextView
+            android:id="@+id/textSequencePrev1"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textSequenceCurrent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Prev 1" />
+
+        <TextView
+            android:id="@+id/textSequenceCurrent"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/sequence_current_background"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSequenceDown"
+            app:layout_constraintStart_toEndOf="@+id/buttonSequenceUp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Current Sequence Item" />
+
+        <ImageButton
+            android:id="@+id/buttonSequenceUp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/sequence_up"
+            android:src="@drawable/ic_arrow_drop_up"
+            app:layout_constraintBottom_toBottomOf="@+id/textSequenceCurrent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textSequenceCurrent" />
+
+        <ImageButton
+            android:id="@+id/buttonSequenceDown"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/sequence_down"
+            android:src="@drawable/ic_arrow_drop_down"
+            app:layout_constraintBottom_toBottomOf="@+id/textSequenceCurrent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textSequenceCurrent" />
+
+        <TextView
+            android:id="@+id/textSequenceNext1"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textSequenceCurrent"
+            tools:text="Next 1" />
+        <TextView
+            android:id="@+id/textSequenceNext2"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textSequenceNext1"
+            tools:text="Next 2" />
+        <TextView
+            android:id="@+id/textSequenceNext3"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textSequenceNext2"
+            tools:text="Next 3" />
+
+        <FrameLayout
+            android:id="@+id/frameLayoutNext4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textSequenceNext3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textSequenceNext4"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Next 4" />
+
+            <View
+                android:id="@+id/fadeOverlayNext4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:background="@drawable/fade_to_bottom" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

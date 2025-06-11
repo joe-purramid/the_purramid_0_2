@@ -1,0 +1,476 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/New_York",
+        "name": "Eastern Time (US & Canada)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -79.76, 45.02 ],
+            [ -79.00, 45.02 ],
+            [ -79.00, 40.00 ],
+            [ -80.00, 40.00 ],
+            [ -80.00, 35.00 ],
+            [ -85.00, 35.00 ],
+            [ -85.00, 30.00 ],
+            [ -80.00, 30.00 ],
+            [ -80.00, 25.00 ],
+            [ -67.00, 25.00 ],
+            [ -67.00, 45.02 ],
+            [ -79.76, 45.02 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Los_Angeles",
+        "name": "Pacific Time (US & Canada)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -124.73, 49.38 ],
+            [ -114.00, 49.38 ],
+            [ -114.00, 32.53 ],
+            [ -124.73, 32.53 ],
+            [ -124.73, 49.38 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Europe/London",
+        "name": "London"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -8.62, 55.80 ],
+            [ 2.00, 55.80 ],
+            [ 2.00, 50.00 ],
+            [ -8.62, 50.00 ],
+            [ -8.62, 55.80 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Asia/Tokyo",
+        "name": "Tokyo"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 129.00, 46.00 ],
+            [ 146.00, 46.00 ],
+            [ 146.00, 30.00 ],
+            [ 129.00, 30.00 ],
+            [ 129.00, 46.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Denver",
+        "name": "Mountain Time (US & Canada)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -114.00, 49.00 ],
+            [ -102.00, 49.00 ],
+            [ -102.00, 32.00 ],
+            [ -114.00, 32.00 ],
+            [ -114.00, 49.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Phoenix",
+        "name": "Arizona"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -114.81, 37.00 ],
+            [ -109.04, 37.00 ],
+            [ -109.04, 31.33 ],
+            [ -114.81, 31.33 ],
+            [ -114.81, 37.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Asia/Dubai",
+        "name": "Dubai"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 51.00, 26.00 ],
+            [ 56.50, 26.00 ],
+            [ 56.50, 22.00 ],
+            [ 51.00, 22.00 ],
+            [ 51.00, 26.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Australia/Sydney",
+        "name": "Sydney"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 149.00, -30.00 ],
+            [ 154.00, -30.00 ],
+            [ 154.00, -37.00 ],
+            [ 149.00, -37.00 ],
+            [ 149.00, -30.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Pacific/Auckland",
+        "name": "Auckland"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 174.00, -34.00 ],
+            [ 179.00, -34.00 ],
+            [ 179.00, -42.00 ],
+            [ 174.00, -42.00 ],
+            [ 174.00, -34.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Europe/Moscow",
+        "name": "Moscow"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 30.00, 60.00 ],
+            [ 42.00, 60.00 ],
+            [ 42.00, 50.00 ],
+            [ 30.00, 50.00 ],
+            [ 30.00, 60.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Asia/Shanghai",
+        "name": "Shanghai"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 117.00, 42.00 ],
+            [ 123.00, 42.00 ],
+            [ 123.00, 27.00 ],
+            [ 117.00, 27.00 ],
+            [ 117.00, 42.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Argentina/Buenos_Aires",
+        "name": "Buenos Aires"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -60.00, -30.00 ],
+            [ -54.00, -30.00 ],
+            [ -54.00, -38.00 ],
+            [ -60.00, -38.00 ],
+            [ -60.00, -30.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Africa/Johannesburg",
+        "name": "Johannesburg"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 27.00, -22.00 ],
+            [ 32.00, -22.00 ],
+            [ 32.00, -35.00 ],
+            [ 27.00, -35.00 ],
+            [ 27.00, -22.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Asia/Kolkata",
+        "name": "Kolkata"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 86.00, 28.00 ],
+            [ 92.00, 28.00 ],
+            [ 92.00, 20.00 ],
+            [ 86.00, 20.00 ],
+            [ 86.00, 28.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Europe/Berlin",
+        "name": "Berlin"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 6.00, 55.00 ],
+            [ 15.00, 55.00 ],
+            [ 15.00, 47.00 ],
+            [ 6.00, 47.00 ],
+            [ 6.00, 55.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Chicago",
+        "name": "Central Time (US & Canada)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -102.00, 49.00 ],
+            [ -87.00, 49.00 ],
+            [ -87.00, 25.00 ],
+            [ -102.00, 25.00 ],
+            [ -102.00, 49.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Halifax",
+        "name": "Atlantic Time (Canada)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -67.00, 47.00 ],
+            [ -60.00, 47.00 ],
+            [ -60.00, 40.00 ],
+            [ -67.00, 40.00 ],
+            [ -67.00, 47.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Europe/Paris",
+        "name": "Paris"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -5.00, 51.00 ],
+            [ 8.00, 51.00 ],
+            [ 8.00, 42.00 ],
+            [ -5.00, 42.00 ],
+            [ -5.00, 51.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Asia/Seoul",
+        "name": "Seoul"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 124.00, 43.00 ],
+            [ 130.00, 43.00 ],
+            [ 130.00, 33.00 ],
+            [ 124.00, 33.00 ],
+            [ 124.00, 43.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Sao_Paulo",
+        "name": "Sao Paulo"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -54.00, -10.00 ],
+            [ -40.00, -10.00 ],
+            [ -40.00, -35.00 ],
+            [ -54.00, -35.00 ],
+            [ -54.00, -10.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Europe/Rome",
+        "name": "Rome"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 6.00, 47.00 ],
+            [ 19.00, 47.00 ],
+            [ 19.00, 35.00 ],
+            [ 6.00, 35.00 ],
+            [ 6.00, 47.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Asia/Singapore",
+        "name": "Singapore"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ 103.60, 1.10 ],
+            [ 104.05, 1.10 ],
+            [ 104.05, 1.47 ],
+            [ 103.60, 1.47 ],
+            [ 103.60, 1.10 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "America/Vancouver",
+        "name": "Vancouver"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -124.00, 51.00 ],
+            [ -118.00, 51.00 ],
+            [ -118.00, 48.00 ],
+            [ -124.00, 48.00 ],
+            [ -124.00, 51.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Europe/Madrid",
+        "name": "Madrid"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [ -9.00, 44.00 ],
+            [ 5.00, 44.00 ],
+            [ 5.00, 36.00 ],
+            [ -9.00, 36.00 ],
+            [ -9.00, 44.00 ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tzid": "Asia/Hong_Kong",
+        "name": "Hong Kong"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [

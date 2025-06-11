@@ -1,4 +1,4 @@
-// the_purramid_0_2\app\src\main\specifications
+// the_purramid_0_1\app\src\main\specifications
 // TrafficLightService.kt
 The traffic light is a vector image of a common traffic light with three colored "bulbs" or "lights": red, yellow, and green. One bulb can be lit at a time, used by the teacher to better manage the classroom.
 

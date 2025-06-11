@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_padding">16dp</dimen>
+
+    <dimen name="large_screen_padding">32dp</dimen>
+	
+	<dimen name="coin_standard_size">60dp</dimen>
+
+    </resources>

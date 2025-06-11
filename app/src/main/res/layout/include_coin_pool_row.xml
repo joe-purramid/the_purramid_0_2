@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ImageView
+        android:id="@+id/coinTypeIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:srcCompat="@drawable/coin_flip_heads"
+        android:contentDescription="@string/coin_image_desc"/>
+
+    <TextView
+        android:id="@+id/coinTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/coinTypeIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1 Bit" />
+
+    <ImageButton
+        android:id="@+id/decrementButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/dice_pool_decrement"
+        android:src="@drawable/ic_remove_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/coinCountEditText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorControlNormal" />
+
+    <EditText
+        android:id="@+id/coinCountEditText"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="2"
+        android:minHeight="48dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/incrementButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10" />
+
+    <ImageButton
+        android:id="@+id/incrementButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/dice_pool_increment"
+        android:src="@drawable/ic_add_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorControlNormal" />
+
+</merge>

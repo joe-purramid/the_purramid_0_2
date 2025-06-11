@@ -1,4 +1,4 @@
-package com.example.thepurramid0_1.ui.theme
+package com.example.thepurramid0_2.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

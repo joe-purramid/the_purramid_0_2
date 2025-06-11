@@ -1,4 +1,4 @@
-// the_purramid_0_2\app\src\main\specifications
+// the_purramid_0_1\app\src\main\specifications
 // AboutActivity.kt
 (1) About (or About this Application) is a text-based citation page that provides license information, application details, and suggested best practices. Text wraps. There is no horizontal scroll bar.
 

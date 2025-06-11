@@ -1,4 +1,4 @@
-package com.example.thepurramid0_1.ui.theme
+package com.example.thepurramid0_2.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -34,7 +34,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun ThePurramid01Theme(
+fun ThePurramid02Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

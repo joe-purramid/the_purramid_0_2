@@ -1,0 +1,58 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="goldGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" style="stop-color:#FFDF00;stop-opacity:1" />
+        <stop offset="60%" style="stop-color:#FFB800;stop-opacity:1" />
+        <stop offset="80%" style="stop-color:#DAA520;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </radialGradient>
+    <circle id="bead" cx="0" cy="0" r="0.75" fill="#505050"/>
+    <circle id="bead2" cx="0" cy="0" r="0.75" fill="#FAF9F6"/>
+  </defs>
+
+  <circle cx="50" cy="50" r="45" fill="url(#goldGradient)" stroke="#606060" stroke-width="2"/>
+
+  <g id="beading" transform="translate(50, 50)" stroke="none">
+    <use href="#bead" transform="translate(41, 0)"/>
+    <use href="#bead" transform="rotate(18) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(36) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(54) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(72) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(90) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(108) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(126) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(144) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(162) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(180) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(198) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(216) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(234) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(252) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(270) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(288) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(306) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(324) translate(41, 0)"/>
+    <use href="#bead" transform="rotate(342) translate(41, 0)"/>
+  </g>
+
+    <circle cx="50" cy="49" r="30" fill="#4A2C00"/>
+    <circle cx="50" cy="49" r="20" fill="url(#goldGradient)"/>
+
+  <g id="centerlines" fill="none" stroke="#4A2C00" stroke-width="2" stroke-linecap="round">
+      <path d="
+      M 50 49 L 50 27
+      M 50 49 C 65 45, 70 39, 75 35
+      M 50 49 C 65 59, 70 68, 60 68 
+      M 50 49 C 35 59, 30 68, 40 68
+      M 50 49 C 35 45, 30 39, 25 35" />
+  </g>
+
+  <g id="inner_beading2" transform="translate(50, 49)" stroke="none">
+    <use href="#bead2" transform="rotate(0) translate(22.5, -11)"/> 
+    <use href="#bead2" transform="rotate(72) translate(22.5, -11)"/>
+    <use href="#bead2" transform="rotate(160) translate(22.5, -11)"/>
+    <use href="#bead2" transform="rotate(232) translate(22.5, -11)"/>
+    <use href="#bead2" transform="rotate(297) translate(22.5, -11)"/>
+  </g>
+
+</svg>
