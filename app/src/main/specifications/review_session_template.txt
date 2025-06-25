@@ -1,0 +1,28 @@
+# Review Session: [App-Intent Name]
+Date: [Date]
+Files: [List all files in this session]
+
+## Context Documents
+[Paste Technical Architecture Decisions]
+[Paste Code Style Guide]
+[Paste relevant Universal Requirements sections]
+[Paste app-intent specification]
+
+## Previous Decisions Log
+- MainActivity: 
+  - Uses Hilt @AndroidEntryPoint
+  - Curved list animation for app-intent selection
+  - No ViewModel (simple launcher)
+  
+- Clock:
+  - ClockOverlayService with Foreground Service
+  - ClockViewModel with StateFlow for time/settings
+  - Multi-instance tracking via ClockRepository
+  
+[Continue for each reviewed app-intent]
+
+## Known Issues to Address
+- [List any known bugs or inconsistencies]
+
+## Code to Review
+[Paste actual code files]

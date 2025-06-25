@@ -2,6 +2,30 @@
 // TimersService.kt
 Timers are companion countdown timer and stopwatch. These appear only as digital clocks.
 
+
+## Technical Implementation Notes
+- Service/Activity type: Foreground Service (TimersService) + Settings Activity (TimersActivity)
+- Multi-window support: Yes (up to 4 simultaneous timers)
+- Window tracking: UUID per timer window
+- Shares single service: Yes
+- Requires permissions:
+  - SYSTEM_ALERT_WINDOW (for overlay)
+  - FOREGROUND_SERVICE
+  - POST_NOTIFICATIONS
+  - INTERNET (music access)
+  - WAKE_LOCK
+  - RECEIVE_BOOT_COMPLETED
+- Instance tracking: 
+  - Uses standardized instanceId (1-4) pattern
+  - Persists with UUID for crash recovery
+  - Managed by InstanceManager
+- Database entities: TimerStateEntity
+- Key dependencies:
+  - ViewModels: TimersViewModel
+  - DAO: TimerDao
+  - Shared: MultiWindowManager
+
+
  --- RUNTIME EVENTS ---
 (1) On first app-intent launch, the timer opens in a windowed state.
 (2) The most recent timer user preferences are saved. Save the following:
@@ -56,7 +80,7 @@ Timers are companion countdown timer and stopwatch. These appear only as digital
 	(9.1) When a user touches the settings button
 		(9.1.1) its icon changes from (4.1) Default to (4.2) Active.
 		(9.1.2) time is paused if it is actively counting
-	(9.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+	(9.2) When activated, a settings window opens with a smooth transition animation, as per the universal specifications.
 		(9.2.1) The settings button remains active while the settings window is open.
 		(9.2.2) The settings window is rows of strings and an icon:
 			(9.2.2.1) "Mode"

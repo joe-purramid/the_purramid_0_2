@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/slotTitleMarqueeCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/slotTitleMarqueeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/slotTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:textAppearance="?attr/textAppearanceListItemSmall"
+                tools:text="Select List" />
+
+            <ImageView
+                android:id="@+id/slotTitleCaret"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/show_lists"
+                android:src="@drawable/ic_arrow_drop_down"
+                app:tint="?android:attr/textColorSecondary" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/slotItemDisplayArea"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintTop_toBottomOf="@id/slotTitleMarqueeCard"
+        app:layout_constraintBottom_toTopOf="@id/slotLockButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/slotItemTextViewCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:background="@drawable/sequence_current_background"
+            android:padding="8dp"
+            tools:text="Center Item"/>
+
+        <ImageView
+            android:id="@+id/slotItemImageViewCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:visibility="gone"
+            android:scaleType="fitCenter"
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/item_image_content_description" />
+
+        <TextView
+             android:id="@+id/slotItemTextViewAbove"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:gravity="center"
+             android:alpha="0.5"
+             android:textAppearance="?attr/textAppearanceBody1"
+             android:layout_marginBottom="60dp"
+             tools:text="Above Item"/>
+
+        <ImageView
+            android:id="@+id/slotItemImageViewAbove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:alpha="0.5"
+            android:visibility="gone"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="60dp" tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/item_image_content_description_secondary"/>
+
+        <TextView
+             android:id="@+id/slotItemTextViewBelow"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:gravity="center"
+              android:alpha="0.5"
+             android:textAppearance="?attr/textAppearanceBody1"
+             android:layout_marginTop="60dp"
+             tools:text="Below Item"/>
+
+        <ImageView
+            android:id="@+id/slotItemImageViewBelow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:alpha="0.5"
+            android:visibility="gone"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="60dp" tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/item_image_content_description_secondary"/>
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/slotLockButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/ic_lock_open"
+        tools:contentDescription="Unlock Column" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

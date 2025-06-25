@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".spotlight.ui.SpotlightSettingsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/buttonCloseSpotlightSettings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_close"
+            android:contentDescription="@string/close"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewSpotlightSettingsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/spotlight_settings_title"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            app:layout_constraintTop_toTopOf="@+id/buttonCloseSpotlightSettings"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonCloseSpotlightSettings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCloseSpotlightSettings"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/buttonAddNewSpotlight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_another_spotlight"
+            android:layout_marginTop="32dp"
+            app:icon="@drawable/ic_add_circle"
+            app:layout_constraintTop_toBottomOf="@id/textViewSpotlightSettingsTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

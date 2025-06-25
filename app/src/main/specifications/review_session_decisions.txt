@@ -1,0 +1,51 @@
+# The Purramid - Implementation Decisions
+
+## All App-Intents
+- **Reviewed**: 14 June 2025
+- **Architecture**: Instance management
+- **Key Decisions**:
+  - Do not use AtomicInteger for instance numbering
+  - Use thepurramid.instance.InstanceManager.kt
+
+- **Reviewed**: 15 June 2025
+- **Architecture**: Settings Window Implementation
+- **Key Decisions**:
+  - Settings should open at the center of the screen
+  - Use an explosion animation
+  - Future efforts may revise this implemenation to have settings open from the settings button in the app-intent window
+ 
+- **Reviewed**: 20 June 2025
+- **Architecture**: HiltViewModelFactory is incompatible with LifecycleService
+- **Key Decisions**:
+  - Use the standard ViewModelProvider with just the factory
+  - Use a unique key for each ViewModel instance
+  - Add an "initialize()" method to set the instance ID after creation
+  - Remove the HiltViewModelFactory usage
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+## MainActivity
+- **Reviewed**: [Date]
+- **Architecture**: Activity without ViewModel
+- **Key Decisions**:
+  - Curved list uses custom RecyclerView.LayoutManager
+  - App-intent launching via explicit Intents
+  - No persistence needed
+
+## Clock
+- **Reviewed**: [Date]
+- **Architecture**: Foreground Service + ViewModel
+- **Key Decisions**:
+  - Time zones use java.time API
+  - 3D globe uses SceneView library
+  - Alarms stored in Room, not system AlarmManager
+  
+[Continue for each app-intent]

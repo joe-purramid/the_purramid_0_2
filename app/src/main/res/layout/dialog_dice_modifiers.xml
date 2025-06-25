@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/diceModifierDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="@string/setting_dice_configure_modifiers_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <include
+            android:id="@+id/dice_modifier_row_d4"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+        <include
+            android:id="@+id/dice_modifier_row_d6"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+        <include
+            android:id="@+id/dice_modifier_row_d8"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+        <include
+            android:id="@+id/dice_modifier_row_d10"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+         <include
+            android:id="@+id/dice_modifier_row_d10_tens"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:visibility="visible"/>
+         <include
+            android:id="@+id/dice_modifier_row_d10_units"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:visibility="visible"/>
+        <include
+            android:id="@+id/dice_modifier_row_d12"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+        <include
+            android:id="@+id/dice_modifier_row_d20"
+            layout="@layout/include_dice_modifier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/diceModifierCloseButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:text="@string/close" />
+    </LinearLayout>
+</ScrollView>

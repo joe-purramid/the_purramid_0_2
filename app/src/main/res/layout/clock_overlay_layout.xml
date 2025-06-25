@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clockMotionLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/clock_background"
+    android:padding="8dp"
+    app:layoutDescription="@xml/clock_motion_scene"
+    tools:context=".clock.ClockOverlayService">
+
+    <!-- Clock View Container -->
+    <FrameLayout
+        android:id="@+id/clockContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.example.purramid.thepurramid.clock.ClockView
+            android:id="@+id/clockView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <!-- Control Buttons Container -->
+    <LinearLayout
+        android:id="@+id/controlButtonsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/control_buttons_background"
+        android:padding="4dp"
+        app:layout_constraintTop_toBottomOf="@id/clockContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <!-- Play/Pause Button -->
+        <ImageButton
+            android:id="@+id/buttonPlayPause"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_play"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Play/Pause"
+            android:layout_marginEnd="4dp" />
+
+        <!-- Reset Button -->
+        <ImageButton
+            android:id="@+id/buttonReset"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_reset"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Reset"
+            android:layout_marginEnd="4dp" />
+
+        <!-- Settings Button -->
+        <ImageButton
+            android:id="@+id/buttonSettings"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_settings"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Settings" />
+
+    </LinearLayout>
+
+    <!-- Nest Button (for toggling nested state) -->
+    <ImageButton
+        android:id="@+id/buttonNest"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_minimize"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Nest Clock"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="4dp" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout> 

@@ -3,6 +3,37 @@
 Randomizers is a collection of four different randomization tools: Spin, Slots, Dice, and Coin Flip. Spin and Slots display a random selection from a defined list of items. Dice displays random results of selected polyhedral dice. Coin Flip displays heads or tails results from selected coins.
 
 
+## Technical Implementation Notes
+- Service/Activity type: Activity only (RandomizersHostActivity)
+- Multi-window support: Yes (up to 4 simultaneous spin dials, slots, or coin flips; up to 7 dice pools)
+- Window tracking: UUID per randomizer window
+- Shares single service: Not applicable
+- Requires permissions:
+  - READ_MEDIA_IMAGES (Android 13+) for image uploads in lists
+  - WAKE_LOCK
+  - RECEIVE_BOOT_COMPLETED
+- Instance tracking: 
+  - Uses standardized instanceId (1-4) pattern
+  - Persists with UUID for crash recovery
+  - Managed by InstanceManager
+- Database entities:
+  - RandomizerInstanceEntity
+  - SpinItemEntity
+  - SpinListEntity
+  - SpinSettingsEntity
+- Key dependencies:
+  - ViewModels: 
+	-- CoinFlipViewModel
+	-- DiceViewModel
+	-- ListCreatorViewModel
+	-- ListEditorViewModel
+	-- RandomizerSettingsViewModel
+	-- RandomizerViewModel
+	-- SlotsViewModel
+  - DAO: RandomizerDao
+  - Shared: PurramidPalette, MultiWindowManager
+
+
  --- RUNTIME EVENTS ---
 (1) On first app-intent launch, the randomizer opens in a windowed state.
 (2) The most recent randomizer user preferences are saved. Save the following:
@@ -208,7 +239,7 @@ Randomizers is a collection of four different randomization tools: Spin, Slots, 
 (9) ``SETTINGS BUTTON FOR ALL MODES``
 	(9.1) If a user taps the (4.1) settings button:
 		(9.1.1) its icon changes from (5.1) Default to (5.2) Active.
-		(9.1.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+		(9.1.2) When activated, a settings window opens with a smooth transition animation, as per the universal specifications.
 			(9.1.2.1) The settings button remains active while the settings window is open.
 			(9.1.2.2) The settings window is rows with text.
 				(9.1.2.2.1) Some settings also include an icon after the text, such as a toggle or an edit icon.

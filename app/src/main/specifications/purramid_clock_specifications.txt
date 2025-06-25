@@ -2,6 +2,39 @@
 // ClockOverlayService.kt
 Clock is a collection of timekeeping services that allows teachers to demonstrate how time works across the globe. It creates a digital or analog clock to manage classroom time.
 
+
+## Technical Implementation Notes
+- Service/Activity type: Foreground Service (ClockOverlayService) + Settings Activity (ClockSettingsActivity)
+- Multi-window support: Yes (up to 4 simultaneous clocks)
+- Window tracking: UUID per clock window
+- Shares single service: Yes
+- Requires permissions:
+  - SYSTEM_ALERT_WINDOW (for overlay - requested on first launch)
+  - FOREGROUND_SERVICE (automatic)
+  - POST_NOTIFICATIONS (Android 13+ - requested when creating first window)
+  - INTERNET (music access for Alarm)
+  - WAKE_LOCK
+  - RECEIVE_BOOT_COMPLETED
+- Instance tracking: 
+  - Uses standardized instanceId (1-4) pattern
+  - Persists with UUID for crash recovery
+  - Managed by InstanceManager
+- Database entities:
+  - ClockStateEntity (includes instanceId, uuid, window position/size)
+  - CityEntity (timezone city data)
+  - TimeZoneBoundaryEntity (timezone boundaries)
+- Key dependencies:
+  - ViewModel: ClockViewModel (time state, settings)
+  - DAO: 
+	-- CithDao
+	-- ClockDao (implements standardized methods)
+	-- TimeZoneDao
+  - Repository: TimeZoneRepository (for timezone data)
+  - Services: InstanceManager (for window ID allocation)
+  - Special: 3D globe scene for timezone selection
+  - Shared: PurramidPalette, MultiWindowManager
+
+
  --- RUNTIME EVENTS ---
 (1) On first app-intent launch, the clock opens in a windowed state.
 (2) The most recent clock user preferences are saved. Save the following:
@@ -134,7 +167,7 @@ Clock is a collection of timekeeping services that allows teachers to demonstrat
  --- USER EXPERIENCE ---
 (10) ``SETTINGS SUMMARY``
 	(10.1) When a user touches the settings button, its icon changes from (4.1) Default to (4.2) Active.
-	(10.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+	(10.2) When activated, a settings window opens with a smooth transition animation, as per the universal specifications.
 		(10.2.1) The settings button remains active while the settings window is open.
 		(10.2.2) The settings window is rows of strings and an icon:
 			(10.2.2.1) "Mode"

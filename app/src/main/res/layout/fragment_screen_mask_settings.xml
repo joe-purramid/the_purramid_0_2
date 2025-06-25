@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".screen_mask.ui.ScreenMaskSettingsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Close button -->
+        <ImageButton
+            android:id="@+id/buttonCloseScreenMaskSettings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_close"
+            android:contentDescription="@string/close"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewScreenMaskSettingsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/screen_mask_settings_title"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            app:layout_constraintTop_toTopOf="@+id/buttonCloseScreenMaskSettings"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonCloseScreenMaskSettings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCloseScreenMaskSettings"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Lock button -->
+        <Button
+            android:id="@+id/lockButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lock_unlock"
+            android:layout_marginTop="8dp"
+            app:icon="@drawable/ic_lock"
+            app:layout_constraintTop_toBottomOf="@id/buttonAddNewMask"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Lock All button -->
+        <Button
+            android:id="@+id/lockAllButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lock_unlock_all"
+            android:layout_marginTop="8dp"
+            app:icon="@drawable/ic_lock_all"
+            app:layout_constraintTop_toBottomOf="@id/lockButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Billboard button -->
+        <Button
+            android:id="@+id/billboardButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/billboard"
+            android:layout_marginTop="8dp"
+            app:icon="@drawable/ic_add_image"
+            app:layout_constraintTop_toBottomOf="@id/lockAllButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Add New button -->
+        <Button
+            android:id="@+id/buttonAddNewMask"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_another_screen"
+            android:layout_marginTop="32dp"
+            app:icon="@drawable/ic_add_circle"
+            app:layout_constraintTop_toBottomOf="@id/textViewScreenMaskSettingsTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

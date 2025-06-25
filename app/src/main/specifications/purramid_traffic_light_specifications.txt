@@ -3,6 +3,28 @@
 The traffic light is a vector image of a common traffic light with three colored "bulbs" or "lights": red, yellow, and green. One bulb can be lit at a time, used by the teacher to better manage the classroom.
 
 
+## Technical Implementation Notes
+- Service/Activity type: Foreground Service (TrafficLightService) + Settings Activity (TrafficLightActivity)
+- Multi-window support: Yes (up to 4 simultaneous traffic lights)
+- Window tracking: UUID per traffic light window
+- Shares single service: Yes
+- Requires permissions:
+  - SYSTEM_ALERT_WINDOW (for overlay)
+  - FOREGROUND_SERVICE
+  - POST_NOTIFICATIONS
+  - WAKE_LOCK
+  - RECEIVE_BOOT_COMPLETED
+- Instance tracking: 
+  - Uses standardized instanceId (1-4) pattern
+  - Persists with UUID for crash recovery
+  - Managed by InstanceManager
+- Database entities: TrafficLightStateEntity
+- Key dependencies:
+  - ViewModels: TrafficLightViewModel
+  - DAO: TrafficLightDao
+  - Shared: MultiWindowManager
+
+
  --- RUNTIME EVENTS ---
 (1) On launch, the traffic light 
 	(1.1) checks if the system has a mic array or other active mic input
@@ -69,7 +91,7 @@ The traffic light is a vector image of a common traffic light with three colored
  --- USER EXPERIENCE ---
 (7) ``SETTINGS SUMMARY``
 	(7.1) When a user touches the settings button, its icon changes from (5.1) Default to (5.2) Active.
-	(7.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+	(7.2) When activated, a settings window opens with a smooth transition animation, as per the universal specifications.
 		(7.2.1) The settings button remains active while the settings window is open.
 		(7.2.2) The settings window is rows of strings and an icon:
 			(7.2.2.1) "Mode"
@@ -376,7 +398,29 @@ The traffic light is a vector image of a common traffic light with three colored
         (18.4.1) The Traffic Light returns to Manual mode.
         (18.4.2) All lights return to their default state.
         (18.4.3) A snackbar shows the warning "No microphone detected."
-    (18.5) TODO: Is it possible for the app-intent to remember that it was in Responsive mode for a fixed period after losing access to the mic array so that the mode can re-establish itself if the loss is brief?
+    (18.5) Mic array recovery behavior:
+        (18.5.1) If the app-intent loses access to the mic array while in Responsive Change mode:
+            (18.5.1.1) Enter a "grace period" of 10 seconds
+            (18.5.1.2) During grace period:
+                (18.5.1.2.1) Continue displaying the last active light state
+                (18.5.1.2.2) Display a temporary banner: "Microphone temporarily unavailable. Reconnecting..."
+                (18.5.1.2.3) Attempt to reconnect every 2 seconds
+            (18.5.1.3) If mic array access is restored during grace period:
+                (18.5.1.3.1) Remove the temporary banner
+                (18.5.1.3.2) Resume normal Responsive mode operation
+                (18.5.1.3.3) No mode change occurs
+            (18.5.1.4) If mic array remains unavailable after 10 seconds:
+                (18.5.1.4.1) Switch to Manual mode
+                (18.5.1.4.2) All lights return to default state
+                (18.5.1.4.3) Show snackbar: "Microphone disconnected. Switched to Manual mode."
+                (18.5.1.4.4) Store that Responsive mode was previously active
+        (18.5.2) Automatic recovery:
+            (18.5.2.1) If switched to Manual due to mic loss, check for mic availability every 30 seconds
+            (18.5.2.2) When mic becomes available again:
+                (18.5.2.2.1) Show snackbar: "Microphone available. Tap to return to Responsive mode."
+                (18.5.2.2.2) Snackbar includes "Switch" action button
+                (18.5.2.2.3) If user taps "Switch", return to Responsive mode
+                (18.5.2.2.4) Stop checking after 5 minutes or if user dismisses snackbar
 
 (19) ``TIMED CHANGE MODE``
     (19.1) A play/pause and a reset button are added to the traffic light layout

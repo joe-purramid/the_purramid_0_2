@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/diceColorDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="@string/setting_dice_configure_colors_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <CheckBox
+            android:id="@+id/checkboxApplyColorToAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/setting_dice_apply_color_all" />
+
+        <include
+            android:id="@+id/dice_color_row_d4"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <include
+            android:id="@+id/dice_color_row_d6"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <include
+            android:id="@+id/dice_color_row_d8"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <include
+            android:id="@+id/dice_color_row_d10"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+         <include
+            android:id="@+id/dice_color_row_d10_tens"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:visibility="visible"/> <include
+            android:id="@+id/dice_color_row_d10_units"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:visibility="visible"/> <include
+            android:id="@+id/dice_color_row_d12"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <include
+            android:id="@+id/dice_color_row_d20"
+            layout="@layout/include_dice_color_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/diceColorPickerCloseButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:text="@string/close" />
+
+    </LinearLayout>
+</ScrollView>

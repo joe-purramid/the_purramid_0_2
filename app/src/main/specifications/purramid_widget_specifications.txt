@@ -3,6 +3,17 @@
 
 The Purramid includes widgets that allow users to add each app-intent (except for About) to their home screen.
 
+
+## Technical Implementation Notes
+- Service/Activity type: Widget Provider (WidgetProvider) + Configuration Activity (WidgetConfigActivity)
+- Multi-window support: Not applicable (home screen widgets)
+- Instance tracking: Widget IDs managed by Android system
+- Requires permissions: None
+- Database entities: None (widget preferences stored by system)
+- Key dependencies:
+  - Special: Remote views for widget updates
+  - Shared: Launcher images from mipmap resources
+
 ``LAUNCHER IMAGES``
 (1) Each app-intent has a launcher image named (tp_*_launcher
     (1.1) For example, tp_timers_launcher.png

@@ -1,5 +1,21 @@
 // the_purramid_0_1\app\src\main\specifications
 // AboutActivity.kt
+
+
+## Technical Implementation Notes
+- Service/Activity type: Activity only (AboutActivity)
+- Multi-window support: No (single window only)
+- Window tracking: Not applicable
+- Shares single service: Not applicable
+- Requires permissions: None
+- Instance tracking: Not applicable
+- Window persistence: Not required
+- Key dependencies:
+  - ViewModel: None (static content only)
+  - Repository: None
+  - Database entities: None
+
+
 (1) About (or About this Application) is a text-based citation page that provides license information, application details, and suggested best practices. Text wraps. There is no horizontal scroll bar.
 
 (2) This app-intent opens in a freeform window 386 px width by 500 px height

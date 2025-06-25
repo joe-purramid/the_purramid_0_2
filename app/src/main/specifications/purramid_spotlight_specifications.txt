@@ -2,6 +2,28 @@
 // SpotlightService.kt
 Spotlight applies a semi-opaque overlay to the entire screen, with an opening in the screen that creates a spotlight effect. It is meant to bring focus to a specific area of the screen.
 
+
+## Technical Implementation Notes
+- Service/Activity type: Foreground Service (SpotlightService) + Settings Activity (SpotlightActivity)
+- Multi-window support: Yes (up to 4 simultaneous spotlights)
+- Window tracking: UUID per spotlight window
+- Shares single service: Yes
+- Requires permissions:
+  - SYSTEM_ALERT_WINDOW (for overlay)
+  - FOREGROUND_SERVICE
+  - POST_NOTIFICATIONS
+  - RECEIVE_BOOT_COMPLETED
+- Instance tracking: 
+  - Uses standardized instanceId (1-4) pattern
+  - Persists with UUID for crash recovery
+  - Managed by InstanceManager
+- Database entities: SpotlightStateEntity
+- Key dependencies:
+  - ViewModels: SpotlightViewModel
+  - DAO: SpotlightDao
+  - Shared: MultiWindowManager
+
+
 (1) If the phrase "app-intent" does not follow the word "spotlight", the word "spotlight" is referring to the spotlight opening.
 
  --- RUNTIME EVENTS ---
@@ -87,7 +109,7 @@ Spotlight applies a semi-opaque overlay to the entire screen, with an opening in
 
 (15) ``SETTINGS``
 	(15.1) When a user touches the settings button, its icon changes from (10.1) Default to (10.2) Active.
-	(15.2) When activated, a settings menu extends with a smooth transition animation from the settings button.
+	(15.2) When activated, a settings window opens with a smooth transition animation, as per the universal specifications.
 		(15.2.1) The settings button remains active while the settings window is open.
 		(15.2.2) The settings window is a collection of icons ordered from top down as follows:
 			(15.2.2.1) "Shape"
