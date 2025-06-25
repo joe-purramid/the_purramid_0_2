@@ -10,12 +10,17 @@ import androidx.core.content.ContextCompat
 import com.example.purramid.thepurramid.R
 import com.example.purramid.thepurramid.databinding.ActivityClockBinding
 import com.example.purramid.thepurramid.clock.ui.ClockSettingsFragment
+import com.example.purramid.thepurramid.instance.InstanceManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ClockActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClockBinding
+    
+    @Inject
+    lateinit var instanceManager: InstanceManager
 
     companion object {
         private const val TAG = "ClockActivity"
@@ -52,16 +57,15 @@ class ClockActivity : AppCompatActivity() {
     }
 
     private fun handleDefaultLaunch() {
-        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val activeCount = prefs.getInt(KEY_ACTIVE_COUNT, 0)
-
+        val activeCount = instanceManager.getActiveInstanceCount(InstanceManager.CLOCK)
+        
         if (activeCount > 0) {
             Log.d(TAG, "Clocks active ($activeCount), showing ClockSettingsFragment.")
             showSettingsFragment(0) // Pass 0 or a "primary" ID if settings needs context
         } else {
             Log.d(TAG, "No active Clocks, requesting service to add a new one.")
             val serviceIntent = Intent(this, ClockOverlayService::class.java).apply {
-                action = ACTION_ADD_NEW_CLOCK // This action tells service to generate ID
+                action = ClockOverlayService.ACTION_ADD_NEW_CLOCK // This action tells service to generate ID
             }
             ContextCompat.startForegroundService(this, serviceIntent)
             finish() // Finish after launching service

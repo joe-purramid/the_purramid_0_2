@@ -217,7 +217,7 @@ class ClockOverlayService : LifecycleService(), ViewModelStoreOwner {
         }
         
         // Request new instance ID from InstanceManager
-        val newClockId = instanceManager.requestInstanceId(InstanceManager.CLOCK)
+        val newClockId = instanceManager.getNextInstanceId(InstanceManager.CLOCK)
         if (newClockId == null) {
             Log.w(TAG, "No available instance IDs for new clock.")
             handleError(ClockServiceException.InvalidClockId(-1), "request_instance_id")
