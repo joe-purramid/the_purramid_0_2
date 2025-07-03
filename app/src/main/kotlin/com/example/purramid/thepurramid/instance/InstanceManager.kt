@@ -23,7 +23,7 @@ class InstanceManager @Inject constructor(
         const val TIMERS = "timers"
         const val TRAFFIC_LIGHT = "traffic_light"
         const val RANDOMIZERS = "randomizers"
-        const val RANDOMIZERS_DICE = "randomizers_dice"
+        const val PROBABILITIES = "probabilities"
     }
 
     init {
@@ -32,7 +32,7 @@ class InstanceManager @Inject constructor(
     }
 
     private fun loadPersistedStates() {
-        for (appIntent in listOf(CLOCK, SCREEN_MASK, SPOTLIGHT, TIMERS, TRAFFIC_LIGHT, RANDOMIZERS, RANDOMIZERS_DICE)) {
+        for (appIntent in listOf(CLOCK, SCREEN_MASK, SPOTLIGHT, TIMERS, TRAFFIC_LIGHT, RANDOMIZERS, PROBABILITIES)) {
             val activeIds = prefs.getStringSet("${appIntent}_active_ids", emptySet())
                 ?.mapNotNull { it.toIntOrNull() }
                 ?.toMutableSet() ?: mutableSetOf()
@@ -47,7 +47,7 @@ class InstanceManager @Inject constructor(
 
     fun getNextInstanceId(appIntent: String): Int? {
         val maxInstances = when (appIntent) {
-            RANDOMIZERS_DICE -> 7
+            PROBABILITIES -> 7
             else -> 4
         }
 
@@ -81,7 +81,7 @@ class InstanceManager @Inject constructor(
     // Helper method to register existing instances during restoration
     fun registerExistingInstance(appIntent: String, instanceId: Int): Boolean {
         val maxInstances = when (appIntent) {
-            RANDOMIZERS_DICE -> 7
+            PROBABILITIES -> 7
             else -> 4
         }
 

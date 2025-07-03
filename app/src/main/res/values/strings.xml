@@ -675,4 +675,7 @@
     <string name="company_name"><xliff:g id="tpl" translatable="false">Purramid Learning, Inc.</xliff:g></string>
     <string name="contact_information_text">Your mailed feedback and requests are welcome at <xliff:g id="tpl" translatable="false">379&#8211;121 Amherst St., Nashua, NH 03063, USA.</xliff:g></string>
 
+    <string name="probabilities_title">Probabilities</string>
+    <string name="probabilities_description">Dice and Coin Flip randomization tools</string>
+
 </resources>

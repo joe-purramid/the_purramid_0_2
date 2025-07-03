@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Mode"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/modeToggleGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonModeDice"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dice" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonModeCoinFlip"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coin Flip" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- Dice Settings Section -->
+        <LinearLayout
+            android:id="@+id/diceSettingsGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dice Settings"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switchCriticalSuccess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Critical Success" />
+
+            <Switch
+                android:id="@+id/switchPercentileDice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Percentile Dice" />
+
+            <Switch
+                android:id="@+id/switchDiceGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Graph" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Graph Type: " />
+                <Spinner
+                    android:id="@+id/spinnerDiceGraphType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distribution: " />
+                <Spinner
+                    android:id="@+id/spinnerDiceDistribution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonEditDicePool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Dice Pool"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- Coin Flip Settings Section -->
+        <LinearLayout
+            android:id="@+id/coinSettingsGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coin Flip Settings"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switchProbabilityMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Probability Mode" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Probability Type: " />
+                <Spinner
+                    android:id="@+id/spinnerProbabilityType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switchCoinGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Graph" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Graph Type: " />
+                <Spinner
+                    android:id="@+id/spinnerCoinGraphType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distribution: " />
+                <Spinner
+                    android:id="@+id/spinnerCoinDistribution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switchAnnounce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Announce Results" />
+
+            <Switch
+                android:id="@+id/switchFreeForm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Free Form" />
+
+            <Button
+                android:id="@+id/buttonEditCoinPool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Coin Pool"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/settingsContentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+</ScrollView> 

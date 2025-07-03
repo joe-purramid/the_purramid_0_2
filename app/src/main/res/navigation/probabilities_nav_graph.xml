@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/probabilities_nav_graph"
+    app:startDestination="@id/diceMainFragment">
+
+    <fragment
+        android:id="@+id/diceMainFragment"
+        android:name="com.example.purramid.thepurramid.probabilities.ui.DiceMainFragment"
+        android:label="@string/randomizer_mode_dice"
+        tools:layout="@layout/fragment_dice_main">
+        <argument
+            android:name="instanceId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/coinFlipFragment"
+        android:name="com.example.purramid.thepurramid.probabilities.ui.CoinFlipFragment"
+        android:label="@string/randomizer_mode_coin_flip"
+        tools:layout="@layout/fragment_coin_flip">
+        <argument
+            android:name="instanceId"
+            app:argType="string" />
+    </fragment>
+
+</navigation> 

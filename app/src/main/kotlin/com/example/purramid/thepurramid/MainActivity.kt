@@ -184,15 +184,31 @@ class MainActivity : AppCompatActivity() {
                     action = { context ->
                         val activeCount = instanceManager.getActiveInstanceCount(InstanceManager.CLOCK)
                         if (activeCount > 0) {
-                            // Bring existing clock to front
                             val intent = Intent(context, ClockActivity::class.java).apply {
                                 addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                             }
                             context.startActivity(intent)
                         } else {
-                            // Launch new clock
                             val intent = Intent(context, ClockActivity::class.java)
                             context.startActivity(intent)
+                        }
+                    }
+                ),
+                AppIntent(
+                    title = getString(R.string.probabilities_title),
+                    iconResId = R.mipmap.tp_probabilities_launcher,
+                    id = "probabilities",
+                    maxInstances = 7,
+                    action = { _ ->
+                        val activeCount = instanceManager.getActiveInstanceCount(InstanceManager.PROBABILITIES)
+                        if (activeCount > 0) {
+                            val intent = Intent(this@MainActivity, ProbabilitiesHostActivity::class.java).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                            }
+                            startActivity(intent)
+                        } else {
+                            val intent = Intent(this@MainActivity, ProbabilitiesHostActivity::class.java)
+                            startActivity(intent)
                         }
                     }
                 ),
@@ -204,13 +220,11 @@ class MainActivity : AppCompatActivity() {
                     action = { _ ->
                         val activeCount = instanceManager.getActiveInstanceCount(InstanceManager.RANDOMIZERS)
                         if (activeCount > 0) {
-                            Log.d(TAG, "Randomizers active ($activeCount), reordering to front.")
                             val intent = Intent(this@MainActivity, RandomizersHostActivity::class.java).apply {
                                 addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                             }
                             startActivity(intent)
                         } else {
-                            Log.d(TAG, "No active Randomizers, launching new instance.")
                             launchNewRandomizerInstance()
                         }
                     }

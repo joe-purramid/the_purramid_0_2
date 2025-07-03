@@ -240,6 +240,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".probabilities.ProbabilitiesHostActivity"
+            android:exported="false"
+            android:label="@string/probabilities_title"
+            android:resizeableActivity="true"
+            android:windowLayoutInDisplayCutoutMode="shortEdges">
+            <layout 
+                android:defaultWidth="840dp"
+                android:defaultHeight="700dp"
+                android:gravity="center" />
+        </activity>
+
     </application>
 
 </manifest>
